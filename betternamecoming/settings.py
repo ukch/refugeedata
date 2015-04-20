@@ -1,3 +1,5 @@
+import warnings
+
 """
 Django settings for betternamecoming project.
 
@@ -20,10 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(6#*_+5scao$2$o_e^r#71p#mp+*ea2($o5h7whhi^+8(4$#a*'
+try:
+    SECRET_KEY = os.environ["SECRET_KEY"]
+except KeyError:
+    warnings.warn("SECRET_KEY environment variable not set")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False) == "1"
 
 #ALLOWED_HOSTS = []
 
