@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from uuidfield import UUIDField
 
@@ -35,3 +35,34 @@ class RegistrationCardBatch(models.Model):
 
     class Meta:
         verbose_name_plural = _("Registration card batches")
+
+
+class Language(models.Model):
+    # TODO populate this from some list
+    iso_code = models.CharField(max_length="5")
+    description = models.CharField(max_length=255)
+    example_text = models.TextField(max_length=255)
+
+    def __unicode__(self):
+        return u"{}: {}".format(self.iso_code, self.description)
+
+
+class Person(models.Model):
+    name = models.CharField(max_length=255)
+    preferred_lang = models.ForeignKey(Language,
+                                       verbose_name=_("Preferred language"))
+    needs = models.TextField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    # TODO incredibly basic phone number validation
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    preferred_contact = models.CharField(max_length=1, choices=[
+        ("P", _("Phone")),
+        ("E", _("Email")),
+    ], default="E")
+    story = models.TextField(blank=True, null=True)
+    active = models.BooleanField(default=True)
+
+    # Populated by mobile (although fallback is available)
+    registration_card = models.OneToOneField(RegistrationNumber, blank=True,
+                                             null=True)
+    photo = models.ImageField(blank=True, null=True)
