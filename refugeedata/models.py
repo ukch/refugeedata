@@ -2,6 +2,7 @@ from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
+from django_languages import LanguageField
 from uuidfield import UUIDField
 
 from . import utils
@@ -45,8 +46,7 @@ class RegistrationCardBatch(models.Model):
 
 
 class Language(models.Model):
-    # TODO populate this from some list
-    iso_code = models.CharField(max_length="5")
+    iso_code = LanguageField(verbose_name=_("Base Language"))
     description = models.CharField(max_length=255)
     example_text = models.TextField(max_length=255)
 
