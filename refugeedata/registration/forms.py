@@ -34,3 +34,13 @@ class RegistrationForm(forms.ModelForm):
             error = self.fields["phone"].default_error_messages["required"]
             self.add_error("phone", error)
         return data
+
+
+class RegistrationFormStage2(forms.ModelForm):
+
+    class Meta:
+        model = Person
+        fields = [
+            "registration_card",
+            "photo",
+        ]

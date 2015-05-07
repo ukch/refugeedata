@@ -1,0 +1,35 @@
+{% extends "registration/base.html" %}
+
+{% block content %}
+<h2>Registration complete</h2>
+
+<div>
+    <img src="{{ MEDIA_URL }}{{ person.photo }}" alt="{{ person.name }}" />
+</div>
+
+<table>
+    <tr>
+        <td>Name:</td><td>{{ person.name }}</td>
+    </tr>
+    <tr>
+        <td>Preferred Language</td><td>{{ person.preferred_lang }}</td>
+    </tr>
+    <tr>
+        <td>Needs</td><td>{{ person.needs }}</td>
+    </tr>
+    <tr>
+        <td>Email</td><td>{{ person.email }}</td>
+    </tr>
+    <tr>
+        <td>Phone</td><td>{{ person.phone }}</td>
+    </tr>
+    <tr>
+        <td>Preferred Contact</td><td>{{ person.preferred_contact }}</td>
+    </tr>
+    <tr>
+        <td>Registration Card</td><td>{{ person.registration_card }}</td>
+    </tr>
+</table>
+
+<p><a href="{% url 'reg:stage_1' %}">Register someone else</a></p>
+{% endblock %}

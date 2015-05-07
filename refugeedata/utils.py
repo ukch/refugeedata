@@ -52,3 +52,15 @@ def format_range(values):
             return "{},{}".format(this_range, extra)
         else:
             return this_range
+
+
+QR_CODE_URL_TEMPLATE = ("https://chart.googleapis.com/chart?cht=qr"
+                        "&chs={size}x{size}&chl={data}")
+
+
+def qr_code_from_url(relative_url, request=None, size=500):
+    if request:
+        url = request.build_absolute_uri(relative_url)
+    else:
+        url = relative_url
+    return QR_CODE_URL_TEMPLATE.format(size=size, data=url)
