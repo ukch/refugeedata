@@ -16,6 +16,9 @@ class RegistrationNumber(models.Model):
     number = models.PositiveSmallIntegerField()
     active = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ("number", )
+
     def __unicode__(self):
         return u"{}: {}".format(self.number, self.id)
 
@@ -28,12 +31,16 @@ class RegistrationCardBatch(models.Model):
     registration_numbers = models.ManyToManyField(RegistrationNumber)
     pdf = models.FileField(blank=True, null=True)
 
+    def __unicode__(self):
+        return unicode(self.registration_number_format)
+
     @property
     def registration_number_format(self):
         numbers = self.registration_numbers.order_by("number")
         return utils.format_range(numbers)
 
     class Meta:
+        ordering = ("id", )
         verbose_name_plural = _("Registration card batches")
 
 
