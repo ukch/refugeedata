@@ -18,11 +18,12 @@ class BatchAdmin(admin.ModelAdmin):
         return super(BatchAdmin, self).get_form(request, obj=obj, **kwargs)
 
     def save_related(self, request, form, formsets, change):
-        numbers = form.cleaned_data["registration_numbers"]
-        models.RegistrationNumber.objects.bulk_create(numbers)
-        form.cleaned_data["registration_numbers"] = (
-            models.RegistrationNumber.objects.filter(
-                id__in=[n.id for n in numbers]))
+        if not change:  # create
+            numbers = form.cleaned_data["registration_numbers"]
+            models.RegistrationNumber.objects.bulk_create(numbers)
+            form.cleaned_data["registration_numbers"] = (
+                models.RegistrationNumber.objects.filter(
+                    id__in=[n.id for n in numbers]))
         return super(BatchAdmin, self).save_related(
             request, form, formsets, change)
 
