@@ -1,1 +1,1 @@
-web: gunicorn betternamecoming.wsgi --log-file -
+web: gunicorn refugeedata.app.wsgi --log-file -

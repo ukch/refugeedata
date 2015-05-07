@@ -3,10 +3,10 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "betternamecoming.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "refugeedata.app.settings")
 
     try:
-        from betternamecoming import local_settings
+        from refugeedata.app import local_settings
     except ImportError:
         pass
     else:
