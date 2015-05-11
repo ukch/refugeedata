@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
@@ -22,8 +23,15 @@ class RegistrationNumber(models.Model):
         verbose_name_plural = _("Registration Numbers")
         ordering = ("number", )
 
+    def short_id(self):
+        """The first few digits of the ID.
+        This is shortened so as to make QR codes easier to scan and IDs easier
+        to manually input."""
+        return str(self.id)[0:settings.ID_LENGTH]
+    short_id.short_description = _("ID")
+
     def __unicode__(self):
-        return u"{}: {}".format(self.number, self.id)
+        return u"{}: {}".format(self.number, self.short_id())
 
 
 class RegistrationCardBatch(models.Model):

@@ -5,7 +5,7 @@ from refugeedata import models, forms
 
 class NumberAdmin(admin.ModelAdmin):
 
-    list_display = ("number", "id", "active")
+    list_display = ("number", "short_id", "active")
 
 
 class BatchAdmin(admin.ModelAdmin):

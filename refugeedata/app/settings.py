@@ -127,3 +127,5 @@ MEDIA_URL = "/media/"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+ID_LENGTH = os.environ.get("ID_LENGTH", 4)
