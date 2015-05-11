@@ -4,7 +4,11 @@
 <h2>Registration complete</h2>
 
 <div>
+    {% if person.photo %}
     <img src="{{ MEDIA_URL }}{{ person.photo }}" alt="{{ person.name }}" />
+    {% else %}
+    <p>{{ person.name }} has no photo!</p>
+    {% endif %}
 </div>
 
 <table>
