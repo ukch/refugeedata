@@ -1,9 +1,11 @@
 {% extends "registration/base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_ul }}
-<input type="submit" value="Save" />
+<input type="submit" value="{% trans "Save" %}" />
 </form>
 {% endblock %}

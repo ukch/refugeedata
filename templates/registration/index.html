@@ -1,7 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 <ul>
-    <li><a href="{% url 'reg:stage_1' %}">Register</a></li>
+    <li><a href="{% url 'reg:stage_1' %}">{% trans "Register" %}</a></li>
 </ul>
 {% endblock %}

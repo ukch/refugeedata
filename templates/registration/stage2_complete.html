@@ -1,7 +1,11 @@
 {% extends "registration/base.html" %}
 
+{% load i18n %}
+
 {% block content %}
-<h2>Registration complete</h2>
+<h2>{% trans "Registration complete" %}</h2>
+
+{# FIXME if we are keeping this view, try and get the values magically from the model #}
 
 <div>
     {% if person.photo %}
@@ -35,5 +39,5 @@
     </tr>
 </table>
 
-<p><a href="{% url 'reg:stage_1' %}">Register someone else</a></p>
+<p><a href="{% url 'reg:stage_1' %}">{% trans "Register someone else" %}</a></p>
 {% endblock %}

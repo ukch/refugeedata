@@ -1,7 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% load i18n %}
+
 {% block content %}
-<p>To complete registration, please scan the below QR code:</p>
+<p>{% trans "To complete registration, please scan the below QR code:" %}</p>
 <img src="{{ qr_code }}" width="300" height="300" />
-<p><a href="{{ url }}">I am unable to scan the QR code</a></p>
+<p><a href="{{ url }}">{% trans "I am unable to scan the QR code" %}</a></p>
 {% endblock %}
