@@ -70,6 +70,9 @@ class Person(models.Model):
     active = models.BooleanField(default=True)
 
     # Populated by mobile (although fallback is available)
-    registration_card = models.OneToOneField(RegistrationNumber, blank=True,
-                                             null=True)
+    registration_card = models.OneToOneField(
+        RegistrationNumber,
+        related_name="person",
+        limit_choices_to={"person": None, "active": False},
+    )
     photo = models.ImageField(blank=True, null=True)

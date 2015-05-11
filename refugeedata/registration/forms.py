@@ -14,6 +14,7 @@ class RegistrationForm(forms.ModelForm):
             "email",
             "phone",
             "preferred_contact",
+            "registration_card",
         ]
 
     def clean_preferred_contact(self):
@@ -35,12 +36,30 @@ class RegistrationForm(forms.ModelForm):
             self.add_error("phone", error)
         return data
 
+    def save(self, commit=True):
+        instance = super(RegistrationForm, self).save(commit)
+
+        def update_card():
+            instance.registration_card.active = True
+            instance.registration_card.save()
+
+        if commit:
+            update_card()
+        else:
+            save_m2m_orig = self.save_m2m
+
+            def save_m2m():
+                update_card()
+                return save_m2m_orig()
+
+            self.save_m2m = save_m2m
+        return instance
+
 
 class RegistrationFormStage2(forms.ModelForm):
 
     class Meta:
         model = Person
         fields = [
-            "registration_card",
             "photo",
         ]
