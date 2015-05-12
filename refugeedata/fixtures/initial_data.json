@@ -1,0 +1,11 @@
+[
+{
+  "fields": {
+    "example_text": "The pen is mightier than the sword",
+    "iso_code": "en",
+    "description": "English"
+  },
+  "model": "refugeedata.language",
+  "pk": 1
+}
+]
