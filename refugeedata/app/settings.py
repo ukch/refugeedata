@@ -45,7 +45,8 @@ INSTALLED_APPS = (
     'refugeedata',
 )
 
-if not DEBUG:
+DEFAULT_DOMAIN = os.environ.get("DEFAULT_DOMAIN", None)
+if DEFAULT_DOMAIN:
     INSTALLED_APPS += ('django.contrib.sites',)
 
 MIDDLEWARE_CLASSES = (
