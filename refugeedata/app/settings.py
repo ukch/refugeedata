@@ -42,9 +42,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'refugeedata',
 )
+
+if not DEBUG:
+    INSTALLED_APPS += ('django.contrib.sites',)
 
 MIDDLEWARE_CLASSES = (
     'refugeedata.middleware.EnforceCurrentSiteMiddleware',
