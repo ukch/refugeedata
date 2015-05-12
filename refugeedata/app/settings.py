@@ -27,7 +27,8 @@ try:
 except KeyError:
     warnings.warn("SECRET_KEY environment variable not set")
 
-DEBUG = os.environ.get("DEBUG", False) == "1"
+DEBUG = os.environ.get("DEBUG") == "1"
+SSLIFY_DISABLE = os.environ.get("SSLIFY_DISABLE", DEBUG and "1") == "1"
 
 #ALLOWED_HOSTS = []
 
@@ -45,6 +46,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,3 +140,4 @@ STATICFILES_DIRS = (
 )
 
 ID_LENGTH = os.environ.get("ID_LENGTH", 4)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
