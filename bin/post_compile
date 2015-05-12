@@ -2,3 +2,6 @@
 
 # Run Django migrations.
 ./manage.py migrate
+
+# DEFAULT_DOMAIN
+./manage.py update_site
