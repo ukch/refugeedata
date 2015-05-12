@@ -45,6 +45,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,6 +74,8 @@ TEMPLATES = [
         },
     },
 ]
+
+LOCALE_PATHS = ("locale", )
 
 WSGI_APPLICATION = 'refugeedata.app.wsgi.application'
 
