@@ -7,5 +7,24 @@
   },
   "model": "refugeedata.language",
   "pk": 1
+},
+{
+  "fields": {
+    "name": "Registration",
+    "permissions": [
+      [
+        "add_person",
+        "refugeedata",
+        "person"
+      ],
+      [
+        "change_person",
+        "refugeedata",
+        "person"
+      ]
+    ]
+  },
+  "model": "auth.group",
+  "pk": 1
 }
 ]

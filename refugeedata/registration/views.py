@@ -1,13 +1,20 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views.generic import TemplateView
 
 from refugeedata import models
 
 from .. import utils
+from .decorators import (
+    register_permission_required, register_or_qr_permission_required)
 from .forms import RegistrationForm, RegistrationFormStage2
 
 
-# TODO limit to special users
+home = register_permission_required(
+    TemplateView.as_view(template_name="registration/index.html"))
+
+
+@register_permission_required
 def stage_1(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -21,7 +28,7 @@ def stage_1(request):
     })
 
 
-# TODO limit to special users
+@register_permission_required
 def stage_1_complete(request, person_id):
     person = get_object_or_404(models.Person, id=person_id)
     if person.registration_card and person.photo:
@@ -33,7 +40,7 @@ def stage_1_complete(request, person_id):
     })
 
 
-# TODO limit to special users or QR-authorised people
+@register_or_qr_permission_required
 def stage_2(request, person_id):
     person = get_object_or_404(models.Person, id=person_id)
     if person.registration_card and person.photo:
@@ -51,7 +58,7 @@ def stage_2(request, person_id):
     })
 
 
-# TODO limit to special users or QR-authorised people
+@register_or_qr_permission_required
 def stage_2_complete(request, person_id):
     person = get_object_or_404(models.Person, id=person_id)
     return render(request, "registration/stage2_complete.html", {
