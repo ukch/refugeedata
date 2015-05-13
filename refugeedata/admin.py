@@ -1,3 +1,4 @@
+from django.core.management import call_command
 from django.contrib import admin
 
 from refugeedata import models, forms
@@ -24,8 +25,8 @@ class BatchAdmin(admin.ModelAdmin):
             form.cleaned_data["registration_numbers"] = (
                 models.RegistrationNumber.objects.filter(
                     id__in=[n.id for n in numbers]))
-        return super(BatchAdmin, self).save_related(
-            request, form, formsets, change)
+        super(BatchAdmin, self).save_related(request, form, formsets, change)
+        call_command("export_card_data", str(form.instance.id), "--save")
 
 
 class LanguageAdmin(admin.ModelAdmin):
