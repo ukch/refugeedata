@@ -42,7 +42,8 @@ class RegistrationCardBatch(models.Model):
     registration_numbers = models.ManyToManyField(
         RegistrationNumber,
         verbose_name=_("Registration Numbers"))
-    pdf = models.FileField(blank=True, null=True, verbose_name=_("PDF File"))
+    data_file = models.FileField(blank=True, null=True,
+                                 verbose_name=_("Data File"))
 
     def __unicode__(self):
         return unicode(self.registration_number_format())

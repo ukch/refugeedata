@@ -10,7 +10,7 @@ class NumberAdmin(admin.ModelAdmin):
 
 class BatchAdmin(admin.ModelAdmin):
 
-    list_display = ("registration_number_format", "pdf")
+    list_display = ("registration_number_format", "data_file")
 
     def get_form(self, request, obj=None, **kwargs):
         if not obj:
