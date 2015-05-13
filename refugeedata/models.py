@@ -42,7 +42,7 @@ class RegistrationCardBatch(models.Model):
     registration_numbers = models.ManyToManyField(
         RegistrationNumber,
         verbose_name=_("Registration Numbers"))
-    data_file = models.FileField(blank=True, null=True,
+    data_file = models.FileField(blank=True, null=True, upload_to="card_data",
                                  verbose_name=_("Data File"))
 
     def __unicode__(self):
@@ -98,7 +98,8 @@ class Person(models.Model):
         limit_choices_to={"person": None, "active": False},
         verbose_name=_("Registration Card"),
     )
-    photo = models.ImageField(blank=True, null=True, verbose_name=_("Photo"))
+    photo = models.ImageField(blank=True, null=True, upload_to="user_images",
+                              verbose_name=_("Photo"))
 
     class Meta:
         verbose_name = _("Person")
