@@ -38,9 +38,9 @@ class Command(BaseCommand):
         if save:
             with NamedTemporaryFile(prefix="export-", suffix=".csv") as fh:
                 self.generate_csv(cards, out=fh)
-                batch.pdf.save(name=fh.name, content=File(fh))
+                batch.data_file.save(name=fh.name, content=File(fh))
             if options["verbosity"]:
                 self.stdout.write("File {} created.".format(
-                    os.path.join(settings.MEDIA_ROOT, batch.pdf.name)))
+                    os.path.join(settings.MEDIA_ROOT, batch.data_file.name)))
         else:
             self.generate_csv(cards, out=self.stdout)
