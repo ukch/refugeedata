@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'raven.contrib.django.raven_compat',
     'refugeedata',
 )
 
@@ -146,6 +147,10 @@ STATICFILES_DIRS = (
 
 ID_LENGTH = os.environ.get("ID_LENGTH", 4)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+RAVEN_CONFIG = {
+    'dsn': os.environ.get("RAVEN_DSN"),
+}
 
 # File storage
 if not DEBUG:
