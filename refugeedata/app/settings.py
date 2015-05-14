@@ -49,6 +49,7 @@ INSTALLED_APPS = (
 DEFAULT_DOMAIN = os.environ.get("DEFAULT_DOMAIN", None)
 if DEFAULT_DOMAIN:
     INSTALLED_APPS += ('django.contrib.sites',)
+    SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'refugeedata.middleware.EnforceCurrentSiteMiddleware',
