@@ -168,11 +168,12 @@ def set_invitees_and_finish_number(instance, created, **kwargs):
             starting_number = last_created_dist.finish_number + 1
         else:
             starting_number = 1
-        cards = RegistrationNumber.objects.filter(number__gte=starting_number)
+        active_cards = RegistrationNumber.objects.filter(active=True)
+        cards = active_cards.filter(number__gte=starting_number)
         cards = list(cards[:instance.supplies_quantity])
         difference = instance.supplies_quantity - len(cards)
         if difference:
-            cards += list(RegistrationNumber.objects.all()[:difference])
+            cards += list(active_cards[:difference])
         instance.invitees = cards
         instance.finish_number = cards[-1].number
         instance.save()
