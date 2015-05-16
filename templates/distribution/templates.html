@@ -1,0 +1,27 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans "Email templates" %}</h2>
+{% for template in email_templates %}
+<p>{% trans "Language:" %} {{ template.language.description }}</p>
+<pre>
+{{ template.text }}
+</pre>
+<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a> | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a></p>
+{% empty %}
+<p>{% trans "No email templates found" %}</p>
+{% endfor %}
+
+<h2>{% trans "SMS templates" %}</h2>
+{% for template in sms_templates %}
+<p>{% trans "Language:" %} {{ template.language.description }}</p>
+<pre>
+{{ template.text }}
+</pre>
+<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a> | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a></p>
+{% empty %}
+<p>{% trans "No SMS templates found" %}</p>
+{% endfor %}
+{% endblock %}

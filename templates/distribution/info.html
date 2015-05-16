@@ -5,6 +5,12 @@
 {% block content %}
 <button onclick="alert('{{ distribution.hash }}')">{% trans "Show Password" %}</button>
 
+{% if user.is_superuser %}
+<p><a href="{% url "dist:templates" distribution.id %}">See email/SMS templates for this distribution</a></p>
+{% endif %}
+
+<p>{{ distribution.supplies_description }}</p>
+
 <h2>{% trans "Attendees:" %}</h2>
 <ul>
 {% for attendee in distribution.invitees.all %}

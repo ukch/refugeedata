@@ -2,6 +2,7 @@ import time
 import hashlib
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.dispatch import receiver
 
@@ -163,6 +164,9 @@ class Distribution(models.Model):
 
     def __unicode__(self):
         return unicode(formats.date_format(self.date))
+
+    def get_absolute_url(self):
+        return reverse("dist:info", args=[self.id])
 
     class Meta:
         verbose_name = _("Distribution")

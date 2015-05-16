@@ -1,0 +1,10 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<ul>
+    <li><strong>{% trans "To:" %}</strong> {{ recipients|join:"; "}}</li>
+    <li><strong>{% trans "Message:" %}</strong> <pre>{{ template.text }}</pre></li>
+</ul>
+{% endblock %}
