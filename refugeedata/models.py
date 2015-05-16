@@ -1,3 +1,6 @@
+import time
+import hashlib
+
 from django.conf import settings
 from django.db import models
 from django.dispatch import receiver
@@ -149,6 +152,14 @@ class Distribution(models.Model):
         RegistrationNumber, related_name="distributions_attended", blank=True)
     templates = models.ManyToManyField(Template, verbose_name=_("Templates"))
     finish_number = models.PositiveSmallIntegerField(blank=True, null=True)
+
+    @property
+    def hash(self):
+        timestamp = time.mktime(self.date.timetuple())
+        return hashlib.sha1(str(timestamp)).hexdigest()[:4]
+
+    def check_hash(self, password):
+        return password == self.hash
 
     def __unicode__(self):
         return unicode(formats.date_format(self.date))

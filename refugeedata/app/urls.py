@@ -10,6 +10,8 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^$', RedirectView.as_view(pattern_name="public", permanent=True)),
+    url(r'^distribution/', include('refugeedata.distribution.urls',
+        app_name="distribution", namespace="dist")),
     url(r'^registration/', include('refugeedata.registration.urls',
         app_name="registration", namespace="reg")),
     url(r'^admin/', include(admin.site.urls)),

@@ -1,0 +1,14 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<button onclick="alert('{{ distribution.hash }}')">{% trans "Show Password" %}</button>
+
+<h2>{% trans "Attendees:" %}</h2>
+<ul>
+{% for attendee in distribution.invitees.all %}
+<li>{{ attendee.number }}: {{ attendee.person.name }}{% if attendee in distribution.attendees.all %} ({% trans "attended" %}){% endif %}</li>
+{% endfor %}
+</ul>
+{% endblock %}

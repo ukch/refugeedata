@@ -1,0 +1,11 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+{{ form.as_ul }}
+<input type="submit" value="{% trans "Authenticate" %}" />
+</form>
+{% endblock %}
