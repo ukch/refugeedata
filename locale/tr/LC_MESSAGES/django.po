@@ -2,123 +2,225 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-13 11:47+0000\n"
+"POT-Creation-Date: 2015-05-16 19:52+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
+#: refugeedata/distribution/forms.py:22
+msgid "Incorrect password"
+msgstr ""
+
 #: refugeedata/forms.py:13
 msgid "Number of cards to add"
 msgstr ""
 
-#: refugeedata/models.py:17 refugeedata/models.py:31
-msgid "ID"
-msgstr ""
-
-#: refugeedata/models.py:18
-msgid "number"
-msgstr ""
-
 #: refugeedata/models.py:19
-msgid "active"
+msgid "SMS"
 msgstr ""
 
-#: refugeedata/models.py:22
-msgid "Registration Number"
-msgstr ""
-
-#: refugeedata/models.py:23 refugeedata/models.py:44
-msgid "Registration Numbers"
-msgstr ""
-
-#: refugeedata/models.py:46
-msgid "Data File"
-msgstr ""
-
-#: refugeedata/models.py:54
-msgid "Number Range"
-msgstr ""
-
-#: refugeedata/models.py:58
-msgid "Registration Card Batch"
-msgstr ""
-
-#: refugeedata/models.py:59
-msgid "Registration Card Batches"
-msgstr ""
-
-#: refugeedata/models.py:63
-msgid "Base Language"
-msgstr ""
-
-#: refugeedata/models.py:65
-msgid "Description"
-msgstr ""
-
-#: refugeedata/models.py:67
-msgid "Example Text"
-msgstr ""
-
-#: refugeedata/models.py:74
-msgid "Language"
-msgstr ""
-
-#: refugeedata/models.py:75
-msgid "Languages"
-msgstr "Diller"
-
-#: refugeedata/models.py:79
-msgid "Name"
-msgstr "İsim"
-
-#: refugeedata/models.py:81
-msgid "Preferred language"
-msgstr ""
-
-#: refugeedata/models.py:82
-msgid "Needs"
-msgstr ""
-
-#: refugeedata/models.py:83 refugeedata/models.py:89
+#: refugeedata/models.py:20 refugeedata/models.py:95
 msgid "Email"
 msgstr ""
 
-#: refugeedata/models.py:86
+#: refugeedata/models.py:29 refugeedata/models.py:43
+msgid "ID"
+msgstr ""
+
+#: refugeedata/models.py:30
+msgid "number"
+msgstr ""
+
+#: refugeedata/models.py:31
+msgid "active"
+msgstr ""
+
+#: refugeedata/models.py:34
+msgid "Registration Number"
+msgstr ""
+
+#: refugeedata/models.py:35 refugeedata/models.py:56
+msgid "Registration Numbers"
+msgstr ""
+
+#: refugeedata/models.py:58
+msgid "Data File"
+msgstr ""
+
+#: refugeedata/models.py:66
+msgid "Number Range"
+msgstr ""
+
+#: refugeedata/models.py:70
+msgid "Registration Card Batch"
+msgstr ""
+
+#: refugeedata/models.py:71
+msgid "Registration Card Batches"
+msgstr ""
+
+#: refugeedata/models.py:75
+msgid "Base Language"
+msgstr ""
+
+#: refugeedata/models.py:77
+msgid "Description"
+msgstr ""
+
+#: refugeedata/models.py:79
+msgid "Example Text"
+msgstr ""
+
+#: refugeedata/models.py:86 refugeedata/models.py:129
+msgid "Language"
+msgstr ""
+
+#: refugeedata/models.py:87
+msgid "Languages"
+msgstr "Diller"
+
+#: refugeedata/models.py:91
+msgid "Name"
+msgstr "İsim"
+
+#: refugeedata/models.py:93
+msgid "Preferred language"
+msgstr ""
+
+#: refugeedata/models.py:94
+msgid "Needs"
+msgstr ""
+
+#: refugeedata/models.py:98
 msgid "Phone Number"
 msgstr "Telefon Numrası"
 
-#: refugeedata/models.py:88
-msgid "Phone"
-msgstr ""
-
-#: refugeedata/models.py:90
+#: refugeedata/models.py:101
 msgid "Preferred Contact"
 msgstr ""
 
-#: refugeedata/models.py:91
+#: refugeedata/models.py:102
 msgid "Story"
 msgstr ""
 
-#: refugeedata/models.py:92
+#: refugeedata/models.py:103
 msgid "Active"
 msgstr ""
 
-#: refugeedata/models.py:99
+#: refugeedata/models.py:110
 msgid "Registration Card"
 msgstr ""
 
-#: refugeedata/models.py:101
+#: refugeedata/models.py:113
 msgid "Photo"
 msgstr ""
 
-#: refugeedata/models.py:104
+#: refugeedata/models.py:119
 msgid "Person"
 msgstr ""
 
-#: refugeedata/models.py:105
+#: refugeedata/models.py:120
 msgid "People"
+msgstr ""
+
+#: refugeedata/models.py:128
+msgid "Template Type"
+msgstr ""
+
+#: refugeedata/models.py:130
+msgid "Template Text"
+msgstr ""
+
+#: refugeedata/models.py:136
+msgid "Template"
+msgstr ""
+
+#: refugeedata/models.py:137 refugeedata/models.py:154
+msgid "Templates"
+msgstr ""
+
+#: refugeedata/models.py:145
+msgid "Distribution Date"
+msgstr ""
+
+#: refugeedata/models.py:147
+msgid "Supplies Quantity"
+msgstr ""
+
+#: refugeedata/models.py:149
+msgid "Supplies Description"
+msgstr ""
+
+#: refugeedata/models.py:172 templates/distribution/base.html:5
+msgid "Distribution"
+msgstr ""
+
+#: refugeedata/models.py:173
+msgid "Distributions"
+msgstr ""
+
+#: templates/distribution/info.html:6
+msgid "Show Password"
+msgstr ""
+
+#: templates/distribution/info.html:14
+msgid "Attendees:"
+msgstr ""
+
+#: templates/distribution/info.html:17
+msgid "attended"
+msgstr ""
+
+#: templates/distribution/login.html:9
+msgid "Authenticate"
+msgstr ""
+
+#: templates/distribution/template_mock_send.html:7
+msgid "To:"
+msgstr ""
+
+#: templates/distribution/template_mock_send.html:8
+msgid "Message:"
+msgstr ""
+
+#: templates/distribution/templates.html:6
+msgid "Email templates"
+msgstr ""
+
+#: templates/distribution/templates.html:8
+#: templates/distribution/templates.html:19
+#, fuzzy
+#| msgid "Languages"
+msgid "Language:"
+msgstr "Diller"
+
+#: templates/distribution/templates.html:12
+#: templates/distribution/templates.html:23
+msgid "Send:"
+msgstr ""
+
+#: templates/distribution/templates.html:12
+#: templates/distribution/templates.html:23
+msgid "to everyone"
+msgstr ""
+
+#: templates/distribution/templates.html:12
+#: templates/distribution/templates.html:23
+msgid "only to recipients"
+msgstr ""
+
+#: templates/distribution/templates.html:14
+msgid "No email templates found"
+msgstr ""
+
+#: templates/distribution/templates.html:17
+msgid "SMS templates"
+msgstr ""
+
+#: templates/distribution/templates.html:25
+msgid "No SMS templates found"
 msgstr ""
 
 #: templates/registration/base.html:5
