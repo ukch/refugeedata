@@ -42,8 +42,10 @@ def template_mock_send(request, distribution, template_id):
         cards = distribution.invitees.all()
     person_ids = cards.exclude(person=None).values_list("person", flat=True)
     preferred_contact = "phone" if template.type == "P" else "email"
-    people = models.Person.objects.filter(id__in=person_ids).exclude(
-        **{preferred_contact: ""})
+    people = models.Person.objects.filter(
+        id__in=person_ids, preferred_lang=template.language).exclude(**{
+            preferred_contact: "",
+        })
     recipients = people.values_list(preferred_contact, flat=True)
     return render(request, "distribution/template_mock_send.html", {
         "distribution": distribution,
