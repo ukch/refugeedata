@@ -30,3 +30,10 @@ class BatchAdminForm(forms.ModelForm):
         regs = [models.RegistrationNumber(number=obj_number+starting_number)
                 for obj_number in xrange(1, number_to_create + 1)]
         return regs
+
+
+class DistributionAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Distribution
+        exclude = ["invitees", "attendees", "finish_number"]

@@ -4,6 +4,12 @@ from django.contrib import admin
 from refugeedata import models, forms
 
 
+class DistributionAdmin(admin.ModelAdmin):
+
+    list_display = ("date", "supplies_quantity", "supplies_description")
+    form = forms.DistributionAdminForm
+
+
 class NumberAdmin(admin.ModelAdmin):
 
     list_display = ("number", "short_id", "active")
@@ -34,6 +40,13 @@ class LanguageAdmin(admin.ModelAdmin):
     list_display = ("iso_code", "description", "example_text")
 
 
-admin.site.register(models.RegistrationNumber, NumberAdmin)
-admin.site.register(models.RegistrationCardBatch, BatchAdmin)
+class TemplateAdmin(admin.ModelAdmin):
+
+    list_display = ("text", "language", "type")
+
+
+admin.site.register(models.Distribution, DistributionAdmin)
 admin.site.register(models.Language, LanguageAdmin)
+admin.site.register(models.RegistrationCardBatch, BatchAdmin)
+admin.site.register(models.RegistrationNumber, NumberAdmin)
+admin.site.register(models.Template, TemplateAdmin)

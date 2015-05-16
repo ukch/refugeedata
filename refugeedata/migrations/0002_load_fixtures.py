@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import warnings
 from django.core.management import call_command
 from django.db import migrations
 
@@ -9,7 +10,10 @@ fixture = 'initial_data'
 
 
 def load_fixture(apps, schema_editor):
-    call_command('loaddata', fixture, app_label='refugeedata')
+    try:
+        call_command('loaddata', fixture, app_label='refugeedata')
+    except:
+        warnings.warn("Unable to load fixture {}".format(fixture))
 
 
 noop = migrations.RunPython.noop
