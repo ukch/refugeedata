@@ -6,6 +6,8 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^$', 'refugeedata.views.home', name='public'),
+    url(r'^c/(?P<person_id>\d+)/(?P<person_code>[a-fA-F0-9]{4})/$',
+        'refugeedata.views.scan_card', name="scan_card")
 ]
 
 urlpatterns += i18n_patterns(
