@@ -3,7 +3,16 @@ import django.forms as forms
 from refugeedata.models import Person
 
 
+def _preferred_language_label_from_instance(instance):
+    return "{} ({})".format(instance.example_text, instance.description)
+
+
 class RegistrationForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        self.fields["preferred_lang"].label_from_instance = \
+            _preferred_language_label_from_instance
 
     class Meta:
         model = Person
