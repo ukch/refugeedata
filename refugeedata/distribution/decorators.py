@@ -17,7 +17,7 @@ def standard_distribution_access(func):
         if not request.user.is_superuser:
             if dist.date != datetime.date.today():
                 raise PermissionDenied()
-            if not dist.check_hash(request.session.get("distribution_hash")):
+            if not request.user.has_perm("distribution", obj=dist):
                 if request.method == "POST":
                     form = DistributionHashForm(dist, request.POST)
                     if form.is_valid():
