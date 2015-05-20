@@ -75,7 +75,7 @@ msgstr "İsim"
 msgid "Preferred language"
 msgstr "Tercih edilen dil"
 
-#: refugeedata/models.py:94
+#: refugeedata/models.py:94 templates/distribution/attendee.html:11
 msgid "Needs"
 msgstr "Özel İhtiyaçları"
 
@@ -199,6 +199,22 @@ msgstr "Dağıtma"
 #: refugeedata/models.py:173
 msgid "Distributions"
 msgstr "Dağıtmalar"
+
+#: templates/distribution/attendee.html:17
+msgid "This person has already received aid in this distribution."
+msgstr ""
+
+#: templates/distribution/attendee.html:20
+msgid "This person is not on the invitation list for this distribution."
+msgstr ""
+
+#: templates/distribution/attendee.html:24
+msgid "Proceed"
+msgstr ""
+
+#: templates/distribution/attendee.html:24
+msgid "Are you sure?"
+msgstr ""
 
 #: templates/distribution/info.html:6
 msgid "Show Password"
