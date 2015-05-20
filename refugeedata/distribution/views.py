@@ -22,6 +22,23 @@ def info(request, distribution):
     })
 
 
+@standard_distribution_access
+def attendee(request, distribution, card_number, card_code):
+    card = get_object_or_404(
+        models.RegistrationNumber, active=True, number=card_number,
+        id__startswith=card_code)
+    if request.method == "POST":
+        distribution.invitees.add(card)
+        distribution.attendees.add(card)
+        return redirect("dist:info", distribution.id)
+    return render(request, "distribution/attendee.html", {
+        "distribution": distribution,
+        "person": card.person,
+        "is_invited": card in distribution.invitees.all(),
+        "has_attended": card in distribution.attendees.all(),
+    })
+
+
 # FIXME standard dist access or admin-only?
 @standard_distribution_access
 def templates(request, distribution):
