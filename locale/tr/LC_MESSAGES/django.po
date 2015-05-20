@@ -1,81 +1,67 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Refugee Data\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-16 19:52+0300\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
-
-#: refugeedata/distribution/forms.py:22
-msgid "Incorrect password"
-msgstr ""
+"Project-Id-Version: Refugee Data\n"
+"Language: tr\n"
 
 #: refugeedata/forms.py:13
 msgid "Number of cards to add"
-msgstr ""
-
-#: refugeedata/models.py:19
-msgid "SMS"
-msgstr ""
-
-#: refugeedata/models.py:20 refugeedata/models.py:95
-msgid "Email"
-msgstr ""
+msgstr "Kaç kart eklemek istiyorsunuz?"
 
 #: refugeedata/models.py:29 refugeedata/models.py:43
 msgid "ID"
-msgstr ""
+msgstr "Kart Numrası"
 
 #: refugeedata/models.py:30
 msgid "number"
-msgstr ""
+msgstr "numara"
 
 #: refugeedata/models.py:31
 msgid "active"
-msgstr ""
+msgstr "aktif"
 
 #: refugeedata/models.py:34
 msgid "Registration Number"
-msgstr ""
+msgstr "Kayıt Numarası"
 
 #: refugeedata/models.py:35 refugeedata/models.py:56
 msgid "Registration Numbers"
-msgstr ""
+msgstr "Kayıt Numaraları"
 
-#: refugeedata/models.py:58
-msgid "Data File"
-msgstr ""
+#: refugeedata/models.py:45
+msgid "PDF File"
+msgstr "PDF Dosya"
 
 #: refugeedata/models.py:66
 msgid "Number Range"
-msgstr ""
+msgstr "Numera sayısı"
 
 #: refugeedata/models.py:70
 msgid "Registration Card Batch"
-msgstr ""
+msgstr "Kimlik kartı sürü"
 
 #: refugeedata/models.py:71
 msgid "Registration Card Batches"
-msgstr ""
+msgstr "Kimlik kartı sürüler"
 
 #: refugeedata/models.py:75
 msgid "Base Language"
-msgstr ""
+msgstr "Temel dili"
 
 #: refugeedata/models.py:77
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: refugeedata/models.py:79
 msgid "Example Text"
-msgstr ""
+msgstr "Metin Örneği"
 
 #: refugeedata/models.py:86 refugeedata/models.py:129
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 #: refugeedata/models.py:87
 msgid "Languages"
@@ -87,166 +73,191 @@ msgstr "İsim"
 
 #: refugeedata/models.py:93
 msgid "Preferred language"
-msgstr ""
+msgstr "Tercih edilen dil"
 
 #: refugeedata/models.py:94
 msgid "Needs"
-msgstr ""
+msgstr "Özel İhtiyaçları"
+
+#: refugeedata/models.py:20 refugeedata/models.py:95
+msgid "Email"
+msgstr "E-posta Adresi"
 
 #: refugeedata/models.py:98
 msgid "Phone Number"
 msgstr "Telefon Numrası"
 
+#: refugeedata/models.py:87
+msgid "Phone"
+msgstr "Telefon"
+
 #: refugeedata/models.py:101
 msgid "Preferred Contact"
-msgstr ""
+msgstr "Tercih edilen bildirme yöntemi "
 
 #: refugeedata/models.py:102
 msgid "Story"
-msgstr ""
+msgstr "Hikâye/Tarih"
 
 #: refugeedata/models.py:103
 msgid "Active"
-msgstr ""
+msgstr "Aktif"
 
 #: refugeedata/models.py:110
 msgid "Registration Card"
-msgstr ""
+msgstr "Kayıt Kartı"
 
 #: refugeedata/models.py:113
 msgid "Photo"
-msgstr ""
+msgstr "Fotoğraf"
 
 #: refugeedata/models.py:119
 msgid "Person"
-msgstr ""
+msgstr "İnsan"
 
 #: refugeedata/models.py:120
 msgid "People"
-msgstr ""
+msgstr "İnsanlar"
+
+#: templates/registration/base.html:5
+msgid "Registration"
+msgstr "Kaydetme"
+
+#. What's the context of this? tried to find it on the system, but I keep getting 500 errors :P we should fix that :P
+#: templates/registration/index.html:7
+msgid "Register"
+msgstr "Kaydet"
+
+#: templates/registration/must_complete.html:6
+msgid "To complete registration, please scan the below QR code:"
+msgstr "Kaydetme bitirmek için, alttaki QR kodu telefonunuzla okutun."
+
+#: templates/registration/must_complete.html:8
+msgid "I am unable to scan the QR code"
+msgstr "QR kodu okutamama"
+
+#: templates/registration/register.html:9 templates/registration/stage2.html:9
+msgid "Save"
+msgstr "Kaydet"
+
+#. This is like, "registration has completed", right?
+#. 
+#. Not, like an imparative, "Click here to complete reg", right?
+#: templates/registration/stage2_complete.html:6
+msgid "Registration complete"
+msgstr "Kaydetme tamamlandı"
+
+#: templates/registration/stage2_complete.html:42
+msgid "Register someone else"
+msgstr "Başka kişi kaydetme"
+
+#: refugeedata/distribution/forms.py:22
+msgid "Incorrect password"
+msgstr "Yanlış şifresi"
+
+#: refugeedata/models.py:19
+msgid "SMS"
+msgstr "SMS"
+
+#. We weren't too sure about the context of this either, so we just went with this:
+#: refugeedata/models.py:58
+msgid "Data File"
+msgstr "Veri Dosyası"
 
 #: refugeedata/models.py:128
 msgid "Template Type"
-msgstr ""
+msgstr "Şablon Tipi"
 
 #: refugeedata/models.py:130
 msgid "Template Text"
-msgstr ""
+msgstr "Şablon Metini"
 
 #: refugeedata/models.py:136
 msgid "Template"
-msgstr ""
+msgstr "Şablon"
 
 #: refugeedata/models.py:137 refugeedata/models.py:154
 msgid "Templates"
-msgstr ""
+msgstr "Şablonlar"
 
 #: refugeedata/models.py:145
 msgid "Distribution Date"
-msgstr ""
+msgstr "Dağıtma Tarihi"
 
 #: refugeedata/models.py:147
 msgid "Supplies Quantity"
-msgstr ""
+msgstr "Paketlerin miktarı"
 
 #: refugeedata/models.py:149
 msgid "Supplies Description"
-msgstr ""
+msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
 #: refugeedata/models.py:172 templates/distribution/base.html:5
 msgid "Distribution"
-msgstr ""
+msgstr "Dağıtma"
 
 #: refugeedata/models.py:173
 msgid "Distributions"
-msgstr ""
+msgstr "Dağıtmalar"
 
 #: templates/distribution/info.html:6
 msgid "Show Password"
-msgstr ""
+msgstr "Şifre Göster"
 
 #: templates/distribution/info.html:14
 msgid "Attendees:"
-msgstr ""
+msgstr "Katılanlar:"
 
 #: templates/distribution/info.html:17
 msgid "attended"
-msgstr ""
+msgstr "Katılabildiğin olanlar"
 
+#. Context? Sorry :P
 #: templates/distribution/login.html:9
 msgid "Authenticate"
-msgstr ""
+msgstr "Gerçeklemek"
 
 #: templates/distribution/template_mock_send.html:7
 msgid "To:"
-msgstr ""
+msgstr "Kime:"
 
 #: templates/distribution/template_mock_send.html:8
 msgid "Message:"
-msgstr ""
+msgstr "Mesaj:"
 
 #: templates/distribution/templates.html:6
 msgid "Email templates"
-msgstr ""
+msgstr "E-posta Şablonları"
 
 #: templates/distribution/templates.html:8
 #: templates/distribution/templates.html:19
-#, fuzzy
-#| msgid "Languages"
 msgid "Language:"
-msgstr "Diller"
+msgstr "Dil:"
 
 #: templates/distribution/templates.html:12
 #: templates/distribution/templates.html:23
 msgid "Send:"
-msgstr ""
+msgstr "Gönder:"
 
 #: templates/distribution/templates.html:12
 #: templates/distribution/templates.html:23
 msgid "to everyone"
-msgstr ""
+msgstr "Herkese"
 
 #: templates/distribution/templates.html:12
 #: templates/distribution/templates.html:23
 msgid "only to recipients"
-msgstr ""
+msgstr "Sırf alanlara"
 
 #: templates/distribution/templates.html:14
 msgid "No email templates found"
-msgstr ""
+msgstr "Hiç e-posta şablonları bulunmadı"
 
 #: templates/distribution/templates.html:17
 msgid "SMS templates"
-msgstr ""
+msgstr "SMS Şablonları"
 
 #: templates/distribution/templates.html:25
 msgid "No SMS templates found"
-msgstr ""
+msgstr "Hiç SMS şablonları bulunmadı"
 
-#: templates/registration/base.html:5
-msgid "Registration"
-msgstr ""
-
-#: templates/registration/index.html:7
-msgid "Register"
-msgstr ""
-
-#: templates/registration/must_complete.html:6
-msgid "To complete registration, please scan the below QR code:"
-msgstr ""
-
-#: templates/registration/must_complete.html:8
-msgid "I am unable to scan the QR code"
-msgstr ""
-
-#: templates/registration/register.html:9 templates/registration/stage2.html:9
-msgid "Save"
-msgstr ""
-
-#: templates/registration/stage2_complete.html:6
-msgid "Registration complete"
-msgstr ""
-
-#: templates/registration/stage2_complete.html:42
-msgid "Register someone else"
-msgstr ""
