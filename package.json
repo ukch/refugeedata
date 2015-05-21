@@ -9,7 +9,6 @@
     "gulp-minify-css": "^1.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.1",
-    "gulp-shell": "^0.4.1",
     "gulp-watch": "^4.2.4"
   },
   "dependencies": {

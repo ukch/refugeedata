@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var shell = require('gulp-shell');
 var watch = require('gulp-watch');
 var minifycss = require('gulp-minify-css');
 var rename = require('gulp-rename');
@@ -37,6 +36,4 @@ gulp.task('watch', function() {
 
 });
 
-gulp.task('django', shell.task(['. $VIRTUAL_ENV/bin/activate && python ./manage.py runserver 0.0.0.0:8000']));
-
-gulp.task('default', ['sass', 'django', 'watch']);
+gulp.task('default', ['sass', 'watch']);
