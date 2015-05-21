@@ -36,6 +36,7 @@ SSLIFY_DISABLE = os.environ.get("SSLIFY_DISABLE", DEBUG and "1") == "1"
 # Application definition
 
 INSTALLED_APPS = (
+    'django_gulp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
