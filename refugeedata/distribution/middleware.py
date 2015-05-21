@@ -35,7 +35,8 @@ class DistributionUserMiddleware(object):
 
 
 def _remove_hash_from_session(request, **kwargs):
-    request.session.remove(DistributionUserMiddleware.hash_name)
+    request.session.pop(DistributionUserMiddleware.hash_name)
+    request.session.save()
 
 
 auth.signals.user_logged_in.connect(_remove_hash_from_session)
