@@ -1,8 +1,13 @@
+{% load compress %}
+{% load staticfiles %}
 {% load i18n %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>{% trans "Distribution" %}</title>
+        {% compress css %}
+        <link rel="stylesheet" href="{% static "css/main.css" %}" />
+        {% endcompress %}
     </head>
     <body>
         <h1>Welcome to distribution</h1>

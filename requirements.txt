@@ -4,6 +4,8 @@ argparse==1.2.1
 boto==2.38.0
 dj-database-url==0.3.0
 dj-static==0.0.6
+django-appconf==1.0.1
+django-compressor==1.5
 django-languages==0.1
 django-sslify==0.2.7
 django-storages==1.1.8
