@@ -1,40 +1,66 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var watch = require('gulp-watch');
-var minifycss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var gzip = require('gulp-gzip');
-var livereload = require('gulp-livereload');
+(function() {
+    "use strict";
 
-var gzip_options = {
-    threshold: '1kb',
-    gzipOptions: {
-        level: 9
-    }
-};
+    var gulp = require('gulp');
+    var sass = require('gulp-sass');
+    require('gulp-watch');
+    var minifycss = require('gulp-minify-css');
+    var rename = require('gulp-rename');
+    var gzip = require('gulp-gzip');
+    var livereload = require('gulp-livereload');
+    var watchify = require('gulp-watchify');
 
-/* Compile Our Sass */
-gulp.task('sass', function() {
-    return gulp.src('scss/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('refugeedata/static/css'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(minifycss())
-        .pipe(gulp.dest('refugeedata/static/css'))
-        .pipe(gzip(gzip_options))
-        .pipe(gulp.dest('refugeedata/static/css'))
-        .pipe(livereload());
-});
+    var gzip_options = {
+        threshold: '1kb',
+        gzipOptions: {
+            level: 9
+        }
+    };
 
-/* Watch Files For Changes */
-gulp.task('watch', function() {
-    livereload.listen();
-    gulp.watch('scss/*.scss', ['sass']);
+    /* Compile Our Sass */
+    gulp.task('sass', function() {
+        return gulp.src('scss/*.scss')
+            .pipe(sass())
+            .pipe(gulp.dest('refugeedata/static/css'))
+            .pipe(rename({suffix: '.min'}))
+            .pipe(minifycss())
+            .pipe(gulp.dest('refugeedata/static/css'))
+            .pipe(gzip(gzip_options))
+            .pipe(gulp.dest('refugeedata/static/css'))
+            .pipe(livereload());
+    });
 
-    /* Trigger a live reload on any Django template changes */
-    gulp.watch('**/templates/*').on('change', livereload.changed);
+    /* Watch Files For Changes */
+    gulp.task('watch', function() {
+        livereload.listen();
+        gulp.watch('scss/*.scss', ['sass']);
 
-});
+        /* Trigger a live reload on any Django template changes */
+        gulp.watch('**/templates/*').on('change', livereload.changed);
 
-gulp.task('default', ['sass', 'watch']);
-gulp.task('build', ['sass']);
+    });
+
+    // Hack to enable configurable watchify watching
+    var watching = false;
+    gulp.task('enable-watch-mode', function() { watching = true; });
+
+    // Browserify and copy js files
+    gulp.task('browserify', watchify(function(watchify) {
+        var bundlePaths = {
+            src: [
+                'js/**/*.js',
+            ],
+            dest: 'refugeedata/static/js/'
+        };
+        return gulp.src(bundlePaths.src)
+            .pipe(watchify({
+                watch:watching
+            }))
+            .pipe(gulp.dest(bundlePaths.dest));
+    }));
+
+    gulp.task('watchify', ['enable-watch-mode', 'browserify']);
+
+    gulp.task('default', ['sass', 'watch', 'watchify']);
+    gulp.task('build', ['sass', 'browserify']);
+}());

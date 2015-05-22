@@ -4,13 +4,44 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% trans "Registration" %}</title>
         {% compress css %}
         <link rel="stylesheet" href="{% static "css/main.css" %}" />
         {% endcompress %}
     </head>
     <body>
-        <h1>Welcome to registration</h1>
-        {% block content %}{% endblock %}
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name"><h1><a href="{% url "reg:home" %}">{% trans "Registration" %}</a></h1></li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>{% trans "Menu" %}</span></a></li>
+            </ul>
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="left">
+                    <li class=""><a href="{% url "reg:stage_1" %}">{% trans "Register" %}</a></li>
+                </ul>
+                <ul class="right">
+                    <li class="has-dropdown">
+                        <a href="#">{% if request.user.get_short_name %}{{ request.user.get_short_name }}{% else %}{{ request.user.get_username }}{% endif %}</a>
+                        <ul class="dropdown">
+                            {% if user.is_superuser %}
+                            <li><a href="{% url "admin:index" %}">{% trans "Admin interface" %}</a></li>
+                            {% endif %}
+                            <li><a href="{% url "auth:logout" %}">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+        <div class="row">
+            <div class="small-12 large-12 column">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        {% compress js %}
+        <script src="{% static "js/libraries.js" %}"></script>
+        {% block extra_js %}{% endblock %}
+        {% endcompress %}
     </body>
 </html>
