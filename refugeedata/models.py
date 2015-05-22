@@ -157,7 +157,9 @@ class Distribution(models.Model):
     @property
     def hash(self):
         timestamp = time.mktime(self.date.timetuple())
-        return hashlib.sha1(str(timestamp)).hexdigest()[:4]
+        secret = "".join(c.encode("hex") for c in settings.SECRET_KEY)
+        secret_int = int(secret[:8], 16)
+        return hashlib.sha1(str(timestamp + secret_int)).hexdigest()[:4]
 
     def check_hash(self, password):
         return password == self.hash
