@@ -1,15 +1,29 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: Refugee Data\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-22 15:49+0300\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
-"Project-Id-Version: Refugee Data\n"
-"Language: tr\n"
+
+#: refugeedata/distribution/forms.py:22
+msgid "Incorrect password"
+msgstr "Yanlış şifresi"
 
 #: refugeedata/forms.py:13
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
+
+#: refugeedata/models.py:19
+msgid "SMS"
+msgstr "SMS"
+
+#: refugeedata/models.py:20 refugeedata/models.py:95
+msgid "Email"
+msgstr "E-posta Adresi"
 
 #: refugeedata/models.py:29 refugeedata/models.py:43
 msgid "ID"
@@ -31,9 +45,9 @@ msgstr "Kayıt Numarası"
 msgid "Registration Numbers"
 msgstr "Kayıt Numaraları"
 
-#: refugeedata/models.py:45
-msgid "PDF File"
-msgstr "PDF Dosya"
+#: refugeedata/models.py:58
+msgid "Data File"
+msgstr "Veri Dosyası"
 
 #: refugeedata/models.py:66
 msgid "Number Range"
@@ -79,17 +93,9 @@ msgstr "Tercih edilen dil"
 msgid "Needs"
 msgstr "Özel İhtiyaçları"
 
-#: refugeedata/models.py:20 refugeedata/models.py:95
-msgid "Email"
-msgstr "E-posta Adresi"
-
 #: refugeedata/models.py:98
 msgid "Phone Number"
 msgstr "Telefon Numrası"
-
-#: refugeedata/models.py:87
-msgid "Phone"
-msgstr "Telefon"
 
 #: refugeedata/models.py:101
 msgid "Preferred Contact"
@@ -119,51 +125,6 @@ msgstr "İnsan"
 msgid "People"
 msgstr "İnsanlar"
 
-#: templates/registration/base.html:5
-msgid "Registration"
-msgstr "Kaydetme"
-
-#. What's the context of this? tried to find it on the system, but I keep getting 500 errors :P we should fix that :P
-#: templates/registration/index.html:7
-msgid "Register"
-msgstr "Kaydet"
-
-#: templates/registration/must_complete.html:6
-msgid "To complete registration, please scan the below QR code:"
-msgstr "Kaydetme bitirmek için, alttaki QR kodu telefonunuzla okutun."
-
-#: templates/registration/must_complete.html:8
-msgid "I am unable to scan the QR code"
-msgstr "QR kodu okutamama"
-
-#: templates/registration/register.html:9 templates/registration/stage2.html:9
-msgid "Save"
-msgstr "Kaydet"
-
-#. This is like, "registration has completed", right?
-#. 
-#. Not, like an imparative, "Click here to complete reg", right?
-#: templates/registration/stage2_complete.html:6
-msgid "Registration complete"
-msgstr "Kaydetme tamamlandı"
-
-#: templates/registration/stage2_complete.html:42
-msgid "Register someone else"
-msgstr "Başka kişi kaydetme"
-
-#: refugeedata/distribution/forms.py:22
-msgid "Incorrect password"
-msgstr "Yanlış şifresi"
-
-#: refugeedata/models.py:19
-msgid "SMS"
-msgstr "SMS"
-
-#. We weren't too sure about the context of this either, so we just went with this:
-#: refugeedata/models.py:58
-msgid "Data File"
-msgstr "Veri Dosyası"
-
 #: refugeedata/models.py:128
 msgid "Template Type"
 msgstr "Şablon Tipi"
@@ -192,11 +153,11 @@ msgstr "Paketlerin miktarı"
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:172 templates/distribution/base.html:5
+#: refugeedata/models.py:174 templates/distribution/base.html:7
 msgid "Distribution"
 msgstr "Dağıtma"
 
-#: refugeedata/models.py:173
+#: refugeedata/models.py:175
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
@@ -228,7 +189,6 @@ msgstr "Katılanlar:"
 msgid "attended"
 msgstr "Katılabildiğin olanlar"
 
-#. Context? Sorry :P
 #: templates/distribution/login.html:9
 msgid "Authenticate"
 msgstr "Gerçeklemek"
@@ -277,3 +237,48 @@ msgstr "SMS Şablonları"
 msgid "No SMS templates found"
 msgstr "Hiç SMS şablonları bulunmadı"
 
+#: templates/login.html:9
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/base.html:8 templates/registration/base.html:16
+msgid "Registration"
+msgstr "Kaydetme"
+
+#: templates/registration/base.html:17
+msgid "Menu"
+msgstr ""
+
+#: templates/registration/base.html:22 templates/registration/index.html:7
+msgid "Register"
+msgstr "Kaydet"
+
+#: templates/registration/base.html:29
+msgid "Admin interface"
+msgstr ""
+
+#: templates/registration/must_complete.html:6
+msgid "To complete registration, please scan the below QR code:"
+msgstr "Kaydetme bitirmek için, alttaki QR kodu telefonunuzla okutun."
+
+#: templates/registration/must_complete.html:8
+msgid "I am unable to scan the QR code"
+msgstr "QR kodu okutamama"
+
+#: templates/registration/register.html:9 templates/registration/stage2.html:9
+msgid "Save"
+msgstr "Kaydet"
+
+#: templates/registration/stage2_complete.html:6
+msgid "Registration complete"
+msgstr "Kaydetme tamamlandı"
+
+#: templates/registration/stage2_complete.html:42
+msgid "Register someone else"
+msgstr "Başka kişi kaydetme"
+
+#~ msgid "PDF File"
+#~ msgstr "PDF Dosya"
+
+#~ msgid "Phone"
+#~ msgstr "Telefon"
