@@ -2,6 +2,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import TemplateView
 
+from django.utils.http import urlencode
+
 from refugeedata import models
 
 from .. import utils
@@ -34,9 +36,12 @@ def stage_1_complete(request, person_id):
     if person.registration_card and person.photo:
         return redirect("reg:stage_2_complete", person.id)
     url = reverse("reg:stage_2", args=[person.id])
+    url_with_login = "{}?{}".format(
+        reverse("auth:check_login"),
+        urlencode({"next": url, "app": "registration"}))
     return render(request, "registration/must_complete.html", {
         "url": url,
-        "qr_code": utils.qr_code_from_url(url, request, size=300),
+        "qr_code": utils.qr_code_from_url(url_with_login, request, size=300),
     })
 
 

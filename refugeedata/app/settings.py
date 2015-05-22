@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.core.urlresolvers import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -161,6 +162,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 RAVEN_CONFIG = {
     'dsn': os.environ.get("RAVEN_DSN"),
 }
+
+LOGIN_URL = reverse_lazy("auth:login")
+LOGOUT_URL = reverse_lazy("auth:logout")
+LOGIN_REDIRECT_URL = reverse_lazy("public")
 
 # File storage
 if not DEBUG:

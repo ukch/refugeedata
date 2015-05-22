@@ -1,3 +1,5 @@
+import urllib
+
 from itertools import chain
 
 
@@ -63,4 +65,4 @@ def qr_code_from_url(relative_url, request=None, size=500):
         url = request.build_absolute_uri(relative_url)
     else:
         url = relative_url
-    return QR_CODE_URL_TEMPLATE.format(size=size, data=url)
+    return QR_CODE_URL_TEMPLATE.format(size=size, data=urllib.quote_plus(url))
