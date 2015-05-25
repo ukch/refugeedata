@@ -1,0 +1,11 @@
+{% extends base_template %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Permission denied" %}</h1>
+<p>{% blocktrans %}You do not have the permission required to view this page.{% endblocktrans %}</p>
+{% if request.user.is_authenticated %}
+{% url "auth:login" as login_url %}
+<p>{% blocktrans with '<a href="'|add:login_url|add:'?next='|add:request.path|add:'">'|safe as link_begin and '</a>' as link_end %}If you have multiple user accounts, try {{ link_begin }}logging in{{ link_end }} with a different one..{% endblocktrans %}</p>
+{% endif %}
+{% endblock %}

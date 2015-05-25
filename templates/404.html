@@ -1,0 +1,8 @@
+{% extends base_template %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Page not found!" %}</h1>
+<p>{% blocktrans %}We are sorry. The page you requested could not be found. Please check and try again.{% endblocktrans %}</p>
+<p>{% blocktrans with '<a href="'|add:bugs_url|add:'" target="_blank">'|safe as link_begin and '</a>' as link_end %}If you think this was caused by a bug in our software, please {{ link_begin }}report it{{ link_end }}.{% endblocktrans %}</p>
+{% endblock %}

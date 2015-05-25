@@ -1,0 +1,10 @@
+{% extends base_template %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Internal server error" %}</h1>
+<p>{% blocktrans %}We are sorry. It seems we have some bugs in our code. Please refresh the page and try again.{% endblocktrans %}</p>
+{% if request.sentry.id %}
+    <p>This particular error has been reported as <strong>{{ request.sentry.id }}</strong>.</p>
+{% endif %}
+{% endblock %}

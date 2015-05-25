@@ -2,8 +2,10 @@ import datetime
 from functools import partial
 import os
 
+from django.core.urlresolvers import resolve, Resolver404
 from django.conf import settings
 from django.http import HttpResponseRedirect
+import django.template.loader as loader
 from django.shortcuts import redirect, render
 
 import django.contrib.auth.views as auth_views
@@ -39,9 +41,23 @@ def check_login(request):
             "{}?{}".format(url, request.GET.urlencode()))
 
 
+def _find_app_from_path(path):
+    try:
+        match = resolve(path)
+    except Resolver404:
+        path, unused = os.path.split(path)
+        return _find_app_from_path(path + "/")
+    return match.app_name
+
+
 def login(request, template_name="login.html"):
-    app = request.GET.get("app", "public")
-    base_template = os.path.join(app, "base.html")
+    base_template = "public/base.html"
+    if "next" in request.GET:
+        app = _find_app_from_path(request.GET["next"])
+        base_template = loader.select_template(
+            [os.path.join(app, "base.html"), base_template])
+    else:
+        app = None
     return auth_views.login(
         request, template_name=template_name, current_app=app, extra_context={
             "base_template": base_template,
@@ -49,3 +65,21 @@ def login(request, template_name="login.html"):
 
 
 logout = partial(auth_views.logout, next_page="/")
+
+
+# Error handlers
+def error_page(request, template_name, code):
+    base_template = "public/base.html"
+    current_app = _find_app_from_path(request.path)
+    if current_app:
+        base_template = loader.select_template(
+            [os.path.join(current_app, "base.html"), "public/base.html"])
+    return render(request, template_name, {
+        "base_template": base_template,
+        "bugs_url": "//github.com/ukch/refugeedata/issues/"
+    }, current_app=current_app, status=code)
+
+
+page_not_found = partial(error_page, template_name="404.html", code=404)
+server_error = partial(error_page, template_name="500.html", code=500)
+permission_denied = partial(error_page, template_name="403.html", code=403)

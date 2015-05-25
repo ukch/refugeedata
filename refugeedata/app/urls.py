@@ -4,6 +4,10 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.generic import RedirectView
 
+handler404 = "refugeedata.views.page_not_found"
+handler500 = "refugeedata.views.server_error"
+handler403 = "refugeedata.views.permission_denied"
+
 urlpatterns = [
     url(r'^$', 'refugeedata.views.home', name='public'),
     url(r'^c/(?P<card_number>\d+)/(?P<card_code>[a-fA-F0-9]{4})/$',

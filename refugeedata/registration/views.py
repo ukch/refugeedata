@@ -37,8 +37,7 @@ def stage_1_complete(request, person_id):
         return redirect("reg:stage_2_complete", person.id)
     url = reverse("reg:stage_2", args=[person.id])
     url_with_login = "{}?{}".format(
-        reverse("auth:check_login"),
-        urlencode({"next": url, "app": "registration"}))
+        reverse("auth:check_login"), urlencode({"next": url}))
     return render(request, "registration/must_complete.html", {
         "url": url,
         "qr_code": utils.qr_code_from_url(url_with_login, request, size=300),
