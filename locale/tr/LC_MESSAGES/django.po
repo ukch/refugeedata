@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-22 15:49+0300\n"
+"POT-Creation-Date: 2015-05-27 12:15+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,13 +153,56 @@ msgstr "Paketlerin miktarı"
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:174 templates/distribution/base.html:7
+#: refugeedata/models.py:174 templates/distribution/base.html:8
+#: templates/distribution/base.html:16
 msgid "Distribution"
 msgstr "Dağıtma"
 
 #: refugeedata/models.py:175
 msgid "Distributions"
 msgstr "Dağıtmalar"
+
+#: templates/403.html:5
+msgid "Permission denied"
+msgstr ""
+
+#: templates/403.html:6
+msgid "You do not have the permission required to view this page."
+msgstr ""
+
+#: templates/403.html:9
+#, python-format
+msgid ""
+"If you have multiple user accounts, try %(link_begin)slogging in%(link_end)s "
+"with a different one.."
+msgstr ""
+
+#: templates/404.html:5
+msgid "Page not found!"
+msgstr ""
+
+#: templates/404.html:6
+msgid ""
+"We are sorry. The page you requested could not be found. Please check and "
+"try again."
+msgstr ""
+
+#: templates/404.html:7
+#, python-format
+msgid ""
+"If you think this was caused by a bug in our software, please "
+"%(link_begin)sreport it%(link_end)s."
+msgstr ""
+
+#: templates/500.html:5
+msgid "Internal server error"
+msgstr ""
+
+#: templates/500.html:6
+msgid ""
+"We are sorry. It seems we have some bugs in our code. Please refresh the "
+"page and try again."
+msgstr ""
 
 #: templates/distribution/attendee.html:17
 msgid "This person has already received aid in this distribution."
@@ -175,6 +218,14 @@ msgstr ""
 
 #: templates/distribution/attendee.html:24
 msgid "Are you sure?"
+msgstr ""
+
+#: templates/distribution/base.html:17 templates/registration/base.html:17
+msgid "Menu"
+msgstr ""
+
+#: templates/distribution/base.html:27 templates/registration/base.html:32
+msgid "Admin interface"
 msgstr ""
 
 #: templates/distribution/info.html:6
@@ -245,17 +296,9 @@ msgstr ""
 msgid "Registration"
 msgstr "Kaydetme"
 
-#: templates/registration/base.html:17
-msgid "Menu"
-msgstr ""
-
-#: templates/registration/base.html:22 templates/registration/index.html:7
+#: templates/registration/base.html:23 templates/registration/index.html:7
 msgid "Register"
 msgstr "Kaydet"
-
-#: templates/registration/base.html:29
-msgid "Admin interface"
-msgstr ""
 
 #: templates/registration/must_complete.html:6
 msgid "To complete registration, please scan the below QR code:"
