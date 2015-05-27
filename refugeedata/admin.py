@@ -10,6 +10,12 @@ class DistributionAdmin(admin.ModelAdmin):
     form = forms.DistributionAdminForm
 
 
+class PersonAdmin(admin.ModelAdmin):
+
+    list_display = ("name", "preferred_lang", "registration_card", "active",
+                    "photo")
+
+
 class NumberAdmin(admin.ModelAdmin):
 
     list_display = ("number", "short_id", "active")
@@ -46,6 +52,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Distribution, DistributionAdmin)
+admin.site.register(models.Person, PersonAdmin)
 admin.site.register(models.Language, LanguageAdmin)
 admin.site.register(models.RegistrationCardBatch, BatchAdmin)
 admin.site.register(models.RegistrationNumber, NumberAdmin)
