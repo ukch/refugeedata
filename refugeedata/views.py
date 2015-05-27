@@ -42,11 +42,12 @@ def check_login(request):
 
 
 def _find_app_from_path(path):
+    path_with_slash = path if path.endswith("/") else "{}/".format(path)
     try:
-        match = resolve(path)
+        match = resolve(path_with_slash)
     except Resolver404:
         path, unused = os.path.split(path)
-        return _find_app_from_path(path + "/")
+        return _find_app_from_path(path)
     return match.app_name
 
 
