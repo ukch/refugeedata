@@ -6,7 +6,11 @@
 <div id="person_details">
     <h2>{{ person.name }}</h2>
     {# TODO allow user to take a photo here #}
-    <img src="{{ MEDIA_URL }}{{ person.photo }}" alt="{{ person.name }}" />
+    {% if person.photo %}
+    <img src="{{ person.photo.url }}" alt="{{ person.name }}" />
+    {% else %}
+    <p>{% blocktrans %}{{ person.name }} has no photo!{% endblocktrans %}</p>
+    {% endif %}
     {% if person.needs %}
     <h4>{% trans "Needs" %}:</h4>
     <p>{{ person.needs }}</p>
