@@ -20,6 +20,7 @@ class RegistrationForm(forms.ModelForm):
             "name",
             "preferred_lang",
             "needs",
+            "number_of_dependents",
             "email",
             "phone",
             "preferred_contact",

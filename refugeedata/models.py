@@ -100,6 +100,8 @@ class Person(models.Model):
         max_length=1, choices=SMS_OR_EMAIL, default="E",
         verbose_name=_("Preferred Contact"))
     story = models.TextField(blank=True, null=True, verbose_name=_("Story"))
+    number_of_dependents = models.PositiveSmallIntegerField(
+        default=0, verbose_name=_("Number of Dependents"))
     active = models.BooleanField(default=True, verbose_name=_("Active"))
 
     # Populated by mobile (although fallback is available)
