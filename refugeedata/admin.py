@@ -14,6 +14,7 @@ class PersonAdmin(admin.ModelAdmin):
 
     list_display = ("name", "preferred_lang", "registration_card", "active",
                     "photo")
+    form = forms.PersonAdminForm
 
 
 class NumberAdmin(admin.ModelAdmin):
