@@ -37,3 +37,10 @@ class DistributionAdminForm(forms.ModelForm):
     class Meta:
         model = models.Distribution
         exclude = ["invitees", "attendees", "finish_number"]
+
+
+class PersonAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Person
+        exclude = ["registration_card"]
