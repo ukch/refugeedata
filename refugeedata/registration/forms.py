@@ -19,10 +19,10 @@ class RegistrationForm(forms.ModelForm):
         fields = [
             "name",
             "preferred_lang",
-            "needs",
             "number_of_dependents",
-            "email",
+            "needs",
             "phone",
+            "email",
             "preferred_contact",
             "registration_card",
         ]
