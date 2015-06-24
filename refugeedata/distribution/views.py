@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from refugeedata import models
 
+from . import forms
 from .decorators import standard_distribution_access
 
 
@@ -28,10 +29,19 @@ def attendee(request, distribution, card_number, card_code):
         models.RegistrationNumber, active=True, number=card_number,
         id__startswith=card_code)
     if request.method == "POST":
-        distribution.invitees.add(card)
-        distribution.attendees.add(card)
-        return redirect("dist:info", distribution.id)
+        photo_form = forms.DistributionAddPhotoForm(
+            request.POST, request.FILES, instance=card.person)
+        if "photo_included" in request.POST:
+            if photo_form.is_valid():
+                photo_form.save()
+        if "photo_included" not in request.POST or photo_form.is_valid():
+            distribution.invitees.add(card)
+            distribution.attendees.add(card)
+            return redirect("dist:info", distribution.id)
+    else:
+        photo_form = forms.DistributionAddPhotoForm(instance=card.person)
     return render(request, "distribution/attendee.html", {
+        "photo_form": photo_form,
         "distribution": distribution,
         "person": card.person,
         "is_invited": card in distribution.invitees.all(),

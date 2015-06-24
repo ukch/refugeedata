@@ -2,6 +2,8 @@ import django.forms as forms
 
 from django.utils.translation import ugettext_lazy as _
 
+import refugeedata.models as models
+
 
 class DistributionHashForm(forms.Form):
 
@@ -20,3 +22,12 @@ class DistributionHashForm(forms.Form):
             return password
         else:
             raise forms.ValidationError(_("Incorrect password"))
+
+
+class DistributionAddPhotoForm(forms.ModelForm):
+
+    photo = forms.ImageField(label=_("Add a photo"), required=True)
+
+    class Meta:
+        model = models.Person
+        fields = ["photo"]

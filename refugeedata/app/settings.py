@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'compressor',
     'raven.contrib.django.raven_compat',
+    'foundationform',
     'refugeedata',
 )
 
