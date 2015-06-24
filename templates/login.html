@@ -1,11 +1,12 @@
 {% extends base_template %}
 
 {% load i18n %}
+{% load foundation %}
 
 {% block content %}
 <form method="post">
 {% csrf_token %}
-{{ form.as_ul }}
+{{ form|foundation }}
 <input type="submit" value="{% trans "Log in" %}" />
 </form>
 {% endblock %}
