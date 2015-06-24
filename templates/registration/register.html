@@ -1,11 +1,12 @@
 {% extends "registration/base.html" %}
 
 {% load i18n %}
+{% load foundation %}
 
 {% block content %}
 <form method="post">
 {% csrf_token %}
-{{ form.as_ul }}
-<input type="submit" value="{% trans "Save" %}" />
+{{ form|foundation }}
+<input class="button small" type="submit" value="{% trans "Save" %}" />
 </form>
 {% endblock %}

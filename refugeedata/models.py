@@ -111,8 +111,9 @@ class Person(models.Model):
         limit_choices_to={"person": None, "active": False},
         verbose_name=_("Registration Card"),
     )
-    photo = models.ImageField(blank=True, null=True, upload_to="user_images",
-                              verbose_name=_("Photo"))
+    photo = models.ImageField(
+        blank=True, null=True, upload_to="user_images/%m%d%H%M/",
+        verbose_name=_("Photo"))
 
     def __unicode__(self):
         return u"{}: {}".format(self.registration_card.number, self.name)

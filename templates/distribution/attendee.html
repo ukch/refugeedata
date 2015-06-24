@@ -1,6 +1,7 @@
 {% extends "distribution/base.html" %}
 
 {% load i18n %}
+{% load foundation %}
 
 {% block content %}
 <div id="person_details">
@@ -23,9 +24,13 @@
 {% if not is_invited %}
 <h4 class="warning">{% blocktrans %}This person is not on the invitation list for this distribution.{% endblocktrans %}</h4>
 {% endif %}
-<form method="post">
+<form method="post"{% if not person.photo %} enctype="multipart/form-data"{% endif %}>
 {% csrf_token %}
-<input type="submit" value="{% trans "Proceed" %}" {% if not is_invited %}onclick="return confirm('{% trans "Are you sure?" %}')"{% endif %}/>
+{% if not person.photo %}
+<input type="hidden" name="photo_included" value="true" />
+{{ photo_form|foundation }}
+{% endif %}
+<input type="submit" class="button small" value="{% trans "Proceed" %}" {% if not is_invited %}onclick="return confirm('{% trans "Are you sure?" %}')"{% endif %}/>
 </form>
 {% endif %}
 {% endblock %}
