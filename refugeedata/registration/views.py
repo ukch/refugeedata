@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render, get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 
 from django.utils.http import urlencode
 
@@ -13,7 +13,7 @@ from .forms import RegistrationForm, RegistrationFormStage2
 
 
 home = register_permission_required(
-    TemplateView.as_view(template_name="registration/index.html"))
+    RedirectView.as_view(permanent=False, pattern_name="reg:stage_1"))
 
 
 @register_permission_required

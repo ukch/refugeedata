@@ -16,8 +16,6 @@ SOURCE_URL = "https://github.com/ukch/refugeedata"
 
 
 def home(request):
-    if request.user.is_superuser:
-        return redirect("admin:index")
     if request.user.has_perm("refugeedata.add_person"):
         return redirect("reg:home")
     return render(request, "public.html", {
