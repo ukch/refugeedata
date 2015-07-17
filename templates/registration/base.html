@@ -24,17 +24,7 @@
                 </ul>
                 {% endif %}
                 <ul class="right">
-                    {% if user.is_authenticated %}
-                    <li class="has-dropdown">
-                        <a href="#">{% if request.user.get_short_name %}{{ request.user.get_short_name }}{% else %}{{ request.user.get_username }}{% endif %}</a>
-                        <ul class="dropdown">
-                            {% if user.is_superuser %}
-                            <li><a href="{% url "admin:index" %}">{% trans "Admin interface" %}</a></li>
-                            {% endif %}
-                            <li><a href="{% url "auth:logout" %}">Log out</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
+                    {% include "inc/right_menu.html" %}
                 </ul>
             </section>
         </nav>

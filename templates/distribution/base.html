@@ -13,23 +13,13 @@
     <body>
         <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
-                <li class="name"><h1><a href="{% url "reg:home" %}">{% trans "Distribution" %}</a></h1></li>
+                <li class="name"><h1><a href="{% url "dist:home" %}">{% trans "Distribution" %}</a></h1></li>
                 <li class="toggle-topbar menu-icon"><a href="#"><span>{% trans "Menu" %}</span></a></li>
             </ul>
             <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
-                    {% if user.is_authenticated %}
-                    <li class="has-dropdown">
-                        <a href="#">{% if request.user.get_short_name %}{{ request.user.get_short_name }}{% else %}{{ request.user.get_username }}{% endif %}</a>
-                        <ul class="dropdown">
-                            {% if user.is_superuser %}
-                            <li><a href="{% url "admin:index" %}">{% trans "Admin interface" %}</a></li>
-                            {% endif %}
-                            <li><a href="{% url "auth:logout" %}">Log out</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
+                    {% include "inc/right_menu.html" %}
                 </ul>
             </section>
         </nav>

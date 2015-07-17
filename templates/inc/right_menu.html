@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% if user.is_superuser %}
+<li class="has-dropdown">
+    <a>{% trans 'Sections' %}</a>
+    <ul class="dropdown">
+        <li><a href="{% url "reg:home" %}">{% trans 'Registration' %}</a></li>
+        <li><a href="{% url "dist:home" %}">{% trans 'Distribution' %}</a></li>
+        <li><a href="{% url "admin:index" %}">{% trans 'Admin' %}</a></li>
+    </ul>
+</li>
+{% endif %}
+{% if user.is_authenticated %}
+<li class="has-dropdown">
+    <a>{% if request.user.get_short_name %}{{ request.user.get_short_name }}{% else %}{{ request.user.get_username }}{% endif %}</a>
+    <ul class="dropdown">
+        {% if user.is_superuser %}
+        <li><a href="{% url "admin:index" %}">{% trans "Admin interface" %}</a></li>
+        {% endif %}
+        <li><a href="{% url "auth:logout" %}">Log out</a></li>
+    </ul>
+</li>
+{% endif %}
