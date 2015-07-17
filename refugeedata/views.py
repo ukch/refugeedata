@@ -12,13 +12,18 @@ import django.contrib.auth.views as auth_views
 
 from .models import Distribution
 
+SOURCE_URL = "https://github.com/ukch/refugeedata"
+
 
 def home(request):
     if request.user.is_superuser:
         return redirect("admin:index")
     if request.user.has_perm("refugeedata.add_person"):
         return redirect("reg:home")
-    return render(request, "public.html")
+    return render(request, "public.html", {
+        "site_name": request.site.name,
+        "source_url": SOURCE_URL,
+    })
 
 
 def scan_card(request, card_number, card_code):
@@ -77,7 +82,7 @@ def error_page(request, template_name, code):
             [os.path.join(current_app, "base.html"), "public/base.html"])
     return render(request, template_name, {
         "base_template": base_template,
-        "bugs_url": "//github.com/ukch/refugeedata/issues/"
+        "bugs_url": "{}/issues/".format(SOURCE_URL)
     }, current_app=current_app, status=code)
 
 

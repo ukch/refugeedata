@@ -2,6 +2,6 @@
 {% load i18n %}
 
 {% block content %}
-<h1>Welcome to ank-aid.com</h1>
-This site is built using the <a href="https://github.com/ukch/refugeedata" target="_blank">Refugeedata</a> system.
+<h1>{% blocktrans %}Welcome to {{ site_name }}{% endblocktrans %}</h1>
+<p>{% blocktrans with '<a href="'|add:source_url|add:'" target="_blank">'|safe as link_begin and '</a>' as link_end %}This site is built using the {{ link_begin }}Refugeedata{{ link_end }}</a> system.{% endblocktrans %}</p>
 {% endblock %}
