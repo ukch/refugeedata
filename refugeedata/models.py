@@ -15,9 +15,11 @@ from uuidfield import UUIDField
 from . import utils
 
 
+ONE_DIGIT_CODE_SMS = "P"
+ONE_DIGIT_CODE_EMAIL = "E"
 SMS_OR_EMAIL = [
-    ("P", _("SMS")),
-    ("E", _("Email")),
+    (ONE_DIGIT_CODE_SMS, _("SMS")),
+    (ONE_DIGIT_CODE_EMAIL, _("Email")),
 ]
 
 
@@ -97,7 +99,7 @@ class Person(models.Model):
     phone = models.CharField(max_length=20, blank=True, null=True,
                              verbose_name=_("Phone Number"))
     preferred_contact = models.CharField(
-        max_length=1, choices=SMS_OR_EMAIL, default="E",
+        max_length=1, choices=SMS_OR_EMAIL, default=ONE_DIGIT_CODE_SMS,
         verbose_name=_("Preferred Contact"))
     story = models.TextField(blank=True, null=True, verbose_name=_("Story"))
     number_of_dependents = models.PositiveSmallIntegerField(

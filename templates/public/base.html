@@ -11,6 +11,19 @@
         {% endcompress %}
     </head>
     <body>
-        {% block content %}{% endblock %}
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name"><h1><a href="{% url "public" %}">Refugeedata</a></h1></li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="small-12 large-12 column">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        {% compress js %}
+        <script src="{% static "js/libraries.js" %}"></script>
+        {% block extra_js %}{% endblock %}
+        {% endcompress %}
     </body>
 </html>

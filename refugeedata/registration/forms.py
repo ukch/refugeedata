@@ -4,7 +4,7 @@ from refugeedata.models import Person
 
 
 def _preferred_language_label_from_instance(instance):
-    return u"{} ({})".format(instance.example_text, instance.description)
+    return u"{}, {}: {}".format(instance.iso_code, instance.description, instance.example_text)
 
 
 class RegistrationForm(forms.ModelForm):
@@ -19,10 +19,10 @@ class RegistrationForm(forms.ModelForm):
         fields = [
             "name",
             "preferred_lang",
-            "needs",
             "number_of_dependents",
-            "email",
+            "needs",
             "phone",
+            "email",
             "preferred_contact",
             "registration_card",
         ]
