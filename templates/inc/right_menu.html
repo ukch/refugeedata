@@ -4,9 +4,17 @@
 <li class="has-dropdown">
     <a>{% trans 'Sections' %}</a>
     <ul class="dropdown">
+        {% with app_name=request.resolver_match.app_name %}
+        {% if app_name != 'registration' %}
         <li><a href="{% url "reg:home" %}">{% trans 'Registration' %}</a></li>
+        {% endif %}
+        {% if app_name != 'distribution' %}
         <li><a href="{% url "dist:home" %}">{% trans 'Distribution' %}</a></li>
+        {% endif %}
+        {% if app_name != 'admin' %}
         <li><a href="{% url "admin:index" %}">{% trans 'Admin' %}</a></li>
+        {% endif %}
+        {% endwith %}
     </ul>
 </li>
 {% endif %}
