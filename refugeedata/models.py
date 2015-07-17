@@ -114,7 +114,7 @@ class Person(models.Model):
         verbose_name=_("Registration Card"),
     )
     photo = models.ImageField(
-        blank=True, null=True, upload_to="user_images/%m%d%H%M/",
+        blank=True, null=True, upload_to="user_images/%m%d%H%M%S/",
         verbose_name=_("Photo"))
 
     def __unicode__(self):
