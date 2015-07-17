@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, Http404
 
 from refugeedata import models
 
@@ -12,6 +12,8 @@ def home(request):
     try:
         dist = models.Distribution.objects.get(date=datetime.date.today())
     except models.Distribution.DoesNotExist:
+        if request.user.is_superuser:
+            raise Http404("No distribution today")
         return redirect("public")
     return redirect("dist:info", dist.id)
 
