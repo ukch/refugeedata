@@ -21,6 +21,11 @@
         <th scope="row">{% trans "Needs" %}</th><td>{{ person.needs }}</td>
     </tr>
     {% endif %}
+    {% if person.number_of_dependents %}
+    <tr>
+        <th scope="row">{% trans "Number of Dependents" %}</th><td>{{ person.number_of_dependents }}</td>
+    </tr>
+    {% endif %}
     {% if person.email %}
     <tr>
         <th scope="row">{% trans "Email" %}</th><td>{{ person.email }}</td>
