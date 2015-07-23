@@ -5,39 +5,7 @@
 {% block content %}
 <h2>{% trans "Registration complete" %}</h2>
 
-{# FIXME if we are keeping this view, try and get the values magically from the model #}
-
-<div>
-    {% if person.photo %}
-    <img src="{{ person.photo.url }}" alt="{{ person.name }}" />
-    {% else %}
-    <p>{{ person.name }} has no photo!</p>
-    {% endif %}
-</div>
-
-<table>
-    <tr>
-        <td>Name:</td><td>{{ person.name }}</td>
-    </tr>
-    <tr>
-        <td>Preferred Language</td><td>{{ person.preferred_lang }}</td>
-    </tr>
-    <tr>
-        <td>Needs</td><td>{{ person.needs }}</td>
-    </tr>
-    <tr>
-        <td>Email</td><td>{{ person.email }}</td>
-    </tr>
-    <tr>
-        <td>Phone</td><td>{{ person.phone }}</td>
-    </tr>
-    <tr>
-        <td>Preferred Contact</td><td>{{ person.preferred_contact }}</td>
-    </tr>
-    <tr>
-        <td>Registration Card</td><td>{{ person.registration_card }}</td>
-    </tr>
-</table>
+{% include "inc/person_details.html" with person=person %}
 
 <p><a href="{% url 'reg:stage_1' %}">{% trans "Register someone else" %}</a></p>
 {% endblock %}

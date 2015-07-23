@@ -1,0 +1,40 @@
+{% load i18n %}
+
+<table id="person_details" role="grid">
+    <tr>
+        <td colspan="2"><h3>{{ person.name }}</h3></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="photo">
+            {% if person.photo %}
+            <img src="{{ person.photo.url }}" alt="{{ person.name }}" />
+            {% else %}
+            <p>{% blocktrans with name=person.name %}{{ name }} has no photo!{% endblocktrans %}</p>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">{% trans "Preferred Language" %}</th><td>{{ person.preferred_lang }}</td>
+    </tr>
+    {% if person.needs %}
+    <tr>
+        <th scope="row">{% trans "Needs" %}</th><td>{{ person.needs }}</td>
+    </tr>
+    {% endif %}
+    {% if person.email %}
+    <tr>
+        <th scope="row">{% trans "Email" %}</th><td>{{ person.email }}</td>
+    </tr>
+    {% endif %}
+    {% if person.phone %}
+    <tr>
+        <th scope="row">{% trans "Phone" %}</th><td>{{ person.phone }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <th scope="row">{% trans "Preferred Contact" %}</th><td>{% if person.preferred_contact == "P" %}{% trans "SMS" %}{% else %}{% trans "Email" %}{% endif %}</td>
+    </tr>
+    <tr>
+        <th scope="row">{% trans "Registration Card" %}</th><td>{{ person.registration_card }}</td>
+    </tr>
+</table>

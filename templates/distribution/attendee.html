@@ -4,19 +4,8 @@
 {% load foundation %}
 
 {% block content %}
-<div id="person_details">
-    <h2>{{ person.name }}</h2>
-    {# TODO allow user to take a photo here #}
-    {% if person.photo %}
-    <img src="{{ person.photo.url }}" alt="{{ person.name }}" />
-    {% else %}
-    <p>{% blocktrans %}{{ person.name }} has no photo!{% endblocktrans %}</p>
-    {% endif %}
-    {% if person.needs %}
-    <h4>{% trans "Needs" %}:</h4>
-    <p>{{ person.needs }}</p>
-    {% endif %}
-</div>
+<h2>{% trans "Attendee Details" %}</h2>
+{% include "inc/person_details.html" with person=person %}
 
 {% if has_attended %}
 <h4 class="warning">{% blocktrans %}This person has already received aid in this distribution.{% endblocktrans %}</h4>
