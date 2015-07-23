@@ -2,7 +2,7 @@ import urllib
 
 from itertools import chain
 
-from django.template import Template
+from django.template import Template, Context
 from django.template.base import VariableNode
 
 
@@ -11,17 +11,42 @@ class TemplateWithDefaultFallback(Template):
 
     replace_variable_with = "{}"
 
+    def _default_fallback(self, node, context):
+        value = self.nodelist.render_node(node, context)
+        if value == "":
+            value = "{{ %s }}" % (node.filter_expression.var.var)
+        return self.replace_variable_with.format(value)
+
     def _render(self, context):
         output = u""
         for node in self.nodelist:
             if isinstance(node, VariableNode):
-                value = self.nodelist.render_node(node, context)
-                if value == "":
-                    value = "{{ %s }}" % (node.filter_expression.var.var)
-                output += self.replace_variable_with.format(value)
+                output += self._default_fallback(node, context)
             else:
                 output += self.nodelist.render_node(node, context)
         return output
+
+
+class NameHarvesterTemplate(TemplateWithDefaultFallback):
+
+    def _default_fallback(self, node, context):
+        self.harvested_variable_names.add(node.filter_expression.var.var)
+        # We don't actually use the output so it doesn't matter what we return
+        # here, so long as it's a string
+        return ""
+
+    def render(self, context):
+        self.harvested_variable_names = set()
+        return super(NameHarvesterTemplate, self).render(context)
+
+    def harvest_names(self):
+        self.render(Context())
+        return self.harvested_variable_names
+
+
+def get_variable_names_from_template(template_text):
+    template = NameHarvesterTemplate(template_text)
+    return template.harvest_names()
 
 
 def format_range(values):

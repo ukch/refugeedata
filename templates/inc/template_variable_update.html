@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<form method="post" action="{% url 'dist:template_variable_set' distribution_id variable %}?next={{ request.path }}">
+    {% csrf_token %}
+    <div class="row">
+        <div class="small-12 large-1 column">
+            <label for="{{ form.variable.auto_id }}_{{ variable }}"><pre class="variable">{{ form.variable.label }}</pre></label>
+        </div>
+        <div class="small-8 large-9 column">
+            {{ form.variable }}
+        </div>
+        <div class="small-4 large-2 column">
+            <input class="button tiny expand" type="submit" value="{% trans "Update" %}" />
+        </div>
+    </div>
+</form>

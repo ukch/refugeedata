@@ -31,3 +31,14 @@ class DistributionAddPhotoForm(forms.ModelForm):
     class Meta:
         model = models.Person
         fields = ["photo"]
+
+
+class TemplateVariableForm(forms.Form):
+
+    variable = forms.CharField(required=False)
+
+    def __init__(self, variable_name, *args, **kwargs):
+        super(TemplateVariableForm, self).__init__(*args, **kwargs)
+        field = self.fields["variable"]
+        field.label = variable_name
+        field.widget.attrs["id"] = "id_variable_{}".format(variable_name)

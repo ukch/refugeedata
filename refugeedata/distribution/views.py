@@ -1,9 +1,11 @@
 import datetime
 
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render, Http404
 
 from refugeedata import models
 
+from refugeedata.utils import get_variable_names_from_template
 from . import forms
 from .decorators import standard_distribution_access
 
@@ -54,11 +56,31 @@ def attendee(request, distribution, card_number, card_code):
 # FIXME standard dist access or admin-only?
 @standard_distribution_access
 def templates(request, distribution):
+    template_variables = set()
+    for template in distribution.templates.all():
+        template_variables = template_variables.union(
+            get_variable_names_from_template(template.text))
     return render(request, "distribution/templates.html", {
         "distribution": distribution,
-        "email_templates": distribution.templates.filter(type="E"),
-        "sms_templates": distribution.templates.filter(type="P"),
+        "template_variables": template_variables,
+        "email_templates": distribution.templates.filter(
+            type=models.ONE_DIGIT_CODE_EMAIL),
+        "sms_templates": distribution.templates.filter(
+            type=models.ONE_DIGIT_CODE_SMS),
     })
+
+
+# FIXME standard dist access or admin-only?
+@standard_distribution_access
+def template_variable_set(request, distribution, variable):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    form = forms.TemplateVariableForm(variable, request.POST)
+    if form.is_valid():
+        key = "template_variable_{}_value".format(variable)
+        request.session[key] = form.cleaned_data["variable"]
+        request.session.save()
+    return redirect(request.GET.get("next", "/"))
 
 
 # FIXME standard dist access or admin-only?
