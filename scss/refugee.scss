@@ -1,3 +1,5 @@
+@import "../node_modules/zurb-foundation-5/scss/foundation/components/global";
+
 /**
  * Common files for Refugeedata project
  */
@@ -8,4 +10,8 @@
     td.photo {
         text-align: center;
     }
+}
+
+.template-src .variable {
+    color: $alert-color;
 }
