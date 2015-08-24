@@ -87,17 +87,12 @@ def template_variable_set(request, distribution, variable):
 @standard_distribution_access
 def template_mock_send(request, distribution, template_id):
     template = get_object_or_404(models.Template, id=template_id)
-    if "to_everyone" in request.GET:
-        cards = models.RegistrationNumber.objects.filter(active=True)
-    else:
-        cards = distribution.invitees.all()
-    person_ids = cards.exclude(person=None).values_list("person", flat=True)
-    preferred_contact = "phone" if template.type == "P" else "email"
-    people = models.Person.objects.filter(
-        id__in=person_ids, preferred_lang=template.language).exclude(**{
-            preferred_contact: "",
-        })
-    recipients = people.values_list(preferred_contact, flat=True)
+    args = []
+    if "to_everyone" not in request.GET:
+        args.append(distribution)
+    recipients = template.get_invitees(*args)
+    if len(recipients) == 0:
+        raise Http404("No recipients found")
     return render(request, "distribution/template_mock_send.html", {
         "distribution": distribution,
         "template": template,

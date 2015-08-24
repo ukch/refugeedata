@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load template_variables %}
+{% load distribution %}
 
 {% block content %}
 <h2>{% trans "Fields" %}</h2>
@@ -14,7 +15,11 @@
 {% for template in email_templates %}
 <p>{% trans "Language:" %} {{ template.language.description }}</p>
 <pre class="template-src">{{ template.text|highlight_variables:request.session|safe }}</pre>
-<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a> | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a></p>
+{% if template.get_invitees %}
+<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_email" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a>{% if distribution|has_recipients_for:template %} | <a href="{% url "dist:mock_send_email" distribution.id template.id %}">{% trans "only to recipients" %}</a>{% endif %}</p>
+{% else %}
+<p>{% trans "No recipients found" %}</p>
+{% endif %}
 {% empty %}
 <p>{% trans "No email templates found" %}</p>
 {% endfor %}
@@ -23,7 +28,11 @@
 {% for template in sms_templates %}
 <p>{% trans "Language:" %} {{ template.language.description }}</p>
 <pre class="template-src">{{ template.text|highlight_variables:request.session|safe }}</pre>
-<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a> | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a></p>
+{% if template.get_invitees %}
+<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a>{% if distribution|has_recipients_for:template %} | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a>{% endif %}</p>
+{% else %}
+<p>{% trans "No recipients found" %}</p>
+{% endif %}
 {% empty %}
 <p>{% trans "No SMS templates found" %}</p>
 {% endfor %}

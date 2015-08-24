@@ -141,6 +141,21 @@ class Template(models.Model):
         verbose_name = _("Template")
         verbose_name_plural = _("Templates")
 
+    def get_invitees(self, distribution=None):
+        if distribution:
+            cards = distribution.invitees.all()
+        else:
+            cards = RegistrationNumber.objects.filter(active=True)
+        person_ids = \
+            cards.exclude(person=None).values_list("person", flat=True)
+        preferred_contact = ("phone" if self.type == ONE_DIGIT_CODE_SMS
+                             else "email")
+        people = Person.objects.filter(
+            id__in=person_ids, preferred_lang=self.language).exclude(**{
+                preferred_contact: "",
+            })
+        return people.values_list(preferred_contact, flat=True)
+
 
 class Distribution(models.Model):
     """A distribution day.
