@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-17 18:16+0300\n"
+"POT-Creation-Date: 2015-08-24 23:21+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,11 +21,12 @@ msgstr ""
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
-#: refugeedata/models.py:21
+#: refugeedata/models.py:21 templates/inc/person_details.html:40
 msgid "SMS"
 msgstr "SMS"
 
 #: refugeedata/models.py:22 refugeedata/models.py:97
+#: templates/inc/person_details.html:31 templates/inc/person_details.html:40
 msgid "Email"
 msgstr "E-posta Adresi"
 
@@ -93,7 +94,7 @@ msgstr "İsim"
 msgid "Preferred language"
 msgstr "Tercih edilen dil"
 
-#: refugeedata/models.py:96 templates/distribution/attendee.html:16
+#: refugeedata/models.py:96 templates/inc/person_details.html:21
 msgid "Needs"
 msgstr "Özel İhtiyaçları"
 
@@ -101,7 +102,7 @@ msgstr "Özel İhtiyaçları"
 msgid "Phone Number"
 msgstr "Telefon Numrası"
 
-#: refugeedata/models.py:103
+#: refugeedata/models.py:103 templates/inc/person_details.html:40
 msgid "Preferred Contact"
 msgstr "Tercih edilen bildirme yöntemi "
 
@@ -109,7 +110,7 @@ msgstr "Tercih edilen bildirme yöntemi "
 msgid "Story"
 msgstr "Hikâye/Tarih"
 
-#: refugeedata/models.py:106
+#: refugeedata/models.py:106 templates/inc/person_details.html:26
 msgid "Number of Dependents"
 msgstr ""
 
@@ -117,7 +118,7 @@ msgstr ""
 msgid "Active"
 msgstr "Aktif"
 
-#: refugeedata/models.py:114
+#: refugeedata/models.py:114 templates/inc/person_details.html:43
 msgid "Registration Card"
 msgstr "Kayıt Kartı"
 
@@ -145,28 +146,28 @@ msgstr "Şablon Metini"
 msgid "Template"
 msgstr "Şablon"
 
-#: refugeedata/models.py:142 refugeedata/models.py:159
+#: refugeedata/models.py:142 refugeedata/models.py:174
 msgid "Templates"
 msgstr "Şablonlar"
 
-#: refugeedata/models.py:150
+#: refugeedata/models.py:165
 msgid "Distribution Date"
 msgstr "Dağıtma Tarihi"
 
-#: refugeedata/models.py:152
+#: refugeedata/models.py:167
 msgid "Supplies Quantity"
 msgstr "Paketlerin miktarı"
 
-#: refugeedata/models.py:154
+#: refugeedata/models.py:169
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:179 templates/distribution/base.html:8
-#: templates/distribution/base.html:16
+#: refugeedata/models.py:194 templates/distribution/base.html:8
+#: templates/distribution/base.html:16 templates/inc/right_menu.html:12
 msgid "Distribution"
 msgstr "Dağıtma"
 
-#: refugeedata/models.py:180
+#: refugeedata/models.py:195
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
@@ -212,33 +213,30 @@ msgid ""
 "page and try again."
 msgstr ""
 
-#: templates/distribution/attendee.html:13
-#, python-format
-msgid "%(person.name)s has no photo!"
-msgstr ""
+#: templates/distribution/attendee.html:7
+#, fuzzy
+#| msgid "Attendees:"
+msgid "Attendee Details"
+msgstr "Katılanlar:"
 
-#: templates/distribution/attendee.html:22
+#: templates/distribution/attendee.html:11
 msgid "This person has already received aid in this distribution."
 msgstr ""
 
-#: templates/distribution/attendee.html:25
+#: templates/distribution/attendee.html:14
 msgid "This person is not on the invitation list for this distribution."
 msgstr ""
 
-#: templates/distribution/attendee.html:33
+#: templates/distribution/attendee.html:22
 msgid "Proceed"
 msgstr ""
 
-#: templates/distribution/attendee.html:33
+#: templates/distribution/attendee.html:22
 msgid "Are you sure?"
 msgstr ""
 
 #: templates/distribution/base.html:17 templates/registration/base.html:17
 msgid "Menu"
-msgstr ""
-
-#: templates/distribution/base.html:27 templates/registration/base.html:32
-msgid "Admin interface"
 msgstr ""
 
 #: templates/distribution/info.html:6
@@ -257,49 +255,102 @@ msgstr "Katılabildiğin olanlar"
 msgid "Authenticate"
 msgstr "Gerçeklemek"
 
-#: templates/distribution/template_mock_send.html:7
+#: templates/distribution/template_mock_send.html:8
 msgid "To:"
 msgstr "Kime:"
 
-#: templates/distribution/template_mock_send.html:8
+#: templates/distribution/template_mock_send.html:9
 msgid "Message:"
 msgstr "Mesaj:"
 
-#: templates/distribution/templates.html:6
+#: templates/distribution/templates.html:8
+msgid "Fields"
+msgstr ""
+
+#: templates/distribution/templates.html:12
+msgid "These templates have no fields."
+msgstr ""
+
+#: templates/distribution/templates.html:14
 msgid "Email templates"
 msgstr "E-posta Şablonları"
 
-#: templates/distribution/templates.html:8
-#: templates/distribution/templates.html:19
+#: templates/distribution/templates.html:16
+#: templates/distribution/templates.html:29
 msgid "Language:"
 msgstr "Dil:"
 
-#: templates/distribution/templates.html:12
-#: templates/distribution/templates.html:23
+#: templates/distribution/templates.html:19
+#: templates/distribution/templates.html:32
 msgid "Send:"
 msgstr "Gönder:"
 
-#: templates/distribution/templates.html:12
-#: templates/distribution/templates.html:23
+#: templates/distribution/templates.html:19
+#: templates/distribution/templates.html:32
 msgid "to everyone"
 msgstr "Herkese"
 
-#: templates/distribution/templates.html:12
-#: templates/distribution/templates.html:23
+#: templates/distribution/templates.html:19
+#: templates/distribution/templates.html:32
 msgid "only to recipients"
 msgstr "Sırf alanlara"
 
-#: templates/distribution/templates.html:14
+#: templates/distribution/templates.html:21
+#: templates/distribution/templates.html:34
+#, fuzzy
+#| msgid "No email templates found"
+msgid "No recipients found"
+msgstr "Hiç e-posta şablonları bulunmadı"
+
+#: templates/distribution/templates.html:24
 msgid "No email templates found"
 msgstr "Hiç e-posta şablonları bulunmadı"
 
-#: templates/distribution/templates.html:17
+#: templates/distribution/templates.html:27
 msgid "SMS templates"
 msgstr "SMS Şablonları"
 
-#: templates/distribution/templates.html:25
+#: templates/distribution/templates.html:37
 msgid "No SMS templates found"
 msgstr "Hiç SMS şablonları bulunmadı"
+
+#: templates/inc/person_details.html:12
+#, python-format
+msgid "%(name)s has no photo!"
+msgstr ""
+
+#: templates/inc/person_details.html:17
+#, fuzzy
+#| msgid "Preferred language"
+msgid "Preferred Language"
+msgstr "Tercih edilen dil"
+
+#: templates/inc/person_details.html:36
+msgid "Phone"
+msgstr "Telefon"
+
+#: templates/inc/right_menu.html:5
+#, fuzzy
+#| msgid "Description"
+msgid "Sections"
+msgstr "Açıklama"
+
+#: templates/inc/right_menu.html:9 templates/registration/base.html:8
+#: templates/registration/base.html:16
+msgid "Registration"
+msgstr "Kaydetme"
+
+#: templates/inc/right_menu.html:15
+msgid "Admin"
+msgstr ""
+
+#: templates/inc/right_menu.html:26
+msgid "Admin interface"
+msgstr ""
+
+#: templates/inc/template_variable_update.html:13
+msgid "Update"
+msgstr ""
 
 #: templates/login.html:10
 msgid "Log in"
@@ -317,11 +368,7 @@ msgid ""
 "system."
 msgstr ""
 
-#: templates/registration/base.html:8 templates/registration/base.html:16
-msgid "Registration"
-msgstr "Kaydetme"
-
-#: templates/registration/base.html:23 templates/registration/index.html:6
+#: templates/registration/base.html:23
 msgid "Register"
 msgstr "Kaydet"
 
@@ -342,12 +389,9 @@ msgstr "Kaydet"
 msgid "Registration complete"
 msgstr "Kaydetme tamamlandı"
 
-#: templates/registration/stage2_complete.html:42
+#: templates/registration/stage2_complete.html:10
 msgid "Register someone else"
 msgstr "Başka kişi kaydetme"
 
 #~ msgid "PDF File"
 #~ msgstr "PDF Dosya"
-
-#~ msgid "Phone"
-#~ msgstr "Telefon"
