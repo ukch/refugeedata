@@ -12,8 +12,9 @@ class DistributionAdmin(admin.ModelAdmin):
 
 class PersonAdmin(admin.ModelAdmin):
 
-    list_display = ("name", "preferred_lang", "registration_card", "active",
-                    "photo")
+    list_display = ("name", "preferred_lang", "registration_card", "phone",
+                    "active", "photo")
+    search_fields = ("name", "needs", "email", "phone")
     form = forms.PersonAdminForm
 
 
