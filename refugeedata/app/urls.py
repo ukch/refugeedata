@@ -14,6 +14,7 @@ urlpatterns = [
         'refugeedata.views.scan_card', name="scan_card"),
     url(r'^accounts/', include('refugeedata.app.auth_urls',
         app_name="distribution", namespace="auth")),
+    url(r'^grappelli/', include('grappelli.urls')),
 ]
 
 urlpatterns += i18n_patterns(

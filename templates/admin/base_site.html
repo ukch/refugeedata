@@ -1,0 +1,52 @@
+{% extends "admin/base.html" %}
+{% load compress %}
+{% load staticfiles %}
+{% load i18n grp_tags %}
+
+{% block extrastyle %}
+    {% compress css %}
+    <link rel="stylesheet" href="{% static "css/admin_extras.css" %}" />
+    {% endcompress %}
+{% endblock %}
+
+{% block title %}{{ title }} | {% get_site_title %}{% endblock %}
+
+{% block branding %}
+    {# Use the div#grp-branding for branding elements, e.g. a logo #}
+    {# <div id="grp-branding"></div> #}
+{% endblock %}
+
+{% block nav-global %}
+{% endblock %}
+
+{% block userlinks %}
+    <!-- Site URL -->
+    {% if site_url %}
+    <li class="has-dropdown grp-collapse grp-closed">
+        <a class="grp-collapse-handler">{% trans 'Sections' %}</a>
+        <ul class="grp-user-options">
+            <li><a href="{% url "reg:home" %}">{% trans 'Registration' %}</a></li>
+            <li><a href="{% url "dist:home" %}">{% trans 'Distribution' %}</a></li>
+        </ul>
+    </li>
+    {% endif %}
+    <!-- Username -->
+    <li class="has-dropdown grp-collapse grp-closed {% if request.session.original_user %}grp-switch-user-is-target{% endif %}">
+        <a class="user-options-handler grp-collapse-handler {% if request.session.original_user %}grp-switch-user-is-target{% else %}grp-switch-user-is-original{% endif %}">{% firstof user.get_short_name user.get_username %}</a>
+        <ul class="grp-user-options">
+            <!-- Change Password -->
+            {% if user.has_usable_password %}
+                <li><a href="{% url 'admin:password_change' %}" class="grp-change-password">{% trans 'Change password' %}</a></li>
+            {% endif %}
+            <!-- Logout -->
+            <li><a href="{% url 'admin:logout' %}" class="grp-logout">{% trans 'Log out' %}</a></li>
+            <!-- Switch -->
+            {% switch_user_dropdown %}
+        </ul>
+    </li>
+    <!-- Documentation -->
+    {% url 'django-admindocs-docroot' as docsroot %}
+    {% if docsroot %}
+        <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+    {% endif %}
+{% endblock %}

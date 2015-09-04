@@ -1,0 +1,31 @@
+@charset 'UTF-8';
+
+/**
+ * Quick-fixes to do what we want on the Django admin site
+ */
+#grp-user-tools {
+    min-width: 300px;
+}
+
+li.has-dropdown {
+    position: relative;
+
+    > a {
+        margin-right: 10px;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border: inset 5px;
+            border-color: rgba(255, 255, 255, 0.4) transparent transparent;
+            border-left-style: solid;
+            margin-right: 5px;
+            margin-top: -3.5px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+        }
+    }
+}

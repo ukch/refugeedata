@@ -2,12 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-24 23:21+0300\n"
+"POT-Creation-Date: 2015-09-04 15:29+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
+
+#: refugeedata/app/settings.py:174
+msgid "Admin Interface"
+msgstr ""
 
 #: refugeedata/distribution/forms.py:24
 msgid "Incorrect password"
@@ -162,8 +166,9 @@ msgstr "Paketlerin miktarı"
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:194 templates/distribution/base.html:8
-#: templates/distribution/base.html:16 templates/inc/right_menu.html:12
+#: refugeedata/models.py:194 templates/admin/base_site.html:29
+#: templates/distribution/base.html:8 templates/distribution/base.html.py:16
+#: templates/inc/right_menu.html:12
 msgid "Distribution"
 msgstr "Dağıtma"
 
@@ -211,6 +216,31 @@ msgstr ""
 msgid ""
 "We are sorry. It seems we have some bugs in our code. Please refresh the "
 "page and try again."
+msgstr ""
+
+#: templates/admin/base_site.html:26 templates/inc/right_menu.html:5
+#, fuzzy
+#| msgid "Description"
+msgid "Sections"
+msgstr "Açıklama"
+
+#: templates/admin/base_site.html:28 templates/inc/right_menu.html:9
+#: templates/registration/base.html:8 templates/registration/base.html.py:16
+msgid "Registration"
+msgstr "Kaydetme"
+
+#: templates/admin/base_site.html:39
+#, fuzzy
+#| msgid "Incorrect password"
+msgid "Change password"
+msgstr "Yanlış şifresi"
+
+#: templates/admin/base_site.html:42
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/base_site.html:50
+msgid "Documentation"
 msgstr ""
 
 #: templates/distribution/attendee.html:7
@@ -329,23 +359,16 @@ msgstr "Tercih edilen dil"
 msgid "Phone"
 msgstr "Telefon"
 
-#: templates/inc/right_menu.html:5
-#, fuzzy
-#| msgid "Description"
-msgid "Sections"
-msgstr "Açıklama"
-
-#: templates/inc/right_menu.html:9 templates/registration/base.html:8
-#: templates/registration/base.html:16
-msgid "Registration"
-msgstr "Kaydetme"
-
 #: templates/inc/right_menu.html:15
 msgid "Admin"
 msgstr ""
 
 #: templates/inc/right_menu.html:26
 msgid "Admin interface"
+msgstr ""
+
+#: templates/inc/right_menu.html:32
+msgid "Log In"
 msgstr ""
 
 #: templates/inc/template_variable_update.html:13

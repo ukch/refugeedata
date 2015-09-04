@@ -6,6 +6,7 @@ dj-static==0.0.6
 Django==1.8
 django-appconf==1.0.1
 django-compressor==1.5
+django-grappelli==2.7.1
 django-gulp==2.0.0
 django-languages==0.1
 django-sslify==0.2.7

@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +39,7 @@ SSLIFY_DISABLE = os.environ.get("SSLIFY_DISABLE", DEBUG and "1") == "1"
 
 INSTALLED_APPS = (
     'django_gulp',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -168,6 +170,9 @@ RAVEN_CONFIG = {
 LOGIN_URL = reverse_lazy("auth:login")
 LOGOUT_URL = reverse_lazy("auth:logout")
 LOGIN_REDIRECT_URL = reverse_lazy("public")
+
+GRAPPELLI_ADMIN_TITLE = _("Admin Interface")
+
 
 # File storage
 if not DEBUG:
