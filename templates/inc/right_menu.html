@@ -28,4 +28,6 @@
         <li><a href="{% url "auth:logout" %}">Log out</a></li>
     </ul>
 </li>
+{% else %}
+<li><a href="{% url "auth:login" %}">{% trans "Log In" %}</a></li>
 {% endif %}
