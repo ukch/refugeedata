@@ -39,10 +39,11 @@ SSLIFY_DISABLE = os.environ.get("SSLIFY_DISABLE", DEBUG and "1") == "1"
 
 INSTALLED_APPS = (
     'django_gulp',
+    'django.contrib.contenttypes',
+    'grappelli.dashboard',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -172,6 +173,7 @@ LOGOUT_URL = reverse_lazy("auth:logout")
 LOGIN_REDIRECT_URL = reverse_lazy("public")
 
 GRAPPELLI_ADMIN_TITLE = _("Admin Interface")
+GRAPPELLI_INDEX_DASHBOARD = 'refugeedata.dashboard.CustomIndexDashboard'
 
 
 # File storage
