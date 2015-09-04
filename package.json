@@ -2,7 +2,7 @@
   "name": "refugeedata",
   "private": true,
   "version": "0.0.0",
-  "devDependencies": {
+  "dependencies": {
     "browserify": "^9.0.7",
     "gulp": "^3.8.11",
     "gulp-gzip": "^1.1.0",
@@ -11,9 +11,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.1",
     "gulp-watch": "^4.2.4",
-    "gulp-watchify": "^0.5.0"
-  },
-  "dependencies": {
+    "gulp-watchify": "^0.5.0",
     "jquery": "^2.1.4",
     "modernizr": "^3.0.0-alpha.4",
     "zurb-foundation-5": "^5.4.7"
