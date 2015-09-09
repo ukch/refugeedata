@@ -75,6 +75,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'refugeedata.app.urls'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 TEMPLATES = [
     {
