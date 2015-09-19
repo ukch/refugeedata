@@ -1,5 +1,6 @@
 import time
 import hashlib
+import uuid
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -23,12 +24,17 @@ SMS_OR_EMAIL = [
 ]
 
 
+def manual_uuid_generation():
+    return uuid.uuid4().get_hex()
+
+
 class RegistrationNumber(models.Model):
     """ A registration number, linked to a QR code, that is printed on a card.
     It is not necessarily assigned to a person.
     """
 
-    id = UUIDField(auto=True, primary_key=True, verbose_name=_("ID"))
+    id = UUIDField(auto=True, primary_key=True, verbose_name=_("ID"),
+                   default=manual_uuid_generation)
     number = models.PositiveSmallIntegerField(verbose_name=_("number"))
     active = models.BooleanField(default=False, verbose_name=_("active"))
 
