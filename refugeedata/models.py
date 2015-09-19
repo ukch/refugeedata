@@ -28,9 +28,8 @@ class RegistrationNumber(models.Model):
     It is not necessarily assigned to a person.
     """
 
-    number = models.PositiveSmallIntegerField(verbose_name=_("number"),
-                                              primary_key=True)
-    uuid = UUIDField(auto=True, verbose_name=_("ID"))
+    id = UUIDField(auto=True, primary_key=True, verbose_name=_("ID"))
+    number = models.PositiveSmallIntegerField(verbose_name=_("number"))
     active = models.BooleanField(default=False, verbose_name=_("active"))
 
     class Meta:
@@ -42,7 +41,7 @@ class RegistrationNumber(models.Model):
         """The first few digits of the ID.
         This is shortened so as to make QR codes easier to scan and IDs easier
         to manually input."""
-        return str(self.uuid)[0:settings.ID_LENGTH]
+        return str(self.id)[0:settings.ID_LENGTH]
     short_id.short_description = _("ID")
 
     def __unicode__(self):
