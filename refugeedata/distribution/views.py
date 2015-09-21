@@ -30,8 +30,9 @@ def info(request, distribution):
 @standard_distribution_access
 def attendee(request, distribution, card_number, card_code):
     card = get_object_or_404(
-        models.RegistrationNumber, active=True, number=card_number,
-        id__startswith=card_code)
+        models.RegistrationNumber, active=True, number=card_number)
+    if card.short_id() != card_code:
+        raise Http404("Invalid card code")
     if request.method == "POST":
         photo_form = forms.DistributionAddPhotoForm(
             request.POST, request.FILES, instance=card.person)

@@ -7,6 +7,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 import django.template.loader as loader
 from django.shortcuts import redirect, render
+from django.views.generic import RedirectView
 
 import django.contrib.auth.views as auth_views
 
@@ -32,6 +33,22 @@ def scan_card(request, card_number, card_code):
     if dist and request.user.has_perm("registration", obj=dist):
         return redirect("dist:attendee", dist.id, card_number, card_code)
     return redirect("public")
+
+
+class MyRedirectView(RedirectView):
+
+    extra_kwargs = None
+
+    def get_redirect_url(self, *args, **kwargs):
+        if self.extra_kwargs is not None:
+            kwargs.update(self.extra_kwargs)
+        return super(MyRedirectView, self).get_redirect_url(*args, **kwargs)
+
+redirect_to_scan_card = MyRedirectView.as_view(
+    permanent=True,
+    pattern_name="scan_card",
+    extra_kwargs={"card_code": "0000"},
+)
 
 
 def check_login(request):

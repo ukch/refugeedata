@@ -37,6 +37,7 @@ class RegistrationNumber(models.Model):
                    default=manual_uuid_generation)
     number = models.PositiveSmallIntegerField(verbose_name=_("number"))
     active = models.BooleanField(default=False, verbose_name=_("active"))
+    short_id_missing = models.BooleanField(default=False, verbose_name=_("short ID missing"))
 
     class Meta:
         verbose_name = _("Registration Number")
@@ -47,6 +48,8 @@ class RegistrationNumber(models.Model):
         """The first few digits of the ID.
         This is shortened so as to make QR codes easier to scan and IDs easier
         to manually input."""
+        if self.short_id_missing:
+            return "0" * settings.ID_LENGTH
         return str(self.id)[0:settings.ID_LENGTH]
     short_id.short_description = _("ID")
 
