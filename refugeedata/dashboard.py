@@ -34,6 +34,7 @@ class CustomIndexDashboard(Dashboard):
                     models=[
                         "refugeedata.models.RegistrationCardBatch",
                         "refugeedata.models.RegistrationNumber",
+                        "refugeedata.models.Language",
                         "refugeedata.models.Person",
                     ]
                 ),
