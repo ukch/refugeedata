@@ -4,9 +4,7 @@
 {% load i18n grp_tags %}
 
 {% block extrastyle %}
-    {% compress css %}
     <link rel="stylesheet" href="{% static "css/admin_extras.css" %}" />
-    {% endcompress %}
 {% endblock %}
 
 {% block title %}{{ title }} | {% get_site_title %}{% endblock %}
