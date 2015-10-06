@@ -7,7 +7,7 @@
     "npm": "2.9.x"
   },
   "dependencies": {
-    "browserify": "^9.0.7",
+    "browserify": "^9.0.8",
     "gulp": "^3.8.11",
     "gulp-gzip": "^1.1.0",
     "gulp-livereload": "^3.8.0",
