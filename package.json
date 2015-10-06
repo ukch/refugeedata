@@ -2,6 +2,9 @@
   "name": "refugeedata",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
     "browserify": "^9.0.7",
     "gulp": "^3.8.11",
