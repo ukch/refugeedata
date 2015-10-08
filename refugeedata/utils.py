@@ -103,7 +103,7 @@ def format_range(values):
 
 
 QR_CODE_URL_TEMPLATE = ("https://chart.googleapis.com/chart?cht=qr"
-                        "&chs={size}x{size}&chl={data}")
+                        "&chs={size}x{size}&chl={data}&chId=L|2")
 
 
 def qr_code_from_url(relative_url, request=None, size=500):
