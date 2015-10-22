@@ -1,9 +1,12 @@
-import urllib
-
+import re
 from itertools import chain
+import urllib
 
 from django.template import Template, Context
 from django.template.base import VariableNode
+
+import pyratemp
+import six
 
 
 class TemplateWithDefaultFallback(Template):
@@ -47,6 +50,85 @@ class NameHarvesterTemplate(TemplateWithDefaultFallback):
 def get_variable_names_from_template(template_text):
     template = NameHarvesterTemplate(template_text)
     return template.harvest_names()
+
+
+class PyratempRegexFixMeta(type):
+
+    """Pyratemp doesn't build its regexes properly. Fix that."""
+
+    def __new__(cls, name, bases, dic):
+        klass = type(name, bases, dic)
+        # build regexps
+        # comment
+        #   single-line, until end-tag or end-of-line.
+        klass._strComment = r"%s(?P<content>.*?)(?P<end>%s|\n|$)" % (
+            re.escape(klass._comment_start), re.escape(klass._comment_end))
+        klass._reComment = re.compile(klass._strComment, re.M)
+
+        # escaped or unescaped substitution
+        #   single-line ("|$" is needed to be able to generate good error-messges)
+        klass._strSubstitution = r"""
+            (
+            %s\s*(?P<sub>.*?)\s*(?P<end>%s|$)       #substitution
+            |
+            %s\s*(?P<escsub>.*?)\s*(?P<escend>%s|$) #escaped substitution
+            )
+        """ % (re.escape(klass._sub_start), re.escape(klass._sub_end),
+               re.escape(klass._subesc_start), re.escape(klass._subesc_end))
+        klass._reSubstitution = re.compile(klass._strSubstitution, re.X | re.M)
+
+        # block
+        #   - single-line, no nesting.
+        #   or
+        #   - multi-line, nested by whitespace indentation:
+        #       * start- and end-tag of a block must have exactly the same indentation.
+        #       * start- and end-tags of *nested* blocks should have a greater indentation.
+        # NOTE: A single-line block must not start at beginning of the line with
+        #       the same indentation as the enclosing multi-line blocks!
+        #       Note that "       " and "\t" are different, although they may
+        #       look the same in an editor!
+        _s = klass._block_start
+        _e = klass._block_end
+        klass._strBlock = r"""
+                    ^(?P<mEnd>[ \t]*)%send%s(?P<meIgnored>.*)\r?\n?   # multi-line end  (^   <!--(end)-->IGNORED_TEXT\n)
+                    |
+                    (?P<sEnd>)%send%s                               # single-line end (<!--(end)-->)
+                    |
+                    (?P<sSpace>[ \t]*)                              # single-line tag (no nesting)
+                    %s(?P<sKeyw>\w+)[ \t]*(?P<sParam>.*?)%s
+                    (?P<sContent>.*?)
+                    (?=(?:%s.*?%s.*?)??%send%s)                     # (match until end or i.e. <!--(elif/else...)-->)
+                    |
+                                                                    # multi-line tag, nested by whitespace indentation
+                    ^(?P<indent>[ \t]*)                             #   save indentation of start tag
+                    %s(?P<mKeyw>\w+)\s*(?P<mParam>.*?)%s(?P<mIgnored>.*)\r?\n
+                    (?P<mContent>(?:.*\n)*?)
+                    (?=(?P=indent)%s(?:.|\s)*?%s)                   #   match indentation
+                """ % (_s, _e,
+                       _s, _e,
+                       _s, _e, _s, _e, _s, _e,
+                       _s, _e, _s, _e)
+        klass._reBlock = re.compile(klass._strBlock, re.X | re.M)
+        return klass
+
+
+@six.add_metaclass(PyratempRegexFixMeta)
+class DjangoFormatParser(pyratemp.Parser):
+
+    # template-syntax
+    _comment_start = "{#"
+    _comment_end = "#}"
+    _subesc_start = "{{"
+    _subesc_end = "}}"
+    _block_start = "{%\s?"
+    _block_end = "\s?%}"
+
+    end_synonyms = frozenset(["endif", "endfor"])
+
+    def _parse(self, template, fpos=0):
+        for end_synonym in self.end_synonyms:
+            template = template.replace(end_synonym, "end")
+        return super(DjangoFormatParser, self)._parse(template, fpos=fpos)
 
 
 def format_range(values):

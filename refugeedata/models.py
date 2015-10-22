@@ -3,6 +3,7 @@ import hashlib
 import uuid
 
 from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.dispatch import receiver
@@ -13,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_languages import LanguageField
 from uuidfield import UUIDField
 
-from . import utils
+from . import exceptions, utils
 
 
 ONE_DIGIT_CODE_SMS = "P"
@@ -52,6 +53,20 @@ class RegistrationNumber(models.Model):
             return "0" * settings.ID_LENGTH
         return str(self.id)[0:settings.ID_LENGTH]
     short_id.short_description = _("ID")
+
+    def get_absolute_url(self):
+        return reverse("scan_card", args=[self.number, self.short_id()])
+
+    @property
+    def qr_code_url(self):
+        relative_url = self.get_absolute_url()
+        try:
+            site = get_current_site(None)
+        except AttributeError:
+            raise exceptions.SitesNotInstalledError()
+        else:
+            absolute_url = "http://{}/{}".format(site.domain, relative_url)
+        return utils.qr_code_from_url(absolute_url, size=130)
 
     def __unicode__(self):
         return u"{}: {}".format(self.number, self.short_id())
