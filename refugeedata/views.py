@@ -4,14 +4,16 @@ import os
 
 from django.core.urlresolvers import resolve, Resolver404
 from django.conf import settings
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext as _
 import django.template.loader as loader
 from django.shortcuts import redirect, render
 from django.views.generic import RedirectView
 
 import django.contrib.auth.views as auth_views
 
-from .models import Distribution
+from .models import Distribution, Person
 
 SOURCE_URL = "https://github.com/ukch/refugeedata"
 
@@ -86,6 +88,16 @@ def login(request, template_name="login.html"):
 
 
 logout = partial(auth_views.logout, next_page="/")
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def show_faces(request, template_name="admin/show_faces.html"):
+    people = Person.objects.filter(active=True).exclude(photo="")\
+        .select_related("registration_card")
+    return render(request, template_name, {
+        "title": _("Faces"),
+        "people": people,
+    })
 
 
 # Error handlers

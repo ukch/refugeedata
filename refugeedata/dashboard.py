@@ -7,7 +7,7 @@ To activate your index dashboard add the following to your settings.py::
 """
 
 from django.utils.translation import ugettext_lazy as _
-#from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse
 
 from grappelli.dashboard import modules, Dashboard
 #from grappelli.dashboard.utils import get_admin_site_name
@@ -44,6 +44,13 @@ class CustomIndexDashboard(Dashboard):
                         "refugeedata.models.Distribution",
                         "refugeedata.models.Template",
                     ]
+                ),
+                modules.LinkList(
+                    _("Extra"),
+                    children=[{
+                        "title": _("Show all faces"),
+                        "url": reverse("show_faces"),
+                    }]
                 ),
             ]
         ))

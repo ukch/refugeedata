@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style type="text/css">
+    #face_container>.face{
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        margin: 5px;
+    }
+    #face_container>.face img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="grp-module">
+    <div class="grp-row" id="face_container">
+        {% for person in people %}
+        <div class="face">
+            <img src="{{ person.photo.url }}" alt="{{ person }}" title="{{ person }}" />
+        </div>
+        {% empty %}
+        <p>{% trans "No faces to show" %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

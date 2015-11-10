@@ -25,6 +25,7 @@ urlpatterns += i18n_patterns(
         app_name="distribution", namespace="dist")),
     url(r'^registration/', include('refugeedata.registration.urls',
         app_name="registration", namespace="reg")),
+    url(r'^admin/show_faces', 'refugeedata.views.show_faces', name="show_faces"),
     url(r'^admin/', include(admin.site.urls)),
 )
 if settings.DEBUG:
