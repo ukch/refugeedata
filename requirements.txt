@@ -23,7 +23,10 @@ model-mommy==1.2.4
 Pillow==2.8.1
 psutil==2.2.1
 psycopg2==2.6
+pyratemp==0.3.2
 raven==5.0.0
+reportlab==3.2.0
 six==1.9.0
 static3==0.5.1
 tini==3.0.1
+z3c.rml==3.0.0
