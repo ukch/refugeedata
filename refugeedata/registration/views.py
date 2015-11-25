@@ -1,8 +1,15 @@
+import json
+import os
+
+from django.core.files.storage import default_storage
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views.decorators.http import require_http_methods
 from django.views.generic import RedirectView
 
 from django.utils.http import urlencode
+from django.utils import timezone
 
 from refugeedata import models
 
@@ -14,6 +21,19 @@ from .forms import RegistrationForm, RegistrationFormStage2
 
 home = register_permission_required(
     RedirectView.as_view(permanent=False, pattern_name="reg:stage_1"))
+
+
+@register_permission_required
+@require_http_methods(["POST"])
+def image_upload(request):
+    if "file" not in request.FILES:
+        return HttpResponseBadRequest("No file uploaded")
+    fh = request.FILES["file"]
+    prefix = timezone.now().strftime(models.USER_IMAGE_PREFIX)
+    filename = os.path.join(prefix, fh.name)
+    default_storage.save(filename, fh)
+    return HttpResponse(json.dumps({"filename": filename}),
+                        content_type="application/json")
 
 
 @register_permission_required

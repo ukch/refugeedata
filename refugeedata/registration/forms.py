@@ -9,6 +9,8 @@ def _preferred_language_label_from_instance(instance):
 
 class RegistrationForm(forms.ModelForm):
 
+    photo = forms.CharField(widget=forms.HiddenInput, required=False)
+
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
         self.fields["preferred_lang"].label_from_instance = \
@@ -47,13 +49,17 @@ class RegistrationForm(forms.ModelForm):
         return data
 
     def save(self, commit=True):
-        instance = super(RegistrationForm, self).save(commit)
+        instance = super(RegistrationForm, self).save(commit=False)
+        if self.cleaned_data.get("photo"):
+            filename = self.cleaned_data["photo"]
+            instance.photo.name = filename
 
         def update_card():
             instance.registration_card.active = True
             instance.registration_card.save()
 
         if commit:
+            instance.save()
             update_card()
         else:
             save_m2m_orig = self.save_m2m

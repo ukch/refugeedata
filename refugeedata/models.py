@@ -113,6 +113,9 @@ class Language(models.Model):
         verbose_name_plural = _("Languages")
 
 
+USER_IMAGE_PREFIX = "user_images/%m%d%H%M%S/"
+
+
 class Person(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Name"))
     preferred_lang = models.ForeignKey(Language,
@@ -138,7 +141,7 @@ class Person(models.Model):
         verbose_name=_("Registration Card"),
     )
     photo = models.ImageField(
-        blank=True, null=True, upload_to="user_images/%m%d%H%M%S/",
+        blank=True, null=True, upload_to=USER_IMAGE_PREFIX,
         verbose_name=_("Photo"))
 
     def __unicode__(self):
