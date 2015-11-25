@@ -70,6 +70,9 @@ def _find_app_from_path(path):
     except Resolver404:
         path, unused = os.path.split(path)
         return _find_app_from_path(path)
+    if match.app_name is None:
+        path, unused = os.path.split(path)
+        return _find_app_from_path(path)
     return match.app_name
 
 
