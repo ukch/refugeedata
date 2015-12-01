@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Run Django migrations.
 ./manage.py migrate
 
 # DEFAULT_DOMAIN
-./manage.py update_site
+if [ -z "$DEFAULT_DOMAIN" ]; then
+    echo "DEFAULT_DOMAIN not set. Not running update_site."
+else
+    ./manage.py update_site
+fi
