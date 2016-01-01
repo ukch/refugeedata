@@ -8,12 +8,12 @@
     #face_container>.face{
         display: inline-block;
         width: 200px;
-        height: 200px;
+        height: 300px;
         margin: 5px;
     }
     #face_container>.face img {
         max-width: 100%;
-        max-height: 100%;
+        max-height: 200px;
     }
 </style>
 {% endblock %}
@@ -23,7 +23,10 @@
     <div class="grp-row" id="face_container">
         {% for person in people %}
         <div class="face">
-            <img src="{{ person.photo.url }}" alt="{{ person }}" title="{{ person }}" />
+            <img src="{{ person.photo.url }}" alt="{{ person }}" title="{{ person }}" /><br />
+            <strong>ID</strong> {{ person.id }}<br />
+            <strong>Name</strong> {{ person.name }}<br />
+            <strong>Phone</strong> {{ person.phone }}<br />
         </div>
         {% empty %}
         <p>{% trans "No faces to show" %}</p>
