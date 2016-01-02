@@ -24,7 +24,7 @@
         {% for person in people %}
         <div class="face">
             <img src="{{ person.photo.url }}" alt="{{ person }}" title="{{ person }}" /><br />
-            <strong>ID</strong> {{ person.id }}<br />
+            <strong>ID</strong> {{ person.registration_card.number }}<br />
             <strong>Name</strong> {{ person.name }}<br />
             <strong>Phone</strong> {{ person.phone }}<br />
         </div>
