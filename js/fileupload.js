@@ -23,6 +23,7 @@
             total: blob.size
         };
         blob.webkitRelativePath = oldFile.webkitRelativePath;
+        // left as blob because of potential incompatibility with file API
         imageDropzone.files[0] = blob;
         imageDropzone.processQueue();
     }
@@ -34,6 +35,7 @@
         if (sourceWidth > maxWidth || sourceHeight > maxHeight) {
             var widthRatio = maxWidth / sourceWidth;
             var heightRatio = maxHeight / sourceHeight;
+            // Take the ratio that makes the bigger difference
             scaleRatio = Math.min(widthRatio, heightRatio);
         }
         var canvas = document.createElement("canvas");
