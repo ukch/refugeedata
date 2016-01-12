@@ -8,6 +8,7 @@
     toBlob.init()
 
     function uploadFile(blob) {
+        var imageDropzone = document.getElementById('reg-image-uploader').dropzone;
         var oldFile = imageDropzone.files[0];
         blob.accepted = oldFile.accepted;
         blob.lastModified = Date.now();
@@ -69,7 +70,6 @@
         maxFiles: 1,
 
         init: function() {
-            window.imageDropzone = this;
             this.on("success", function(file, response) {
                 var form = document.forms.mainForm;
                 form.photo.value = response.filename;
