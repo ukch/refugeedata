@@ -26,13 +26,13 @@
         imageDropzone.processQueue();
     }
 
-    function scaleImageToCanvas(image, dwidth, dheight) {
+    function scaleImageToCanvas(image, maxWidth, maxHeight) {
         var scaleRatio = 1;
         var sourceWidth = image.naturalWidth;
         var sourceHeight = image.naturalHeight;
-        if (sourceWidth > dwidth || sourceHeight > dheight) {
-            var widthRatio = dwidth / sourceWidth;
-            var heightRatio = dheight / sourceHeight;
+        if (sourceWidth > maxWidth || sourceHeight > maxHeight) {
+            var widthRatio = maxWidth / sourceWidth;
+            var heightRatio = maxHeight / sourceHeight;
             scaleRatio = Math.min(widthRatio, heightRatio);
         }
         var canvas = document.createElement("canvas");
@@ -44,7 +44,7 @@
         canvas.toBlob(uploadFile, "image/jpeg", 1);
     }
 
-    function rotateAndScaleFile(file, dwidth, dheight) {
+    function rotateAndScaleFile(file, maxWidth, maxHeight) {
         var reader = new FileReader();
         reader.onload = (function(readerFile) {
             return function(e) {
@@ -52,7 +52,7 @@
                     var waitForImg = setInterval(function() {
                         if (image.naturalWidth && image.naturalHeight) {
                             clearInterval(waitForImg);
-                            scaleImageToCanvas(image, dwidth, dheight);
+                            scaleImageToCanvas(image, maxWidth, maxHeight);
                         }
                     }, 30);
                 });
