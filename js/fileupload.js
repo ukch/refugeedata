@@ -5,7 +5,7 @@
     var cookie = require("cookie");
     var fixOrientation = require('fix-orientation');
     var toBlob = require("canvas-to-blob");
-    toBlob.init()
+    toBlob.init();
 
     function uploadFile(blob) {
         var imageDropzone = document.getElementById('reg-image-uploader').dropzone;
