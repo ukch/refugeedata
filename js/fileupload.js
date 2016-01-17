@@ -5,7 +5,7 @@
     var cookie = require("cookie");
     var fixOrientation = require('fix-orientation');
     var toBlob = require("canvas-to-blob");
-    toBlob.init();
+    toBlob.init(); //add toBlob method to canvas prototype if not present
 
     function uploadFile(blob) {
         var imageDropzone = document.getElementById('reg-image-uploader').dropzone;
@@ -23,7 +23,7 @@
             total: blob.size
         };
         blob.webkitRelativePath = oldFile.webkitRelativePath;
-        // left as blob because of potential incompatibility with file API
+        // left as blob because of potential incompatibilities with File API
         imageDropzone.files[0] = blob;
         imageDropzone.processQueue();
     }
@@ -44,6 +44,7 @@
         var ctx = canvas.getContext("2d");
         ctx.scale(scaleRatio, scaleRatio);
         ctx.drawImage(image, 0, 0);
+        // turn scaled image into a jpg blob with 100% quality
         canvas.toBlob(uploadFile, "image/jpeg", 1);
     }
 
@@ -51,7 +52,9 @@
         var reader = new FileReader();
         reader.onload = (function(readerFile) {
             return function(e) {
+                // read DataURL and reorient image if EXIF information says so
                 fixOrientation(e.target.result, { image: true }, function (fixed, image) {
+                    // Don't try to scale the returned image element until it's fully loaded
                     var waitForImg = setInterval(function() {
                         if (image.naturalWidth && image.naturalHeight) {
                             clearInterval(waitForImg);
