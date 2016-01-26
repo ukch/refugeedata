@@ -1,3 +1,4 @@
+pip==8.0.2
 ansicolors==1.0.2
 boto==2.38.0
 configparser==3.5.0b2

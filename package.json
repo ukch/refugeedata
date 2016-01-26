@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "engines": {
-    "node": "0.10.x",
-    "npm": "2.9.x"
+    "node": "latest",
+    "npm": "latest"
   },
   "dependencies": {
     "browserify": "^9.0.8",
@@ -22,6 +22,7 @@
     "gulp-watchify": "^0.5.0",
     "jquery": "^2.1.4",
     "modernizr": "^3.0.0-alpha.4",
+    "process": "^0.11.2",
     "zurb-foundation-5": "^5.4.7"
   }
 }
