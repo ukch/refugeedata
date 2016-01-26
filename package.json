@@ -23,6 +23,7 @@
     "jquery": "^2.1.4",
     "modernizr": "^3.0.0-alpha.4",
     "process": "^0.11.2",
+    "watchify": "^3.7.0",
     "zurb-foundation-5": "^5.4.7"
   }
 }
