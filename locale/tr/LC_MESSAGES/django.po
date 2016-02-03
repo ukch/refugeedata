@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-11 00:59+0200\n"
+"POT-Creation-Date: 2016-02-03 17:47+0200\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
-#: refugeedata/app/settings.py:176
+#: refugeedata/app/settings.py:185
 msgid "Admin Interface"
 msgstr ""
 
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Registration"
 msgstr "Kaydetme"
 
-#: refugeedata/dashboard.py:42 refugeedata/models.py:218
+#: refugeedata/dashboard.py:42 refugeedata/models.py:227
 #: templates/admin/base_site.html:29 templates/distribution/base.html:8
 #: templates/distribution/base.html.py:16 templates/inc/right_menu.html:12
 msgid "Distribution"
@@ -67,156 +67,156 @@ msgstr ""
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
-#: refugeedata/models.py:23 templates/inc/person_details.html:40
+#: refugeedata/models.py:25 templates/inc/person_details.html:40
 msgid "SMS"
 msgstr "SMS"
 
-#: refugeedata/models.py:24 refugeedata/models.py:121
+#: refugeedata/models.py:26 refugeedata/models.py:126
 #: templates/inc/person_details.html:31 templates/inc/person_details.html:40
 msgid "Email"
 msgstr "E-posta Adresi"
 
-#: refugeedata/models.py:37 refugeedata/models.py:55
+#: refugeedata/models.py:39 refugeedata/models.py:57
 msgid "ID"
 msgstr "Kart Numrası"
 
-#: refugeedata/models.py:39
+#: refugeedata/models.py:41
 msgid "number"
 msgstr "numara"
 
-#: refugeedata/models.py:40
+#: refugeedata/models.py:42
 msgid "active"
 msgstr "aktif"
 
-#: refugeedata/models.py:41
+#: refugeedata/models.py:43
 msgid "short ID missing"
 msgstr ""
 
-#: refugeedata/models.py:44
+#: refugeedata/models.py:46
 msgid "Registration Number"
 msgstr "Kayıt Numarası"
 
-#: refugeedata/models.py:45 refugeedata/models.py:82
+#: refugeedata/models.py:47 refugeedata/models.py:84
 msgid "Registration Numbers"
 msgstr "Kayıt Numaraları"
 
-#: refugeedata/models.py:84
+#: refugeedata/models.py:86
 msgid "Data File"
 msgstr "Veri Dosyası"
 
-#: refugeedata/models.py:92
+#: refugeedata/models.py:94
 msgid "Number Range"
 msgstr "Numera sayısı"
 
-#: refugeedata/models.py:96
+#: refugeedata/models.py:98
 msgid "Registration Card Batch"
 msgstr "Kimlik kartı sürü"
 
-#: refugeedata/models.py:97
+#: refugeedata/models.py:99
 msgid "Registration Card Batches"
 msgstr "Kimlik kartı sürüler"
 
-#: refugeedata/models.py:101
+#: refugeedata/models.py:103
 msgid "Base Language"
 msgstr "Temel dili"
 
-#: refugeedata/models.py:103
+#: refugeedata/models.py:105
 msgid "Description"
 msgstr "Açıklama"
 
-#: refugeedata/models.py:105
+#: refugeedata/models.py:107
 msgid "Example Text"
 msgstr "Metin Örneği"
 
-#: refugeedata/models.py:112 refugeedata/models.py:158
+#: refugeedata/models.py:114 refugeedata/models.py:167
 msgid "Language"
 msgstr "Dil"
 
-#: refugeedata/models.py:113
+#: refugeedata/models.py:115
 msgid "Languages"
 msgstr "Diller"
 
-#: refugeedata/models.py:117
+#: refugeedata/models.py:122
 msgid "Name"
 msgstr "İsim"
 
-#: refugeedata/models.py:119
+#: refugeedata/models.py:124
 msgid "Preferred language"
 msgstr "Tercih edilen dil"
 
-#: refugeedata/models.py:120 templates/inc/person_details.html:21
+#: refugeedata/models.py:125 templates/inc/person_details.html:21
 msgid "Needs"
 msgstr "Özel İhtiyaçları"
 
-#: refugeedata/models.py:124
+#: refugeedata/models.py:129
 msgid "Phone Number"
 msgstr "Telefon Numrası"
 
-#: refugeedata/models.py:127 templates/inc/person_details.html:40
+#: refugeedata/models.py:132 templates/inc/person_details.html:40
 msgid "Preferred Contact"
 msgstr "Tercih edilen bildirme yöntemi "
 
-#: refugeedata/models.py:128
+#: refugeedata/models.py:133
 msgid "Story"
 msgstr "Hikâye/Tarih"
 
-#: refugeedata/models.py:130 templates/inc/person_details.html:26
+#: refugeedata/models.py:135 templates/inc/person_details.html:26
 msgid "Number of Dependents"
 msgstr ""
 
-#: refugeedata/models.py:131
+#: refugeedata/models.py:136
 msgid "Active"
 msgstr "Aktif"
 
-#: refugeedata/models.py:138 templates/inc/person_details.html:43
+#: refugeedata/models.py:143 templates/inc/person_details.html:43
 msgid "Registration Card"
 msgstr "Kayıt Kartı"
 
-#: refugeedata/models.py:142
+#: refugeedata/models.py:147
 msgid "Photo"
 msgstr "Fotoğraf"
 
-#: refugeedata/models.py:148
+#: refugeedata/models.py:157
 msgid "Person"
 msgstr "İnsan"
 
-#: refugeedata/models.py:149
+#: refugeedata/models.py:158
 msgid "People"
 msgstr "İnsanlar"
 
-#: refugeedata/models.py:157
+#: refugeedata/models.py:166
 msgid "Template Type"
 msgstr "Şablon Tipi"
 
-#: refugeedata/models.py:159
+#: refugeedata/models.py:168
 msgid "Template Text"
 msgstr "Şablon Metini"
 
-#: refugeedata/models.py:165
+#: refugeedata/models.py:174
 msgid "Template"
 msgstr "Şablon"
 
-#: refugeedata/models.py:166 refugeedata/models.py:198
+#: refugeedata/models.py:175 refugeedata/models.py:207
 msgid "Templates"
 msgstr "Şablonlar"
 
-#: refugeedata/models.py:189
+#: refugeedata/models.py:198
 msgid "Distribution Date"
 msgstr "Dağıtma Tarihi"
 
-#: refugeedata/models.py:191
+#: refugeedata/models.py:200
 msgid "Supplies Quantity"
 msgstr "Paketlerin miktarı"
 
-#: refugeedata/models.py:193
+#: refugeedata/models.py:202
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:219
+#: refugeedata/models.py:228
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
-#: refugeedata/views.py:98
+#: refugeedata/views.py:105
 msgid "Faces"
 msgstr ""
 
@@ -282,7 +282,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: templates/admin/show_faces.html:29
+#: templates/admin/show_faces.html:34
 msgid "No faces to show"
 msgstr ""
 
@@ -308,23 +308,44 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: templates/distribution/base.html:17 templates/registration/base.html:17
+#: templates/distribution/base.html:17 templates/public/base.html:17
+#: templates/registration/base.html:17
 msgid "Menu"
 msgstr ""
 
-#: templates/distribution/info.html:6
+#: templates/distribution/home_base.html:6
+#, fuzzy, python-format
+#| msgid "Distributions"
+msgid "Distribution #%(dist_id)s"
+msgstr "Dağıtmalar"
+
+#: templates/distribution/info.html:7
 msgid "Show Password"
 msgstr "Şifre Göster"
 
-#: templates/distribution/info.html:14
+#: templates/distribution/info.html:9
+#, fuzzy
+#| msgid "Email templates"
+msgid "Show Email/SMS Templates"
+msgstr "E-posta Şablonları"
+
+#: templates/distribution/info.html:13
 msgid "Attendees:"
 msgstr "Katılanlar:"
 
-#: templates/distribution/info.html:17
+#: templates/distribution/info.html:16
 msgid "attended"
 msgstr "Katılabildiğin olanlar"
 
-#: templates/distribution/login.html:9
+#: templates/distribution/login.html:10
+#, python-format
+msgid ""
+"\n"
+"Please enter the 4-digit password to gain access. Alternatively, "
+"%(link_begin)slog in with a username%(link_end)s."
+msgstr ""
+
+#: templates/distribution/login.html:13
 msgid "Authenticate"
 msgstr "Gerçeklemek"
 
@@ -446,7 +467,7 @@ msgstr "Kaydetme bitirmek için, alttaki QR kodu telefonunuzla okutun."
 msgid "I am unable to scan the QR code"
 msgstr "QR kodu okutamama"
 
-#: templates/registration/register.html:10
+#: templates/registration/register.html:18
 #: templates/registration/stage2.html:10
 msgid "Save"
 msgstr "Kaydet"
