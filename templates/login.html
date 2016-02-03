@@ -7,6 +7,6 @@
 <form method="post">
 {% csrf_token %}
 {{ form|foundation }}
-<input type="submit" value="{% trans "Log in" %}" />
+<input type="submit" class="button small" value="{% trans "Log in" %}" />
 </form>
 {% endblock %}
