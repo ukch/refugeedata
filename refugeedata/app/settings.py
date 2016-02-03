@@ -62,7 +62,8 @@ if DEFAULT_DOMAIN:
 
 MIDDLEWARE_CLASSES = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-    'refugeedata.middleware.EnforceCurrentSiteMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'refugeedata.middleware.EnforceSiteURLMiddleware',
     'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
