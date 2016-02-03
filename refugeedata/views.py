@@ -32,7 +32,7 @@ def scan_card(request, card_number, card_code):
         dist = Distribution.objects.get(date=datetime.date.today())
     except Distribution.DoesNotExist:
         dist = None
-    if dist and request.user.has_perm("registration", obj=dist):
+    if dist:
         return redirect("dist:attendee", dist.id, card_number, card_code)
     return redirect("public")
 

@@ -1,11 +1,15 @@
-{% extends "distribution/base.html" %}
+{% extends "distribution/home_base.html" %}
 
+{% load foundation %}
 {% load i18n %}
 
-{% block content %}
+{% block form %}
 <form method="post">
 {% csrf_token %}
-{{ form.as_ul }}
-<input type="submit" value="{% trans "Authenticate" %}" />
+{% url "auth:login" as login_url %}
+<p class="small">{% blocktrans with '<a href="'|add:login_url|add:'?next='|add:request.path|add:'">'|safe as link_begin and '</a>' as link_end %}
+Please enter the 4-digit password to gain access. Alternatively, {{ link_begin }}log in with a username{{ link_end }}.{% endblocktrans %}</p>
+{{ form.password|foundation }}
+<input type="submit" class="button small" value="{% trans "Authenticate" %}" />
 </form>
 {% endblock %}

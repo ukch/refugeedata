@@ -27,6 +27,7 @@ def standard_distribution_access(func):
                 else:
                     form = DistributionHashForm(dist)
                 return render(request, "distribution/login.html", {
+                    "distribution": dist,
                     "form": form,
                 })
 
