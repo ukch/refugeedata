@@ -7,7 +7,7 @@
     <tr>
         <td colspan="2" class="photo">
             {% if person.photo %}
-            <img src="{{ person.photo.url }}" alt="{{ person.name }}" />
+            <img class="small-12 large-12" src="{{ person.photo.url }}" alt="{{ person.name }}" />
             {% else %}
             <p>{% blocktrans with name=person.name %}{{ name }} has no photo!{% endblocktrans %}</p>
             {% endif %}
