@@ -57,6 +57,8 @@ DEFAULT_DOMAIN = os.environ.get("DEFAULT_DOMAIN", None)
 if DEFAULT_DOMAIN:
     INSTALLED_APPS += ('django.contrib.sites',)
     SITE_ID = 1
+    SECURE_SSL_HOST = DEFAULT_DOMAIN
+    SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE_CLASSES = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
@@ -141,7 +143,13 @@ import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Extra security settings
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_HSTS_SECONDS = 3600  # 1 hour - TODO increase this
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
