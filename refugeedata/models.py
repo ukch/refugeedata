@@ -12,9 +12,11 @@ from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 
 from django_languages import LanguageField
+from imagekit.models import ProcessedImageField
 from uuidfield import UUIDField
 
 from . import exceptions, utils
+from .processors import RotateAndScale
 
 
 ONE_DIGIT_CODE_SMS = "P"
@@ -140,9 +142,13 @@ class Person(models.Model):
         limit_choices_to={"person": None, "active": False},
         verbose_name=_("Registration Card"),
     )
-    photo = models.ImageField(
+    photo = ProcessedImageField(
         blank=True, null=True, upload_to=USER_IMAGE_PREFIX,
-        verbose_name=_("Photo"))
+        verbose_name=_("Photo"),
+        processors=[RotateAndScale(max_width=600, max_height=800)])
+
+    def get_absolute_url(self):
+        return reverse("reg:stage_2_complete", args=[self.id])
 
     def __unicode__(self):
         return u"{}: {}".format(self.registration_card.number, self.name)
