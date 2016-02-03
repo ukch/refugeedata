@@ -189,7 +189,7 @@ class Distribution(models.Model):
     This model holds data about distribution date and expected/actual
     attendees.
     """
-    date = models.DateField(verbose_name=_("Distribution Date"))
+    date = models.DateField(verbose_name=_("Distribution Date"), unique=True)
     supplies_quantity = models.SmallIntegerField(
         verbose_name=_("Supplies Quantity"))
     supplies_description = models.TextField(
