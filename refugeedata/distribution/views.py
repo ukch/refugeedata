@@ -88,6 +88,7 @@ def template_variable_set(request, distribution, variable):
 
 # FIXME standard dist access or admin-only?
 @standard_distribution_access
+@handle_template_errors
 def template_mock_send(request, distribution, template_id):
     template = get_object_or_404(models.Template, id=template_id)
     args = []

@@ -5,6 +5,10 @@
 {% block content %}
 <h2>{% trans "An error occurred while parsing the templates" %}</h2>
 <pre>{{ exception }}</pre>
-{% url 'admin:refugeedata_template_change' template.id as template_url %}
+{% if template %}
+    {% url 'admin:refugeedata_template_change' template.id as template_url %}
+{% else %}
+    {% url 'admin:refugeedata_template_changelist' as template_url %}
+{% endif %}
 <p>{% blocktrans with '<a href="'|add:template_url|add:'">'|safe as link_begin and '</a>' as link_end %}Please {{ link_begin }}edit the template{{ link_end }} and try again.{% endblocktrans %}</p>
 {% endblock content %}
