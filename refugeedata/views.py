@@ -103,6 +103,7 @@ def show_faces(request, template_name="admin/show_faces.html"):
         .select_related("registration_card")
     return render(request, template_name, {
         "title": _("Faces"),
+        "site_url": "/",
         "people": people,
     })
 
