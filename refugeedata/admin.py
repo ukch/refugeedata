@@ -51,6 +51,7 @@ class LanguageAdmin(admin.ModelAdmin):
 class TemplateAdmin(admin.ModelAdmin):
 
     list_display = ("text", "language", "type")
+    form = forms.TemplateAdminForm
 
 
 admin.site.register(models.Distribution, DistributionAdmin)

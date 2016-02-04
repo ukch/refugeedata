@@ -4,7 +4,9 @@ from django.contrib.admin.widgets import AdminIntegerFieldWidget
 
 from django.utils.translation import ugettext_lazy as _
 
-from . import models
+import pyratemp
+
+from . import models, utils
 
 
 class BatchAdminForm(forms.ModelForm):
@@ -44,3 +46,14 @@ class PersonAdminForm(forms.ModelForm):
     class Meta:
         model = models.Person
         exclude = ["registration_card"]
+
+
+class TemplateAdminForm(forms.ModelForm):
+
+    def clean_text(self):
+        text = self.cleaned_data["text"]
+        try:
+            utils.TemplateWithDefaultFallback(text).render({})
+        except pyratemp.TemplateSyntaxError as e:
+            raise forms.ValidationError(e)
+        return text
