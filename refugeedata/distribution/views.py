@@ -7,7 +7,7 @@ from refugeedata import models
 
 from refugeedata.utils import get_variable_names_from_template
 from . import forms
-from .decorators import standard_distribution_access
+from .decorators import standard_distribution_access, handle_template_errors
 
 
 def home(request):
@@ -56,11 +56,12 @@ def attendee(request, distribution, card_number, card_code):
 
 # FIXME standard dist access or admin-only?
 @standard_distribution_access
+@handle_template_errors
 def templates(request, distribution):
     template_variables = set()
     for template in distribution.templates.all():
         template_variables = template_variables.union(
-            get_variable_names_from_template(template.text))
+            get_variable_names_from_template(template))
     return render(request, "distribution/templates.html", {
         "distribution": distribution,
         "template_variables": template_variables,
@@ -73,6 +74,7 @@ def templates(request, distribution):
 
 # FIXME standard dist access or admin-only?
 @standard_distribution_access
+@handle_template_errors
 def template_variable_set(request, distribution, variable):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])

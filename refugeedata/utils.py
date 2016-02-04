@@ -2,54 +2,10 @@ import re
 from itertools import chain
 import urllib
 
-from django.template import Template, Context
-from django.template.base import VariableNode
+from django.utils.safestring import SafeData
 
 import pyratemp
 import six
-
-
-class TemplateWithDefaultFallback(Template):
-    """Don't leave unresolved context variables empty; leave them as-is."""
-
-    replace_variable_with = "{}"
-
-    def _default_fallback(self, node, context):
-        value = self.nodelist.render_node(node, context)
-        if value == "":
-            value = "{{ %s }}" % (node.filter_expression.var.var)
-        return self.replace_variable_with.format(value)
-
-    def _render(self, context):
-        output = u""
-        for node in self.nodelist:
-            if isinstance(node, VariableNode):
-                output += self._default_fallback(node, context)
-            else:
-                output += self.nodelist.render_node(node, context)
-        return output
-
-
-class NameHarvesterTemplate(TemplateWithDefaultFallback):
-
-    def _default_fallback(self, node, context):
-        self.harvested_variable_names.add(node.filter_expression.var.var)
-        # We don't actually use the output so it doesn't matter what we return
-        # here, so long as it's a string
-        return ""
-
-    def render(self, context):
-        self.harvested_variable_names = set()
-        return super(NameHarvesterTemplate, self).render(context)
-
-    def harvest_names(self):
-        self.render(Context())
-        return self.harvested_variable_names
-
-
-def get_variable_names_from_template(template_text):
-    template = NameHarvesterTemplate(template_text)
-    return template.harvest_names()
 
 
 class PyratempRegexFixMeta(type):
@@ -125,10 +81,74 @@ class DjangoFormatParser(pyratemp.Parser):
 
     end_synonyms = frozenset(["endif", "endfor"])
 
+    def __init__(self, filename=None, *args, **kwargs):
+        self.filename = filename
+        super(DjangoFormatParser, self).__init__(*args, **kwargs)
+
     def _parse(self, template, fpos=0):
+        if self._includestack[-1][0] == None:
+            self._includestack[-1] = (self.filename, self._includestack[-1][1])
         for end_synonym in self.end_synonyms:
             template = template.replace(end_synonym, "end")
         return super(DjangoFormatParser, self)._parse(template, fpos=fpos)
+
+
+def test_expression(expr):
+    if "|" in expr:
+        raise SyntaxError("Django-style filters are not supported")
+
+
+class PyratempTemplate(pyratemp.Renderer):
+
+    """Wrapper around pyratemp.Template to use the Django template API"""
+
+    def __init__(self, template_string, filename=None):
+        superclass = DjangoFormatParser(filename, testexpr=test_expression)
+        self.parsetree = superclass.parse(template_string)
+        self.escapefunc = pyratemp.escape
+
+    def evalfunc(self, expr, variables):
+        return variables[expr]
+
+    def render(self, context):
+        assert isinstance(context, dict), context
+        tokens = super(PyratempTemplate, self).render(self.parsetree, context)
+        return pyratemp._dontescape("".join(tokens))
+
+
+class TemplateWithDefaultFallback(PyratempTemplate):
+    """Don't leave unresolved context variables empty; leave them as-is."""
+
+    replace_variable_with = "{}"
+
+    def evalfunc(self, expr, variables):
+        value = variables.get(expr, "{{ %s }}" % expr)
+        safe = isinstance(
+            self.replace_variable_with, (pyratemp._dontescape, SafeData))
+        value = self.replace_variable_with.format(value)
+        if safe:
+            value = pyratemp._dontescape(value)
+        return value
+
+
+class NameHarvesterTemplate(TemplateWithDefaultFallback):
+
+    def evalfunc(self, expr, variables):
+        self.harvested_variable_names.add(expr)
+        return super(NameHarvesterTemplate, self).evalfunc(expr, variables)
+
+    def render(self, context):
+        self.harvested_variable_names = set()
+        return super(NameHarvesterTemplate, self).render(context)
+
+    def harvest_names(self):
+        self.render({})
+        return self.harvested_variable_names
+
+
+def get_variable_names_from_template(template):
+    template = NameHarvesterTemplate(template.text, template.id)
+    return template.harvest_names()
 
 
 def format_range(values):

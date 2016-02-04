@@ -1,0 +1,10 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans "An error occurred while parsing the templates" %}</h2>
+<pre>{{ exception }}</pre>
+{% url 'admin:refugeedata_template_change' template.id as template_url %}
+<p>{% blocktrans with '<a href="'|add:template_url|add:'">'|safe as link_begin and '</a>' as link_end %}Please {{ link_begin }}edit the template{{ link_end }} and try again.{% endblocktrans %}</p>
+{% endblock content %}
