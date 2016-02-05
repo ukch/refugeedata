@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{% blocktrans with distribution.id|add:1 as dist_id %}Distribution #{{ dist_id }}{% endblocktrans %}</h1>
 <h3>{{ distribution.date }}</h3>
-<h4>#{{ distribution.attendees.first.number }} &ndash; #{{ distribution.finish_number }}</h4>
+<h4>#{{ distribution.invitees.first.number }} &ndash; #{{ distribution.finish_number }}</h4>
 
 <p>{{ distribution.supplies_description }}</p>
 
