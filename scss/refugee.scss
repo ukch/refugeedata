@@ -16,8 +16,12 @@ img {
     }
 }
 
-.template-src .variable {
-    color: $alert-color;
+.template-src {
+    white-space: pre-wrap;
+
+    .variable {
+        color: $alert-color;
+    }
 }
 
 .dropzone {

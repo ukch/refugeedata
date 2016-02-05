@@ -50,6 +50,20 @@ class PersonAdminForm(forms.ModelForm):
 
 class TemplateAdminForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(TemplateAdminForm, self).__init__(*args, **kwargs)
+        field = self.fields.get("text")
+        if field is not None:
+            field.help_text = "<br>\n".join([
+                'Basic templating is allowed, using <a '
+                'href="{url}">Django-like syntax</a>.'.format(
+                    # TODO write my own basic documentation
+                    url=("https://docs.djangoproject.com/en/1.8/ref/templates/"
+                         "language/")),
+                "The following template variables are provided: distribution; "
+                "start_num; end_num",
+            ])
+
     def clean_text(self):
         text = self.cleaned_data["text"]
         try:

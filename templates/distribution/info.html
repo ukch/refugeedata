@@ -5,7 +5,7 @@
 {% block form %}
 <ul class="button-group">
     <li><button type="button" onclick="alert('{{ distribution.hash }}')">{% trans "Show Password" %}</button></li>
-    {% if user.is_superuser %}
+    {% if user.is_staff %}
     <li><a class="button" href="{% url "dist:templates" distribution.id %}">{% trans "Show Email/SMS Templates" %}</a></li>
     {% endif %}
 </ul>

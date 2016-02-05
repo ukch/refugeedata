@@ -61,8 +61,9 @@ def attendee(request, distribution, card_number, card_code):
 def templates(request, distribution):
     template_variables = set()
     for template in distribution.templates.all():
-        template_variables = template_variables.union(
-            get_variable_names_from_template(template))
+        template_variables = template_variables\
+                .union(get_variable_names_from_template(template))\
+                .difference({"distribution", "start_num", "end_num"})
     return render(request, "distribution/templates.html", {
         "distribution": distribution,
         "template_variables": template_variables,

@@ -2,10 +2,17 @@ import re
 from itertools import chain
 import urllib
 
+from django.template import defaultfilters
 from django.utils.safestring import SafeData
+from django.utils.translation import ugettext as _
 
 import pyratemp
 import six
+
+FILTER_REGISTRY = {
+    # TODO pass lang option to date_format so dates are correctly formatted
+    "date": defaultfilters.date,
+}
 
 
 class PyratempRegexFixMeta(type):
@@ -94,8 +101,17 @@ class DjangoFormatParser(pyratemp.Parser):
 
 
 def test_expression(expr):
+    if expr == "i==1":
+        # The test expr: pass without questioning
+        return
     if "|" in expr:
-        raise SyntaxError("Django-style filters are not supported")
+        expr, fltr = expr.split("|", 1)
+        fltr = fltr.split(":", 1)[0]
+        if fltr not in FILTER_REGISTRY:
+            raise SyntaxError(_("Filter '{}' is not defined.".format(fltr)))
+    if not re.match(r"^[a-zA-Z_.]+$", expr):
+        raise SyntaxError(_("Expression must be made up of upper or lowercase "
+                          "letters and underscores."))
 
 
 class PyratempTemplate(pyratemp.Renderer):
@@ -107,8 +123,33 @@ class PyratempTemplate(pyratemp.Renderer):
         self.parsetree = superclass.parse(template_string)
         self.escapefunc = pyratemp.escape
 
+    def _parse_expr(self, expr):
+        if "|" not in expr:
+            return expr, None, None
+        expr, fltr = expr.split("|", 1)
+        if ":" not in fltr:
+            return expr, fltr, []
+        fltr, arg = fltr.split(":", 1)
+        return expr, fltr, [arg]
+
+    def _handle_filter(self, var, fltr, args):
+        args = [a.strip("'").strip('"') for a in args]
+        return FILTER_REGISTRY[fltr](var, *args)
+
     def evalfunc(self, expr, variables):
-        return variables[expr]
+        expr, fltr, args = self._parse_expr(expr)
+        var_name, remainder = (expr + ".").split(".", 1)
+        var = variables[var_name]
+        for part in remainder.split("."):
+            if part == "":
+                continue
+            try:
+                var = getattr(var, part)
+            except AttributeError:
+                raise KeyError(part)
+        if fltr:
+            return self._handle_filter(var, fltr, args)
+        return var
 
     def render(self, context):
         assert isinstance(context, dict), context
@@ -122,7 +163,11 @@ class TemplateWithDefaultFallback(PyratempTemplate):
     replace_variable_with = "{}"
 
     def evalfunc(self, expr, variables):
-        value = variables.get(expr, "{{ %s }}" % expr)
+        try:
+            value = super(TemplateWithDefaultFallback, self).evalfunc(
+                expr, variables)
+        except KeyError:
+            value = "{{ %s }}" % expr
         safe = isinstance(
             self.replace_variable_with, (pyratemp._dontescape, SafeData))
         value = self.replace_variable_with.format(value)
@@ -133,9 +178,10 @@ class TemplateWithDefaultFallback(PyratempTemplate):
 
 class NameHarvesterTemplate(TemplateWithDefaultFallback):
 
-    def evalfunc(self, expr, variables):
-        self.harvested_variable_names.add(expr)
-        return super(NameHarvesterTemplate, self).evalfunc(expr, variables)
+    def _parse_expr(self, expr):
+        expr, fltr, args = super(NameHarvesterTemplate, self)._parse_expr(expr)
+        self.harvested_variable_names.add(expr.split(".", 1)[0])
+        return expr, fltr, args
 
     def render(self, context):
         self.harvested_variable_names = set()
