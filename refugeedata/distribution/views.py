@@ -3,6 +3,8 @@ import datetime
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render, Http404
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 from refugeedata import models
 
 from refugeedata.utils import get_variable_names_from_template
@@ -54,8 +56,7 @@ def attendee(request, distribution, card_number, card_code):
     })
 
 
-# FIXME standard dist access or admin-only?
-@standard_distribution_access
+@staff_member_required
 @handle_template_errors
 def templates(request, distribution):
     template_variables = set()
@@ -72,8 +73,7 @@ def templates(request, distribution):
     })
 
 
-# FIXME standard dist access or admin-only?
-@standard_distribution_access
+@staff_member_required
 @handle_template_errors
 def template_variable_set(request, distribution, variable):
     if request.method != "POST":
@@ -86,8 +86,7 @@ def template_variable_set(request, distribution, variable):
     return redirect(request.GET.get("next", "/"))
 
 
-# FIXME standard dist access or admin-only?
-@standard_distribution_access
+@staff_member_required
 @handle_template_errors
 def template_mock_send(request, distribution, template_id):
     template = get_object_or_404(models.Template, id=template_id)

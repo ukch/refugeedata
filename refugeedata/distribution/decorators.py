@@ -41,7 +41,8 @@ def standard_distribution_access(func):
 
 def handle_template_errors(func):
     @functools.wraps(func)
-    def wrapper(request, distribution, *args, **kwargs):
+    def wrapper(request, distribution_id, *args, **kwargs):
+        distribution = get_object_or_404(Distribution, id=distribution_id)
         try:
             return func(request, distribution, *args, **kwargs)
         except TemplateSyntaxError as e:
