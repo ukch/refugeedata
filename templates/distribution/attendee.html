@@ -20,6 +20,11 @@
 {{ photo_form|foundation }}
 {% endif %}
 <input type="submit" class="button small" value="{% trans "Proceed" %}" {% if not is_invited %}onclick="return confirm('{% trans "Are you sure?" %}')"{% endif %}/>
+{% if perms.refugeedata.change_person %}
+<div class="right">
+    <a href="{% url "reg:edit" person.id %}?next={{ request.path }}" class="button small">{% trans "Edit Details" %}</a>
+</div>
+{% endif %}
 </form>
 {% endif %}
 {% endblock %}

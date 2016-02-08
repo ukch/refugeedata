@@ -37,7 +37,7 @@ def image_upload(request):
 
 
 @register_permission_required
-def stage_1(request):
+def register(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -51,7 +51,24 @@ def stage_1(request):
 
 
 @register_permission_required
-def stage_1_complete(request, person_id):
+def edit(request, person_id):
+    person = get_object_or_404(models.Person, id=person_id)
+    if request.method == "POST":
+        form = RegistrationForm(request.POST, instance=person)
+        if form.is_valid():
+            person = form.save()
+            if "next" in request.GET:
+                return redirect(request.GET["next"])
+            return redirect("reg:stage_1_complete", person.id)
+    else:
+        form = RegistrationForm(instance=person)
+    return render(request, "registration/register.html", {
+        "form": form,
+    })
+
+
+@register_permission_required
+def extra_required(request, person_id):
     person = get_object_or_404(models.Person, id=person_id)
     if person.registration_card and person.photo:
         return redirect("reg:stage_2_complete", person.id)
@@ -65,7 +82,7 @@ def stage_1_complete(request, person_id):
 
 
 @register_or_qr_permission_required
-def stage_2(request, person_id):
+def extra(request, person_id):
     person = get_object_or_404(models.Person, id=person_id)
     if person.registration_card and person.photo:
         return redirect("reg:stage_2_complete", person.id)
@@ -83,8 +100,15 @@ def stage_2(request, person_id):
 
 
 @register_or_qr_permission_required
-def stage_2_complete(request, person_id):
+def view(request, person_id):
     person = get_object_or_404(models.Person, id=person_id)
     return render(request, "registration/stage2_complete.html", {
         "person": person,
     })
+
+
+# TODO remove these aliases
+stage_1 = register
+stage_1_complete = extra_required
+stage_2 = extra
+stage_2_complete = view

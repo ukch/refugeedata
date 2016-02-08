@@ -13,6 +13,8 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
+        if self.instance and self.instance.id:
+            del self.fields["registration_card"]
         self.fields["preferred_lang"].label_from_instance = \
             _preferred_language_label_from_instance
 

@@ -7,5 +7,8 @@
 
 {% include "inc/person_details.html" with person=person %}
 
-<p><a href="{% url 'reg:stage_1' %}">{% trans "Register someone else" %}</a></p>
+<ul class="button-group">
+    <li><a class="button" href="{% url 'reg:home' %}">{% trans "Register someone else" %}</a></li>
+    <li><a class="button" href="{% url 'reg:edit' person.id %}">{% trans "Edit details" %}</a></li>
+</ul>
 {% endblock %}
