@@ -11,6 +11,7 @@ django-grappelli==2.7.1
 django-gulp==2.0.0
 django-imagekit==3.3
 django-languages==0.1
+django-mailgun==0.8.0
 django-sslify==0.2.7
 django-storages==1.1.8
 django-toolbelt==0.0.1

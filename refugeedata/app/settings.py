@@ -19,6 +19,10 @@ from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+if "MAILGUN_API_KEY" in os.environ:
+    EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+    MAILGUN_ACCESS_KEY = os.getenv("MAILGUN_API_KEY")
+    MAILGUN_SERVER_NAME = os.getenv("MAILGUN_DOMAIN")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/

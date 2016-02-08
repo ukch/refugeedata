@@ -4,7 +4,8 @@
   "repository": "https://github.com/ukch/refugeedata",
   "website": "http://joelcross.co.uk/refugeedata",
   "addons": [
-    "heroku-postgresql:hobby-dev"
+    "heroku-postgresql:hobby-dev",
+    "mailgun:starter"
   ],
   "success_url": "/admin",
   "env": {
