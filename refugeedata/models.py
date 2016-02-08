@@ -71,7 +71,7 @@ class RegistrationNumber(models.Model):
         return utils.qr_code_from_url(absolute_url, size=130)
 
     def __unicode__(self):
-        return u"{}: {}".format(self.number, self.short_id())
+        return unicode(self.number)
 
 
 class RegistrationCardBatch(models.Model):
