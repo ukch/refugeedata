@@ -14,7 +14,7 @@
 <h2>{% trans "Email templates" %}</h2>
 {% for template in email_templates %}
 <p>{% trans "Language:" %} {{ template.language.description }}</p>
-<pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|safe }}</pre>
+<pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|with_locale:template.language.iso_code|safe }}</pre>
 {% if template.get_invitees %}
 <p>{% trans "Send:" %} <a href="{% url "dist:mock_send_email" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a>{% if distribution|has_recipients_for:template %} | <a href="{% url "dist:mock_send_email" distribution.id template.id %}">{% trans "only to recipients" %}</a>{% endif %}</p>
 {% else %}
@@ -27,7 +27,7 @@
 <h2>{% trans "SMS templates" %}</h2>
 {% for template in sms_templates %}
 <p>{% trans "Language:" %} {{ template.language.description }}</p>
-<pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|safe }}</pre>
+<pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|with_locale:template.language.iso_code|safe }}</pre>
 {% if template.get_invitees %}
 <p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a>{% if distribution|has_recipients_for:template %} | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a>{% endif %}</p>
 {% else %}

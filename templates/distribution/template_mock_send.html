@@ -6,6 +6,6 @@
 {% block content %}
 <ul>
     <li><strong>{% trans "To:" %}</strong> {{ recipients|join:"; "}}</li>
-    <li><strong>{% trans "Message:" %}</strong> <pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|safe }}</pre></li>
+    <li><strong>{% trans "Message:" %}</strong> <pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|with_locale:template.language.iso_code|safe }}</pre></li>
 </ul>
 {% endblock %}

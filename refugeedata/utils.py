@@ -1,17 +1,32 @@
-import re
+import functools
 from itertools import chain
+import re
 import urllib
 
 from django.template import defaultfilters
 from django.utils.safestring import SafeData
 from django.utils.translation import ugettext as _
 
+from babel.dates import format_date
+
 import pyratemp
 import six
+
+
+def takes_locale(func, kwarg_name):
+    """Specifies that a filter function can be locale-specific"""
+    @functools.wraps(func)
+    def wrapper(locale, *args, **kwargs):
+        kwargs[kwarg_name] = locale
+        return func(*args, **kwargs)
+    wrapper.takes_locale = True
+    return wrapper
+
 
 FILTER_REGISTRY = {
     # TODO pass lang option to date_format so dates are correctly formatted
     "date": defaultfilters.date,
+    "localdate": takes_locale(format_date, "locale"),
 }
 
 
@@ -108,7 +123,9 @@ def test_expression(expr):
         expr, fltr = expr.split("|", 1)
         fltr = fltr.split(":", 1)[0]
         if fltr not in FILTER_REGISTRY:
-            raise SyntaxError(_("Filter '{}' is not defined.".format(fltr)))
+            raise SyntaxError(_("Filter '{name}' is not defined. Please "
+                                "choose from one of {filters}.").format(
+                    name=fltr, filters=FILTER_REGISTRY.keys()))
     if not re.match(r"^[a-zA-Z_.]+$", expr):
         raise SyntaxError(_("Expression must be made up of upper or lowercase "
                           "letters and underscores."))
@@ -132,9 +149,15 @@ class PyratempTemplate(pyratemp.Renderer):
         fltr, arg = fltr.split(":", 1)
         return expr, fltr, [arg]
 
-    def _handle_filter(self, var, fltr, args):
+    def _handle_filter(self, var, fltr, args, locale=None):
         args = [a.strip("'").strip('"') for a in args]
-        return FILTER_REGISTRY[fltr](var, *args)
+        func = FILTER_REGISTRY[fltr]
+        if hasattr(func, "takes_locale"):
+            if locale is None:
+                raise SyntaxError(
+                    _("'{name}' filter requires locale").format(name=fltr))
+            func = functools.partial(func, locale)
+        return func(var, *args)
 
     def evalfunc(self, expr, variables):
         expr, fltr, args = self._parse_expr(expr)
@@ -148,7 +171,8 @@ class PyratempTemplate(pyratemp.Renderer):
             except AttributeError:
                 raise KeyError(part)
         if fltr:
-            return self._handle_filter(var, fltr, args)
+            return self._handle_filter(
+                var, fltr, args, variables.get("locale"))
         return var
 
     def render(self, context):
@@ -160,7 +184,7 @@ class PyratempTemplate(pyratemp.Renderer):
 class TemplateWithDefaultFallback(PyratempTemplate):
     """Don't leave unresolved context variables empty; leave them as-is."""
 
-    replace_variable_with = "{}"
+    replace_variable_with = u"{}"
 
     def evalfunc(self, expr, variables):
         try:

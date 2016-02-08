@@ -9,14 +9,14 @@ register = django.template.Library()
 
 class HighlightedTemplate(TemplateWithDefaultFallback):
 
-    replace_variable_with = mark_safe('<span class="variable">{}</span>')
+    replace_variable_with = mark_safe(u'<span class="variable">{}</span>')
 
     def __init__(self, *args, **kwargs):
         super(HighlightedTemplate, self).__init__(*args, **kwargs)
         self._tmpl_context = {}
 
-    def add_tmpl_context(self, dic):
-        self._tmpl_context.update(dic)
+    def add_tmpl_context(self, **kwargs):
+        self._tmpl_context.update(kwargs)
 
     def __unicode__(self):
         return self.render(self._tmpl_context)
@@ -30,7 +30,7 @@ def highlight_variables(text, distribution):
         "end_num": distribution.finish_number,
     }
     tmpl = HighlightedTemplate(text)
-    tmpl.add_tmpl_context(dic)
+    tmpl.add_tmpl_context(**dic)
     return tmpl
 
 
@@ -41,7 +41,14 @@ def add_keys_from_session(tmpl, session):
     for key, value in session.iteritems():
         if key.startswith("template_variable_"):
             dic[key[18:][:-6]] = value
-    tmpl.add_tmpl_context(dic)
+    tmpl.add_tmpl_context(**dic)
+    return tmpl
+
+
+@register.filter
+def with_locale(tmpl, language_code):
+    assert hasattr(tmpl, "add_tmpl_context"), tmpl  # simple duck-typing
+    tmpl.add_tmpl_context(locale=language_code)
     return tmpl
 
 
