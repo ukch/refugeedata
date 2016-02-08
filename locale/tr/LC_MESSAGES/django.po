@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-03 17:47+0200\n"
+"POT-Creation-Date: 2016-02-08 11:26+0200\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +63,7 @@ msgstr "Yanlış şifresi"
 msgid "Add a photo"
 msgstr ""
 
-#: refugeedata/forms.py:13
+#: refugeedata/forms.py:15
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
@@ -216,6 +216,21 @@ msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
+#: refugeedata/utils.py:126
+#, python-brace-format
+msgid "Filter '{name}' is not defined. Please choose from one of {filters}."
+msgstr ""
+
+#: refugeedata/utils.py:130
+msgid ""
+"Expression must be made up of upper or lowercase letters and underscores."
+msgstr ""
+
+#: refugeedata/utils.py:158
+#, python-brace-format
+msgid "'{name}' filter requires locale"
+msgstr ""
+
 #: refugeedata/views.py:105
 msgid "Faces"
 msgstr ""
@@ -356,6 +371,15 @@ msgstr "Kime:"
 #: templates/distribution/template_mock_send.html:9
 msgid "Message:"
 msgstr "Mesaj:"
+
+#: templates/distribution/template_syntax_error.html:6
+msgid "An error occurred while parsing the templates"
+msgstr ""
+
+#: templates/distribution/template_syntax_error.html:13
+#, python-format
+msgid "Please %(link_begin)sedit the template%(link_end)s and try again."
+msgstr ""
 
 #: templates/distribution/templates.html:8
 msgid "Fields"
