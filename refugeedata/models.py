@@ -159,6 +159,11 @@ class Person(models.Model):
         ordering = ("registration_card__number", )
 
 
+class MissingContext(Exception):
+
+    pass
+
+
 class Template(models.Model):
     """An Email or SMS template to be sent to attendees."""
 
@@ -188,6 +193,19 @@ class Template(models.Model):
                 preferred_contact: "",
             })
         return people.values_list(preferred_contact, flat=True)
+
+    def get_rendered_text(self, context):
+        """Render the text using pyratemp."""
+        missing = set()
+        for required in utils.get_variable_names_from_template(self):
+            if required not in context:
+                missing.add(required)
+        if missing:
+            raise MissingContext(missing)
+        tmpl = utils.PyratempTemplate(self.text)
+        context = context.copy()
+        context["locale"] = self.language.iso_code
+        return tmpl.render(context)
 
 
 class Distribution(models.Model):
@@ -222,6 +240,14 @@ class Distribution(models.Model):
 
     def get_absolute_url(self):
         return reverse("dist:info", args=[self.id])
+
+    def get_template_render_context(self):
+        """Return the 'free' context used to render email/SMS templates."""
+        return {
+            "distribution": self,
+            "start_num": self.invitees.first().number,
+            "end_num": self.finish_number,
+        }
 
     class Meta:
         verbose_name = _("Distribution")

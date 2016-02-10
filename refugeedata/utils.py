@@ -13,6 +13,14 @@ import pyratemp
 import six
 
 
+def get_keys_from_session(session):
+    dic = {}
+    for key, value in session.iteritems():
+        if key.startswith("template_variable_"):
+            dic[key[18:][:-6]] = value
+    return dic
+
+
 def takes_locale(func, kwarg_name):
     """Specifies that a filter function can be locale-specific"""
     @functools.wraps(func)

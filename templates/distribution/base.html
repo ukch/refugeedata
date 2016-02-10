@@ -1,37 +1,6 @@
-{% load compress %}
-{% load staticfiles %}
+{% extends "base.html" %}
 {% load i18n %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% trans "Distribution" %}</title>
-        {% compress css %}
-        <link rel="stylesheet" href="{% static "css/main.css" %}" />
-        {% endcompress %}
-        {% block extrahead %}{% endblock %}
-    </head>
-    <body>
-        <nav class="top-bar" data-topbar role="navigation">
-            <ul class="title-area">
-                <li class="name"><h1><a href="{% url "dist:home" %}">{% trans "Distribution" %}</a></h1></li>
-                <li class="toggle-topbar menu-icon"><a href="#"><span>{% trans "Menu" %}</span></a></li>
-            </ul>
-            <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right">
-                    {% include "inc/right_menu.html" %}
-                </ul>
-            </section>
-        </nav>
-        <div class="row">
-            <div class="small-12 large-12 column">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-        {% compress js %}
-        <script src="{% static "js/libraries.js" %}"></script>
-        {% block extra_js %}{% endblock %}
-        {% endcompress %}
-    </body>
-</html>
+
+{% block title %}{% trans "Distribution" %}{% endblock %}
+
+{% block home_link %}<a href="{% url "dist:home" %}">{% trans "Distribution" %}</a>{% endblock %}

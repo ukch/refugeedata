@@ -1,14 +1,19 @@
 import datetime
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, Http404
 
 from django.contrib.admin.views.decorators import staff_member_required
 
+from six.moves.urllib.parse import urlencode
+
 from refugeedata import models
 
-from refugeedata.utils import get_variable_names_from_template
+from refugeedata.utils import (
+    get_variable_names_from_template,
+    get_keys_from_session,
+)
 from . import forms
 from .decorators import standard_distribution_access, handle_template_errors
 
@@ -105,3 +110,33 @@ def template_mock_send(request, distribution, template_id):
         "template": template,
         "recipients": recipients
     })
+
+
+@staff_member_required
+@handle_template_errors
+def template_to_mailer(request, distribution, template_id):
+    template = get_object_or_404(models.Template, id=template_id)
+    args = []
+    if "to_everyone" not in request.GET:
+        args.append(distribution)
+    recipients = template.get_invitees(*args)
+    if len(recipients) == 0:
+        raise Http404("No recipients found")
+    context = get_keys_from_session(request.session)
+    context.update(distribution.get_template_render_context())
+    try:
+        body = template.get_rendered_text(context)
+    except models.MissingContext as e:
+        variables, = e.args
+        return render(request, "distribution/template_missing_context.html", {
+            "template_variables": variables,
+            "distribution": distribution,
+            "template": template,
+        })
+    params = {
+        "to": "; ".join(recipients),
+        "body": body,
+        "next": request.path,
+    }
+    url = reverse("mailings:home") + "?" + urlencode(params)
+    return HttpResponseRedirect(url)

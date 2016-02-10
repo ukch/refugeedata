@@ -97,7 +97,7 @@ def login(request, template_name="login.html"):
 logout = partial(auth_views.logout, next_page="/")
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser, login_url="admin:login")
 def show_faces(request, template_name="admin/show_faces.html"):
     people = Person.objects.filter(active=True).exclude(photo="")\
         .select_related("registration_card")
@@ -110,11 +110,11 @@ def show_faces(request, template_name="admin/show_faces.html"):
 
 # Error handlers
 def error_page(request, template_name, code):
-    base_template = "public/base.html"
+    base_template = "base.html"
     current_app = _find_app_from_path(request.path)
     if current_app:
         base_template = loader.select_template(
-            [os.path.join(current_app, "base.html"), "public/base.html"])
+            [os.path.join(current_app, "base.html"), "base.html"])
     return render(request, template_name, {
         "base_template": base_template,
         "bugs_url": "{}/issues/".format(SOURCE_URL)

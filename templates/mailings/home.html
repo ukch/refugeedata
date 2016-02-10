@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load foundation %}
+
+{% block content %}
+<h1>{% trans "New Mailing" %}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="large-12 columns">
+            <label>
+                From
+                <input type="text" value="{{ from_address }}" disabled />
+            </label>
+        </div>
+    </div>
+    {{ form|foundation }}
+    <input type="submit" class="button small" value="{% trans 'Send' %}" />
+</form>
+{% endblock %}

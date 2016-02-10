@@ -9,6 +9,9 @@
   ],
   "success_url": "/admin",
   "env": {
+    "EMAIL_FROM_ADDRESS": {
+        "description": "Default address to send emails from"
+    },
     "AWS_ACCESS_KEY_ID": {
         "description": "Amazon Web Services access key ID, for storage of uploaded files."
     },

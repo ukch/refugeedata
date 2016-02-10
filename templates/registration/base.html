@@ -1,41 +1,14 @@
-{% load compress %}
-{% load staticfiles %}
+{% extends "base.html" %}
 {% load i18n %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% trans "Registration" %}</title>
-        {% compress css %}
-        <link rel="stylesheet" href="{% static "css/main.css" %}" />
-        {% endcompress %}
-    </head>
-    <body>
-        <nav class="top-bar" data-topbar role="navigation">
-            <ul class="title-area">
-                <li class="name"><h1><a href="{% url "reg:home" %}">{% trans "Registration" %}</a></h1></li>
-                <li class="toggle-topbar menu-icon"><a href="#"><span>{% trans "Menu" %}</span></a></li>
-            </ul>
-            <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                {% if user.is_authenticated %}
-                <ul class="left">
-                    <li class=""><a href="{% url "reg:home" %}">{% trans "Register" %}</a></li>
-                </ul>
-                {% endif %}
-                <ul class="right">
-                    {% include "inc/right_menu.html" %}
-                </ul>
-            </section>
-        </nav>
-        <div class="row">
-            <div class="small-12 large-12 column">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-        {% compress js %}
-        <script src="{% static "js/libraries.js" %}"></script>
-        {% block extra_js %}{% endblock %}
-        {% endcompress %}
-    </body>
-</html>
+
+{% block title %}{% trans "Registration" %}{% endblock %}
+
+{% block home_link %}<a href="{% url "reg:home" %}">{% trans "Registration" %}</a>{% endblock %}
+
+{% block right_nav %}
+{% if user.is_authenticated %}
+<ul class="left">
+    <li class=""><a href="{% url "reg:home" %}">{% trans "Register" %}</a></li>
+</ul>
+{% endif %}
+{% endblock %}

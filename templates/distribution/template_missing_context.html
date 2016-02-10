@@ -1,0 +1,14 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+{% load template_variables %}
+
+{% block content %}
+<h4>{% trans "Please set the following template variables:" %}</h4>
+{% for variable in template_variables %}
+{% variable_name_to_form variable %}
+{% endfor %}
+<ul>
+    <pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|with_locale:template.language.iso_code|safe }}</pre>
+</ul>
+{% endblock %}

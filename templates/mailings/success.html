@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<h4 class="text-center">{% trans "The email sent successfully." %}</h4>
+<div class="text-center">
+    <a class="button" href="{{ next_url }}">{% trans "Continue" %}</a>
+</div>
+{% endblock %}

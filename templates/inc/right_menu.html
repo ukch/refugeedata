@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if user.is_superuser %}
+{% if user.is_authenticated %}
 <li class="has-dropdown">
     <a>{% trans 'Sections' %}</a>
     <ul class="dropdown">
@@ -11,7 +11,10 @@
         {% if app_name != 'distribution' %}
         <li><a href="{% url "dist:home" %}">{% trans 'Distribution' %}</a></li>
         {% endif %}
-        {% if app_name != 'admin' %}
+        {% if user.is_staff and app_name != 'mailings' %}
+        <li><a href="{% url "mailings:home" %}">{% trans 'Mailings' %}</a></li>
+        {% endif %}
+        {% if user.is_superuser and app_name != 'admin' %}
         <li><a href="{% url "admin:index" %}">{% trans 'Admin' %}</a></li>
         {% endif %}
         {% endwith %}

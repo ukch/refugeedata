@@ -24,6 +24,9 @@ if "MAILGUN_API_KEY" in os.environ:
     MAILGUN_ACCESS_KEY = os.getenv("MAILGUN_API_KEY")
     MAILGUN_SERVER_NAME = os.getenv("MAILGUN_DOMAIN")
 
+if "EMAIL_FROM_ADDRESS" in os.environ:
+    DEFAULT_FROM_EMAIL = os.environ["EMAIL_FROM_ADDRESS"]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 

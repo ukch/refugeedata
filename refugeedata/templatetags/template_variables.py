@@ -2,7 +2,10 @@ import django.template
 from django.utils.safestring import mark_safe
 
 from refugeedata.distribution.forms import TemplateVariableForm
-from refugeedata.utils import TemplateWithDefaultFallback
+from refugeedata.utils import (
+    TemplateWithDefaultFallback,
+    get_keys_from_session,
+)
 
 register = django.template.Library()
 
@@ -24,11 +27,7 @@ class HighlightedTemplate(TemplateWithDefaultFallback):
 
 @register.filter
 def highlight_variables(text, distribution):
-    dic = {
-        "distribution": distribution,
-        "start_num": distribution.invitees.first().number,
-        "end_num": distribution.finish_number,
-    }
+    dic = distribution.get_template_render_context()
     tmpl = HighlightedTemplate(text)
     tmpl.add_tmpl_context(**dic)
     return tmpl
@@ -37,11 +36,7 @@ def highlight_variables(text, distribution):
 @register.filter
 def add_keys_from_session(tmpl, session):
     assert hasattr(tmpl, "add_tmpl_context"), tmpl  # simple duck-typing
-    dic = {}
-    for key, value in session.iteritems():
-        if key.startswith("template_variable_"):
-            dic[key[18:][:-6]] = value
-    tmpl.add_tmpl_context(**dic)
+    tmpl.add_tmpl_context(**get_keys_from_session(session))
     return tmpl
 
 
