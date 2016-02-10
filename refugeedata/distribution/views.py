@@ -1,6 +1,5 @@
 import datetime
 
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render, Http404
 
@@ -45,9 +44,7 @@ def attendee(request, distribution, card_number, card_code):
         if "photo_included" not in request.POST or photo_form.is_valid():
             distribution.invitees.add(card)
             distribution.attendees.add(card)
-            return render(request, "distribution/redirect.html", {
-                "redirect_url": reverse("dist:info", args=[distribution.id]),
-            })
+            return redirect("dist:info", distribution.id)
     else:
         photo_form = forms.DistributionAddPhotoForm(instance=card.person)
     return render(request, "distribution/attendee.html", {
