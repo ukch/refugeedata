@@ -1,1 +1,1 @@
-web: gunicorn refugeedata.app.wsgi --log-file -
+web: gunicorn refugeedata.app.wsgi -w 4 --log-file -
