@@ -1,0 +1,18 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block extrahead %}
+<meta http-equiv="refresh" content="0; url={{ redirect_url }}" />
+{% endblock %}
+
+{% block content %}
+<h4 class="text-center">{% trans "Please wait while we redirect you..." %}</h4>
+<div class="text-center" style="padding-top: 20px">
+    <div class="la-ball-fall la-2x la-dark" style="display: inline-block">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+{% endblock %}
