@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 11:26+0200\n"
+"POT-Creation-Date: 2016-02-10 20:57+0200\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
-#: refugeedata/app/settings.py:185
+#: refugeedata/app/settings.py:192
 msgid "Admin Interface"
 msgstr ""
 
@@ -18,14 +18,14 @@ msgid "Users"
 msgstr ""
 
 #: refugeedata/dashboard.py:33 templates/admin/base_site.html:28
-#: templates/inc/right_menu.html:9 templates/registration/base.html:8
-#: templates/registration/base.html.py:16
+#: templates/inc/right_menu.html:9 templates/registration/base.html:4
+#: templates/registration/base.html.py:6
 msgid "Registration"
 msgstr "Kaydetme"
 
-#: refugeedata/dashboard.py:42 refugeedata/models.py:227
-#: templates/admin/base_site.html:29 templates/distribution/base.html:8
-#: templates/distribution/base.html.py:16 templates/inc/right_menu.html:12
+#: refugeedata/dashboard.py:42 refugeedata/models.py:253
+#: templates/admin/base_site.html:29 templates/distribution/base.html:4
+#: templates/distribution/base.html.py:6 templates/inc/right_menu.html:12
 msgid "Distribution"
 msgstr "Dağıtma"
 
@@ -66,6 +66,27 @@ msgstr ""
 #: refugeedata/forms.py:15
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
+
+#: refugeedata/mailings/forms.py:8
+#, fuzzy
+#| msgid "To:"
+msgid "To"
+msgstr "Kime:"
+
+#: refugeedata/mailings/forms.py:9
+msgid "Subject"
+msgstr ""
+
+#: refugeedata/mailings/forms.py:11
+#, fuzzy
+#| msgid "Message:"
+msgid "Message Body"
+msgstr "Mesaj:"
+
+#: refugeedata/mailings/forms.py:23
+#, python-brace-format
+msgid "'{item}' does not look like an email address."
+msgstr ""
 
 #: refugeedata/models.py:25 templates/inc/person_details.html:40
 msgid "SMS"
@@ -128,7 +149,7 @@ msgstr "Açıklama"
 msgid "Example Text"
 msgstr "Metin Örneği"
 
-#: refugeedata/models.py:114 refugeedata/models.py:167
+#: refugeedata/models.py:114 refugeedata/models.py:172
 msgid "Language"
 msgstr "Dil"
 
@@ -184,49 +205,49 @@ msgstr "İnsan"
 msgid "People"
 msgstr "İnsanlar"
 
-#: refugeedata/models.py:166
+#: refugeedata/models.py:171
 msgid "Template Type"
 msgstr "Şablon Tipi"
 
-#: refugeedata/models.py:168
+#: refugeedata/models.py:173
 msgid "Template Text"
 msgstr "Şablon Metini"
 
-#: refugeedata/models.py:174
+#: refugeedata/models.py:179
 msgid "Template"
 msgstr "Şablon"
 
-#: refugeedata/models.py:175 refugeedata/models.py:207
+#: refugeedata/models.py:180 refugeedata/models.py:225
 msgid "Templates"
 msgstr "Şablonlar"
 
-#: refugeedata/models.py:198
+#: refugeedata/models.py:216
 msgid "Distribution Date"
 msgstr "Dağıtma Tarihi"
 
-#: refugeedata/models.py:200
+#: refugeedata/models.py:218
 msgid "Supplies Quantity"
 msgstr "Paketlerin miktarı"
 
-#: refugeedata/models.py:202
+#: refugeedata/models.py:220
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:228
+#: refugeedata/models.py:254
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
-#: refugeedata/utils.py:126
+#: refugeedata/utils.py:134
 #, python-brace-format
 msgid "Filter '{name}' is not defined. Please choose from one of {filters}."
 msgstr ""
 
-#: refugeedata/utils.py:130
+#: refugeedata/utils.py:138
 msgid ""
 "Expression must be made up of upper or lowercase letters and underscores."
 msgstr ""
 
-#: refugeedata/utils.py:158
+#: refugeedata/utils.py:166
 #, python-brace-format
 msgid "'{name}' filter requires locale"
 msgstr ""
@@ -283,22 +304,30 @@ msgstr ""
 msgid "Sections"
 msgstr "Açıklama"
 
-#: templates/admin/base_site.html:39
+#: templates/admin/base_site.html:30 templates/inc/right_menu.html:15
+msgid "Mailings"
+msgstr ""
+
+#: templates/admin/base_site.html:40
 #, fuzzy
 #| msgid "Incorrect password"
 msgid "Change password"
 msgstr "Yanlış şifresi"
 
-#: templates/admin/base_site.html:42
+#: templates/admin/base_site.html:43
 msgid "Log out"
 msgstr ""
 
-#: templates/admin/base_site.html:50
+#: templates/admin/base_site.html:51
 msgid "Documentation"
 msgstr ""
 
 #: templates/admin/show_faces.html:34
 msgid "No faces to show"
+msgstr ""
+
+#: templates/base.html:18
+msgid "Menu"
 msgstr ""
 
 #: templates/distribution/attendee.html:7
@@ -323,10 +352,11 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: templates/distribution/base.html:17 templates/public/base.html:17
-#: templates/registration/base.html:17
-msgid "Menu"
-msgstr ""
+#: templates/distribution/attendee.html:25
+#, fuzzy
+#| msgid "Attendees:"
+msgid "Edit Details"
+msgstr "Katılanlar:"
 
 #: templates/distribution/home_base.html:6
 #, fuzzy, python-format
@@ -363,6 +393,14 @@ msgstr ""
 #: templates/distribution/login.html:13
 msgid "Authenticate"
 msgstr "Gerçeklemek"
+
+#: templates/distribution/redirect.html:10
+msgid "Please wait while we redirect you..."
+msgstr ""
+
+#: templates/distribution/template_missing_context.html:7
+msgid "Please set the following template variables:"
+msgstr ""
 
 #: templates/distribution/template_mock_send.html:8
 msgid "To:"
@@ -447,15 +485,15 @@ msgstr "Tercih edilen dil"
 msgid "Phone"
 msgstr "Telefon"
 
-#: templates/inc/right_menu.html:15
+#: templates/inc/right_menu.html:18
 msgid "Admin"
 msgstr ""
 
-#: templates/inc/right_menu.html:26
+#: templates/inc/right_menu.html:29
 msgid "Admin interface"
 msgstr ""
 
-#: templates/inc/right_menu.html:32
+#: templates/inc/right_menu.html:35
 msgid "Log In"
 msgstr ""
 
@@ -465,6 +503,24 @@ msgstr ""
 
 #: templates/login.html:10
 msgid "Log in"
+msgstr ""
+
+#: templates/mailings/home.html:6
+msgid "New Mailing"
+msgstr ""
+
+#: templates/mailings/home.html:18
+#, fuzzy
+#| msgid "Send:"
+msgid "Send"
+msgstr "Gönder:"
+
+#: templates/mailings/success.html:6
+msgid "The email sent successfully."
+msgstr ""
+
+#: templates/mailings/success.html:8
+msgid "Continue"
 msgstr ""
 
 #: templates/public.html:5
@@ -479,7 +535,7 @@ msgid ""
 "system."
 msgstr ""
 
-#: templates/registration/base.html:23
+#: templates/registration/base.html:11
 msgid "Register"
 msgstr "Kaydet"
 
@@ -491,7 +547,7 @@ msgstr "Kaydetme bitirmek için, alttaki QR kodu telefonunuzla okutun."
 msgid "I am unable to scan the QR code"
 msgstr "QR kodu okutamama"
 
-#: templates/registration/register.html:18
+#: templates/registration/register.html:20
 #: templates/registration/stage2.html:10
 msgid "Save"
 msgstr "Kaydet"
@@ -500,9 +556,13 @@ msgstr "Kaydet"
 msgid "Registration complete"
 msgstr "Kaydetme tamamlandı"
 
-#: templates/registration/stage2_complete.html:10
+#: templates/registration/stage2_complete.html:11
 msgid "Register someone else"
 msgstr "Başka kişi kaydetme"
+
+#: templates/registration/stage2_complete.html:12
+msgid "Edit details"
+msgstr ""
 
 #~ msgid "PDF File"
 #~ msgstr "PDF Dosya"
