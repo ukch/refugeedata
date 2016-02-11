@@ -15,7 +15,7 @@ from django_languages import LanguageField
 from imagekit.models import ProcessedImageField
 from uuidfield import UUIDField
 
-from . import exceptions, utils
+from . import exceptions, managers, utils
 from .processors import RotateAndScale
 
 
@@ -239,6 +239,8 @@ class Distribution(models.Model):
         RegistrationNumber, related_name="distributions_attended", blank=True)
     templates = models.ManyToManyField(Template, verbose_name=_("Templates"))
     finish_number = models.PositiveSmallIntegerField(blank=True, null=True)
+
+    objects = managers.DistributionManager()
 
     @property
     def hash(self):

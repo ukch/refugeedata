@@ -23,7 +23,10 @@ def home(request):
         dist = models.Distribution.objects.get(date=datetime.date.today())
     except models.Distribution.DoesNotExist:
         if request.user.is_superuser:
-            raise Http404("No distribution today")
+            return render(request, "distribution/upcoming.html", {
+                "upcoming": models.Distribution.objects.upcoming(),
+                "past": models.Distribution.objects.past(),
+            })
         return redirect("public")
     return redirect("dist:info", dist.id)
 

@@ -1,0 +1,18 @@
+{% extends "distribution/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<h4>{% trans "Upcoming Distributions" %}</h4>
+<ul>
+{% for distribution in upcoming %}
+<li><a href="{{ distribution.get_absolute_url }}">{{ distribution }}</a>: {{ distribution.show_numbers }}{% if distribution.times.count %} ({% for times in distribution.times.all %}{{ times }}{{ forloop.last|yesno:",; " }}{% endfor %}){% endif %}</li>
+{% endfor %}
+</ul>
+<h4>{% trans "Past Distributions" %}</h4>
+<ul>
+{% for distribution in past %}
+<li><a href="{{ distribution.get_absolute_url }}">{{ distribution }}</a>: {{ distribution.show_numbers }}{% if distribution.times.count %} ({% for times in distribution.times.all %}{{ times }}{{ forloop.last|yesno:",; " }}{% endfor %}){% endif %}</li>
+{% endfor %}
+</ul>
+{% endblock %}
