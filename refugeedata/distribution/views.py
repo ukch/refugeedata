@@ -109,10 +109,21 @@ def template_mock_send(request, distribution, template_id):
     recipients = template.get_invitees(*args)
     if len(recipients) == 0:
         raise Http404("No recipients found")
+    context = get_keys_from_session(request.session)
+    context.update(distribution.get_template_render_context())
+    try:
+        body = template.get_rendered_text(context)
+    except models.MissingContext as e:
+        variables, = e.args
+        return render(request, "distribution/template_missing_context.html", {
+            "template_variables": variables,
+            "distribution": distribution,
+            "template": template,
+        })
     return render(request, "distribution/template_mock_send.html", {
         "distribution": distribution,
-        "template": template,
-        "recipients": recipients
+        "recipients": recipients,
+        "body": body,
     })
 
 
