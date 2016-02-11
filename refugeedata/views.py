@@ -81,7 +81,7 @@ def _find_app_from_path(path):
 
 
 def login(request, template_name="login.html"):
-    base_template = "public/base.html"
+    base_template = "base.html"
     if "next" in request.GET:
         app = _find_app_from_path(request.GET["next"])
         base_template = loader.select_template(
