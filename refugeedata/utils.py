@@ -123,6 +123,39 @@ class DjangoFormatParser(pyratemp.Parser):
         return super(DjangoFormatParser, self)._parse(template, fpos=fpos)
 
 
+@six.add_metaclass(PyratempRegexFixMeta)
+class DjangoFormatParserWithCustomTagHandler(DjangoFormatParser):
+
+    def __init__(self, *args, **kwargs):
+        # Keep track of the for-loops that we are replacing
+        self.forloop_fallbacks = set()
+        self.forloop_defined_variables = {}
+        super(DjangoFormatParserWithCustomTagHandler, self).__init__(
+            *args, **kwargs)
+
+    def parse(self, template, replace_variable_with):
+        """Do our own parsing on 'for' nodes, so they appear usefully."""
+        superclass = super(DjangoFormatParserWithCustomTagHandler, self)
+        parsetree = []
+        for elem in superclass.parse(template):
+            if elem[0] == "for":
+                names, iterable = elem[1:3]
+                parsetree.append(("str", u"%s for %s in %s %s\n" % (
+                    "{%",
+                    u", ".join(replace_variable_with.format(name)
+                               for name in names),
+                    replace_variable_with.format(iterable),
+                    "%}",
+                )))
+                self.forloop_fallbacks.add(iterable)
+                self.forloop_defined_variables[iterable] = names
+                parsetree += elem[3]
+                parsetree.append(("str", "{% endfor %}\n"))
+            else:
+                parsetree.append(elem)
+        return parsetree
+
+
 def test_expression(expr):
     if expr == "i==1":
         # The test expr: pass without questioning
@@ -143,10 +176,19 @@ class PyratempTemplate(pyratemp.Renderer):
 
     """Wrapper around pyratemp.Template to use the Django template API"""
 
+    PARSER_CLASS = DjangoFormatParser
+
     def __init__(self, template_string, filename=None):
-        superclass = DjangoFormatParser(filename, testexpr=test_expression)
-        self.parsetree = superclass.parse(template_string)
+        self.filename = filename
+        self.parsetree = self.parser.parse(template_string)
         self.escapefunc = pyratemp.escape
+
+    @property
+    def parser(self):
+        if not hasattr(self, "_parser"):
+            self._parser = self.PARSER_CLASS(
+                self.filename, testexpr=test_expression)
+        return self._parser
 
     def _parse_expr(self, expr):
         if "|" not in expr:
@@ -183,9 +225,13 @@ class PyratempTemplate(pyratemp.Renderer):
                 var, fltr, args, variables.get("locale"))
         return var
 
-    def render(self, context):
+    def render(self, context, *extra):
+        superclass = super(PyratempTemplate, self)
+        if len(extra):
+            # context is a parsetree, extra is [context]
+            return superclass.render(context, *extra)
         assert isinstance(context, dict), context
-        tokens = super(PyratempTemplate, self).render(self.parsetree, context)
+        tokens = superclass.render(self.parsetree, context)
         return pyratemp._dontescape("".join(tokens))
 
 
@@ -193,6 +239,18 @@ class TemplateWithDefaultFallback(PyratempTemplate):
     """Don't leave unresolved context variables empty; leave them as-is."""
 
     replace_variable_with = u"{}"
+
+    PARSER_CLASS = DjangoFormatParserWithCustomTagHandler
+
+    @property
+    def parser(self):
+        if not hasattr(self, "_parser"):
+            self._parser = super(TemplateWithDefaultFallback, self).parser
+            self._parser.parse = functools.partial(
+                self._parser.parse,
+                replace_variable_with=self.replace_variable_with,
+            )
+        return self._parser
 
     def evalfunc(self, expr, variables):
         try:
@@ -210,14 +268,30 @@ class TemplateWithDefaultFallback(PyratempTemplate):
 
 class NameHarvesterTemplate(TemplateWithDefaultFallback):
 
+    def __init__(self, *args, **kwargs):
+        self.harvested_variable_names = None
+        self.forloop_defined_variables = None
+        super(NameHarvesterTemplate, self).__init__(*args, **kwargs)
+
     def _parse_expr(self, expr):
         expr, fltr, args = super(NameHarvesterTemplate, self)._parse_expr(expr)
-        self.harvested_variable_names.add(expr.split(".", 1)[0])
+        if self.harvested_variable_names is not None:
+            name = expr.split(".", 1)[0]
+            if name not in self.forloop_defined_variables:
+                self.harvested_variable_names.add(name)
         return expr, fltr, args
 
-    def render(self, context):
-        self.harvested_variable_names = set()
-        return super(NameHarvesterTemplate, self).render(context)
+    def render(self, context, *extra):
+        self.harvested_variable_names = {
+            self._parse_expr(expr)[0]
+            for expr in self.parser.forloop_fallbacks
+        }
+        self.forloop_defined_variables = {
+            name
+            for names in self.parser.forloop_defined_variables.itervalues()
+            for name in names
+        }
+        return super(NameHarvesterTemplate, self).render(context, *extra)
 
     def harvest_names(self):
         self.render({})
