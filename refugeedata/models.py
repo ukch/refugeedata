@@ -292,8 +292,9 @@ class Distribution(models.Model):
         return groups
 
     def show_numbers(self):
-        return "; ".join((u"#{} \u2013 #{}".format(*seq)
-                          for seq in self.numbers))
+        return "; ".join((u"#{}".format(begin) if begin == end else
+                          u"#{} \u2013 #{}".format(begin, end)
+                          for begin, end in self.numbers))
 
     def get_absolute_url(self):
         return reverse("dist:info", args=[self.id])
