@@ -1,1 +1,1 @@
-web: gunicorn refugeedata.app.wsgi -w 4 --log-file -
+web: waitress-serve --port=$PORT refugeedata.app.wsgi:application
