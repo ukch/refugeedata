@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 20:57+0200\n"
+"POT-Creation-Date: 2016-02-11 12:55+0200\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Registration"
 msgstr "Kaydetme"
 
-#: refugeedata/dashboard.py:42 refugeedata/models.py:253
+#: refugeedata/dashboard.py:42 refugeedata/models.py:286
 #: templates/admin/base_site.html:29 templates/distribution/base.html:4
 #: templates/distribution/base.html.py:6 templates/inc/right_menu.html:12
 msgid "Distribution"
@@ -149,7 +149,7 @@ msgstr "Açıklama"
 msgid "Example Text"
 msgstr "Metin Örneği"
 
-#: refugeedata/models.py:114 refugeedata/models.py:172
+#: refugeedata/models.py:114 refugeedata/models.py:185
 msgid "Language"
 msgstr "Dil"
 
@@ -205,49 +205,55 @@ msgstr "İnsan"
 msgid "People"
 msgstr "İnsanlar"
 
-#: refugeedata/models.py:171
+#: refugeedata/models.py:184
 msgid "Template Type"
 msgstr "Şablon Tipi"
 
-#: refugeedata/models.py:173
+#: refugeedata/models.py:186
 msgid "Template Text"
 msgstr "Şablon Metini"
 
-#: refugeedata/models.py:179
+#: refugeedata/models.py:192
 msgid "Template"
 msgstr "Şablon"
 
-#: refugeedata/models.py:180 refugeedata/models.py:225
+#: refugeedata/models.py:193 refugeedata/models.py:240
 msgid "Templates"
 msgstr "Şablonlar"
 
-#: refugeedata/models.py:216
+#: refugeedata/models.py:229
 msgid "Distribution Date"
 msgstr "Dağıtma Tarihi"
 
-#: refugeedata/models.py:218
+#: refugeedata/models.py:231
 msgid "Supplies Quantity"
 msgstr "Paketlerin miktarı"
 
-#: refugeedata/models.py:220
+#: refugeedata/models.py:233
 msgid "Supplies Description"
 msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 
-#: refugeedata/models.py:254
+#: refugeedata/models.py:235
+#, fuzzy
+#| msgid "Distributions"
+msgid "Distribution Times"
+msgstr "Dağıtmalar"
+
+#: refugeedata/models.py:287
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
-#: refugeedata/utils.py:134
+#: refugeedata/utils.py:172
 #, python-brace-format
 msgid "Filter '{name}' is not defined. Please choose from one of {filters}."
 msgstr ""
 
-#: refugeedata/utils.py:138
+#: refugeedata/utils.py:176
 msgid ""
 "Expression must be made up of upper or lowercase letters and underscores."
 msgstr ""
 
-#: refugeedata/utils.py:166
+#: refugeedata/utils.py:213
 #, python-brace-format
 msgid "'{name}' filter requires locale"
 msgstr ""
@@ -411,7 +417,7 @@ msgid "Message:"
 msgstr "Mesaj:"
 
 #: templates/distribution/template_syntax_error.html:6
-msgid "An error occurred while parsing the templates"
+msgid "An error occurred while evaluating the templates"
 msgstr ""
 
 #: templates/distribution/template_syntax_error.html:13
