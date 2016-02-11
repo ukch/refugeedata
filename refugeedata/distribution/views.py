@@ -71,7 +71,8 @@ def templates(request, distribution):
     for template in distribution.templates.all():
         template_variables = template_variables\
                 .union(get_variable_names_from_template(template))\
-                .difference({"distribution", "start_num", "end_num"})
+                .difference({"distribution", "distribution_numbers",
+                             "distribution_times"})
     return render(request, "distribution/templates.html", {
         "distribution": distribution,
         "template_variables": template_variables,
@@ -135,7 +136,7 @@ def template_to_mailer(request, distribution, template_id):
         })
     params = {
         "to": "; ".join(recipients),
-        "body": body,
+        "body": body.encode("utf-8"),
         "next": request.path,
     }
     url = reverse("mailings:home") + "?" + urlencode(params)

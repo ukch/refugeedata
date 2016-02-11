@@ -61,7 +61,7 @@ class TemplateAdminForm(forms.ModelForm):
                     url=("https://docs.djangoproject.com/en/1.8/ref/templates/"
                          "language/")),
                 "The following template variables are provided: distribution; "
-                "start_num; end_num",
+                "distribution_numbers; distribution_times",
             ])
 
     def clean_text(self):

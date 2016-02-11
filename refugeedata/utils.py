@@ -7,7 +7,7 @@ from django.template import defaultfilters
 from django.utils.safestring import SafeData
 from django.utils.translation import ugettext as _
 
-from babel.dates import format_date
+from babel.dates import format_date, format_time
 
 import pyratemp
 import six
@@ -31,10 +31,15 @@ def takes_locale(func, kwarg_name):
     return wrapper
 
 
+def my_format_time(*args, **kwargs):
+    kwargs.setdefault("format", "short")
+    return format_time(*args, **kwargs)
+
+
 FILTER_REGISTRY = {
-    # TODO pass lang option to date_format so dates are correctly formatted
     "date": defaultfilters.date,
     "localdate": takes_locale(format_date, "locale"),
+    "timeformat": takes_locale(my_format_time, "locale"),
 }
 
 

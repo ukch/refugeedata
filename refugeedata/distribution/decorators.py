@@ -1,7 +1,7 @@
 import datetime
 import functools
 
-from pyratemp import TemplateSyntaxError
+from pyratemp import TemplateSyntaxError, TemplateRenderError
 
 from django.contrib.auth import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect, render
@@ -45,8 +45,13 @@ def handle_template_errors(func):
         distribution = get_object_or_404(Distribution, id=distribution_id)
         try:
             return func(request, distribution, *args, **kwargs)
-        except TemplateSyntaxError as e:
-            template = Template.objects.filter(id=e.filename).first()
+        except (TemplateSyntaxError, TemplateRenderError) as e:
+            if hasattr(e, "filename"):
+                template_id = e.filename
+            else:
+                template_id = kwargs.get("template_id")
+            if template_id:
+                template = Template.objects.filter(id=template_id).first()
             return render(request, "distribution/template_syntax_error.html", {
                 "distribution": distribution,
                 "template": template,

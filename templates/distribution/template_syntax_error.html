@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block content %}
-<h2>{% trans "An error occurred while parsing the templates" %}</h2>
+<h2>{% trans "An error occurred while evaluating the templates" %}</h2>
 <pre>{{ exception }}</pre>
 {% if template %}
     {% url 'admin:refugeedata_template_change' template.id as template_url %}

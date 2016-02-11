@@ -159,6 +159,19 @@ class Person(models.Model):
         ordering = ("registration_card__number", )
 
 
+class DistributionTime(models.Model):
+    """The time of the distribution."""
+
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    class Meta:
+        ordering = ("start_time", )
+
+    def __unicode__(self):
+        return u"{} - {}".format(self.start_time, self.end_time)
+
+
 class MissingContext(Exception):
 
     pass
@@ -218,6 +231,8 @@ class Distribution(models.Model):
         verbose_name=_("Supplies Quantity"))
     supplies_description = models.TextField(
         blank=True, null=True, verbose_name=_("Supplies Description"))
+    times = models.ManyToManyField(
+        DistributionTime, verbose_name=_("Distribution Times"), blank=True)
     invitees = models.ManyToManyField(RegistrationNumber,
                                       related_name="distributions_invited_to")
     attendees = models.ManyToManyField(
@@ -238,6 +253,24 @@ class Distribution(models.Model):
     def __unicode__(self):
         return unicode(formats.date_format(self.date))
 
+    @property
+    def numbers(self):
+        numbers = [(self.invitees.first().number, self.finish_number)]
+        try:
+            previous = Distribution.objects.get(id=self.id - 1)
+        except Distribution.DoesNotExist:
+            pass
+        else:
+            if previous.finish_number > numbers[0][0]:
+                # We are almost certainly looping
+                numbers.insert(0, (previous.finish_number + 1,
+                                   self.invitees.last().number))
+        return numbers
+
+    def show_numbers(self):
+        return "; ".join((u"#{} \u2013 #{}".format(*seq)
+                          for seq in self.numbers))
+
     def get_absolute_url(self):
         return reverse("dist:info", args=[self.id])
 
@@ -245,8 +278,8 @@ class Distribution(models.Model):
         """Return the 'free' context used to render email/SMS templates."""
         return {
             "distribution": self,
-            "start_num": self.invitees.first().number,
-            "end_num": self.finish_number,
+            "distribution_numbers": self.numbers,
+            "distribution_times": self.times.all(),
         }
 
     class Meta:
