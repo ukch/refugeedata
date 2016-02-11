@@ -1,3 +1,6 @@
+from itertools import groupby
+from functools import cmp_to_key
+from operator import itemgetter
 import time
 import hashlib
 import uuid
@@ -12,6 +15,7 @@ from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 
 from django_languages import LanguageField
+from six.moves import map
 from imagekit.models import ProcessedImageField
 from uuidfield import UUIDField
 
@@ -221,6 +225,20 @@ class Template(models.Model):
         return tmpl.render(context)
 
 
+def _sort_by_previous_finish(finish):
+    def _sort(x, y):
+        if x[0] > finish and y[0] <= finish:
+            # x < y
+            return -1
+        elif y[0] > finish and x[0] <= finish:
+            # x > y
+            return 1
+        # x == y
+        return 0
+
+    return _sort
+
+
 class Distribution(models.Model):
     """A distribution day.
     This model holds data about distribution date and expected/actual
@@ -257,17 +275,21 @@ class Distribution(models.Model):
 
     @property
     def numbers(self):
-        numbers = [(self.invitees.first().number, self.finish_number)]
+        numbers = self.invitees.values_list("number", flat=True)
+        # Taken from http://stackoverflow.com/questions/2154249/
+        groups = []
+        for key, group in groupby(enumerate(numbers),
+                                  lambda (index, item): index - item):
+            group = list(map(itemgetter(1), group))
+            groups.append((group[0], group[-1]))
         try:
             previous = Distribution.objects.get(id=self.id - 1)
         except Distribution.DoesNotExist:
             pass
         else:
-            if previous.finish_number > numbers[0][0]:
-                # We are almost certainly looping
-                numbers.insert(0, (previous.finish_number + 1,
-                                   self.invitees.last().number))
-        return numbers
+            groups.sort(key=cmp_to_key(
+                _sort_by_previous_finish(previous.finish_number)))
+        return groups
 
     def show_numbers(self):
         return "; ".join((u"#{} \u2013 #{}".format(*seq)
