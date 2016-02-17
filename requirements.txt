@@ -19,6 +19,7 @@ django-uuidfield==0.5.0
 env-tools==2.0.0
 foundationform==0.2
 futures==2.2.0
+gunicorn==19.4.5
 ipdb==0.8
 ipython==3.1.0
 model-mommy==1.2.4
@@ -31,5 +32,4 @@ reportlab==3.2.0
 six==1.10.0
 static3==0.5.1
 tini==3.0.1
-waitress==0.8.10
 z3c.rml==3.0.0
