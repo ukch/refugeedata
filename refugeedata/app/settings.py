@@ -164,7 +164,7 @@ ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 import os
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = "uploads"
 MEDIA_URL = "/media/"
 
