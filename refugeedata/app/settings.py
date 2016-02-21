@@ -178,6 +178,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+COMPRESS_OFFLINE = True
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ID_LENGTH = os.environ.get("ID_LENGTH", 4)
