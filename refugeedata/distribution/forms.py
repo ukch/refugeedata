@@ -24,6 +24,23 @@ class DistributionHashForm(forms.Form):
             raise forms.ValidationError(_("Incorrect password"))
 
 
+class DistributionNumberForm(forms.Form):
+
+    number = forms.IntegerField(label=_("Number"))
+
+    def __init__(self, distribution, *args, **kwargs):
+        super(DistributionNumberForm, self).__init__(*args, **kwargs)
+        self.distribution = distribution
+
+    def clean_number(self):
+        number = self.cleaned_data["number"]
+        invitees = self.distribution.invitees.all()
+        if number not in invitees.values_list("number", flat=True):
+            raise forms.ValidationError(
+                _("{} is not part of this distribution.".format(number)))
+        return number
+
+
 class DistributionAddPhotoForm(forms.ModelForm):
 
     photo = forms.ImageField(label=_("Add a photo"), required=True)

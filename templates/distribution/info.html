@@ -1,5 +1,6 @@
 {% extends "distribution/home_base.html" %}
 
+{% load foundation %}
 {% load i18n %}
 
 {% block form %}
@@ -10,10 +11,15 @@
     {% endif %}
 </ul>
 
-<h2>{% trans "Attendees:" %}</h2>
-<ul>
-{% for attendee in distribution.invitees.all %}
-<li><a href="{% url "dist:attendee" distribution.id attendee.number attendee.short_id %}">{{ attendee.number }}: {{ attendee.person.name }}</a>{% if attendee in distribution.attendees.all %} ({% trans "attended" %}){% endif %}</li>
-{% endfor %}
-</ul>
+<div class="row">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="large-4 small-6 columns">
+            {{ form.number|foundation }}
+        </div>
+        <div class="large-8 small-6 columns">
+            <input class="button" type="submit" value="{% trans 'Go to' %}" />
+        </div>
+    </form>
+</div>
 {% endblock %}
