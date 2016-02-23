@@ -3,8 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "engines": {
-    "node": "latest",
-    "npm": "default"
+    "node": "latest"
   },
   "dependencies": {
     "browserify": "^9.0.8",

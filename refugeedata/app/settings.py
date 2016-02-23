@@ -82,6 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'refugeedata.middleware.MaxAgeMiddleware',
 )
 
 ROOT_URLCONF = 'refugeedata.app.urls'
@@ -164,7 +165,7 @@ ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 import os
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = "uploads"
 MEDIA_URL = "/media/"
 
@@ -178,6 +179,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+COMPRESS_OFFLINE = True
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ID_LENGTH = os.environ.get("ID_LENGTH", 4)
