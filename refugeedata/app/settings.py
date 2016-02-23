@@ -82,6 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'refugeedata.middleware.MaxAgeMiddleware',
 )
 
 ROOT_URLCONF = 'refugeedata.app.urls'

@@ -6,12 +6,14 @@ from django.shortcuts import render
 
 from django.contrib.auth.decorators import user_passes_test
 
+from ..decorators import cache_control
 from . import forms
 
 require_staff = user_passes_test(lambda u: u.is_staff)
 
 
 @require_staff
+@cache_control(24 * 60 * 60)
 def home(request, template_name="mailings/home.html"):
     if request.method == "POST":
         form = forms.MailingForm(request.POST)
@@ -34,6 +36,7 @@ def home(request, template_name="mailings/home.html"):
 
 
 @require_staff
+@cache_control(24 * 60 * 60)
 def success(request, template_name="mailings/success.html"):
     if "next" in request.GET:
         next_url = request.GET["next"]

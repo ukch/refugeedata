@@ -16,3 +16,12 @@ class EnforceSiteURLMiddleware(object):
             absolute_uri = "{}://{}{}".format(
                 scheme, request.site.domain, request.path)
             return HttpResponsePermanentRedirect(absolute_uri)
+
+
+class MaxAgeMiddleware(object):
+
+    def process_response(self, request, response):
+        if hasattr(request, "_cache_control_max_age"):
+            response['Cache-Control'] = \
+                'max-age=%d' % request._cache_control_max_age
+        return response

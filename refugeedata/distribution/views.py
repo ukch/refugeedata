@@ -14,10 +14,13 @@ from refugeedata.utils import (
     get_variable_names_from_template,
     get_keys_from_session,
 )
+from ..decorators import cache_control
 from . import forms
 from .decorators import standard_distribution_access, handle_template_errors
 
 
+# TODO is this safe? Will it respect logins?
+@cache_control(1 * 60 * 60)
 def home(request):
     try:
         dist = models.Distribution.objects.get(date=datetime.date.today())
@@ -31,6 +34,8 @@ def home(request):
     return redirect("dist:info", dist.id)
 
 
+# TODO is this safe? Will it respect logins?
+@cache_control(1 * 60 * 60)
 @standard_distribution_access
 def info(request, distribution):
     return render(request, "distribution/info.html", {
