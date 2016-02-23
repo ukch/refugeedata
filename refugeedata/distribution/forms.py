@@ -37,7 +37,8 @@ class DistributionNumberForm(forms.Form):
         invitees = self.distribution.invitees.all()
         if number not in invitees.values_list("number", flat=True):
             raise forms.ValidationError(
-                _("{} is not part of this distribution.".format(number)))
+                _("{number} is not part of this distribution.".format(
+                    number=number)))
         return number
 
 
