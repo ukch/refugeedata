@@ -277,10 +277,19 @@ class Distribution(models.Model):
     def numbers(self):
         numbers = self.invitees.values_list("number", flat=True)
         # Taken from http://stackoverflow.com/questions/2154249/
+        max_padding = 5
         groups = []
         for key, group in groupby(enumerate(numbers),
                                   lambda (index, item): index - item):
             group = list(map(itemgetter(1), group))
+            if len(groups) and groups[-1][1] + max_padding >= group[0]:
+                # There is a small gap between the groups. If the cards in this
+                # gap are all deactivated, pretend it's not there.
+                extras = range(groups[-1][1] + 1, group[0])
+                inactive_extras = RegistrationNumber.objects.filter(
+                    active=False, number__in=extras)
+                if inactive_extras.count() == len(extras):
+                    group[0], unused = groups.pop()
             groups.append((group[0], group[-1]))
         try:
             previous = Distribution.objects.get(id=self.id - 1)
