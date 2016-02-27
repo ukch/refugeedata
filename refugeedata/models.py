@@ -287,9 +287,10 @@ class Distribution(models.Model):
                     # There is a small gap between the groups. If the cards in
                     # this gap are all deactivated, pretend it's not there.
                     extras = range(groups[-1][1] + 1, group[0])
-                    inactive_extras = RegistrationNumber.objects.filter(
-                        active=False, number__in=extras)
-                    if inactive_extras.count() == len(extras):
+                    extras = RegistrationNumber.objects.filter(
+                        number__in=extras)
+                    inactive_extras = extras.filter(active=False)
+                    if inactive_extras.count() == extras.count():
                         group[0], unused = groups.pop()
                 groups.append((group[0], group[-1]))
             try:
