@@ -291,7 +291,11 @@ class Distribution(models.Model):
                         number__in=extras)
                     inactive_extras = extras.filter(active=False)
                     if inactive_extras.count() == extras.count():
-                        group[0], unused = groups.pop()
+                        group_begin, unused = groups.pop()
+                        if len(group) == 1:
+                            group.insert(0, group_begin)
+                        else:
+                            group[0] = group_begin
                 groups.append((group[0], group[-1]))
             try:
                 previous = Distribution.objects.get(id=self.id - 1)
