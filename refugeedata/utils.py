@@ -3,11 +3,13 @@ from itertools import chain
 import re
 import urllib
 
+from django.conf import settings
 from django.template import defaultfilters
 from django.utils.safestring import SafeData
 from django.utils.translation import ugettext as _
 
 from babel.dates import format_date, format_time
+from twilio.rest import TwilioRestClient
 
 import pyratemp
 import six
@@ -371,3 +373,16 @@ def qr_code_from_url(relative_url, request=None, size=500):
     else:
         url = relative_url
     return QR_CODE_URL_TEMPLATE.format(size=size, data=urllib.quote_plus(url))
+
+
+def send_sms(to, body):
+    """Sends an SMS using the Twilio API library
+    arguments:
+    to: a list of phone numbers (may or may not be valid)
+    body: a string containing the body of the message to be sent
+    """
+    account_sid = settings.TWILIO_SID
+    auth_token = settings.TWILIO_AUTHTOKEN
+    fromsms = settings.TWILIO_FROMSMS
+    client = TwilioRestClient(account_sid, auth_token)
+    client.messages.create(to=to, from_=fromsms, body=body)
