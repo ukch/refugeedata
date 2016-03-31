@@ -116,34 +116,6 @@ def template_variable_set(request, distribution, variable):
 
 @staff_member_required
 @handle_template_errors
-def template_mock_send(request, distribution, template_id):
-    template = get_object_or_404(models.Template, id=template_id)
-    args = []
-    if "to_everyone" not in request.GET:
-        args.append(distribution)
-    recipients = template.get_invitees(*args)
-    if len(recipients) == 0:
-        raise Http404("No recipients found")
-    context = get_keys_from_session(request.session)
-    context.update(distribution.get_template_render_context())
-    try:
-        body = template.get_rendered_text(context)
-    except models.MissingContext as e:
-        variables, = e.args
-        return render(request, "distribution/template_missing_context.html", {
-            "template_variables": variables,
-            "distribution": distribution,
-            "template": template,
-        })
-    return render(request, "distribution/template_mock_send.html", {
-        "distribution": distribution,
-        "recipients": recipients,
-        "body": body,
-    })
-
-
-@staff_member_required
-@handle_template_errors
 def template_to_mailer(request, distribution, template_id):
     template = get_object_or_404(models.Template, id=template_id)
     args = []
@@ -168,5 +140,8 @@ def template_to_mailer(request, distribution, template_id):
         "body": body.encode("utf-8"),
         "next": request.path,
     }
-    url = reverse("mailings:home") + "?" + urlencode(params)
+    url_name = ("mailings:send_email"
+                if template.type == models.ONE_DIGIT_CODE_EMAIL
+                else "mailings:send_sms")
+    url = reverse(url_name) + "?" + urlencode(params)
     return HttpResponseRedirect(url)

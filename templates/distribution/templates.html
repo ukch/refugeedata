@@ -29,7 +29,7 @@
 <p>{% trans "Language:" %} {{ template.language.description }}</p>
 <pre class="template-src">{{ template.text|highlight_variables:distribution|add_keys_from_session:request.session|with_locale:template.language.iso_code|safe }}</pre>
 {% if template.get_invitees %}
-<p>{% trans "Send:" %} <a href="{% url "dist:mock_send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a>{% if distribution|has_recipients_for:template %} | <a href="{% url "dist:mock_send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a>{% endif %}</p>
+<p>{% trans "Send:" %} <a href="{% url "dist:send_sms" distribution.id template.id %}?to_everyone">{% trans "to everyone" %}</a>{% if distribution|has_recipients_for:template %} | <a href="{% url "dist:send_sms" distribution.id template.id %}">{% trans "only to recipients" %}</a>{% endif %}</p>
 {% else %}
 <p>{% trans "No recipients found" %}</p>
 {% endif %}

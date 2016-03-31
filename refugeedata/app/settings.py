@@ -27,6 +27,11 @@ if "MAILGUN_API_KEY" in os.environ:
 if "EMAIL_FROM_ADDRESS" in os.environ:
     DEFAULT_FROM_EMAIL = os.environ["EMAIL_FROM_ADDRESS"]
 
+if "TWILIO_SID" in os.environ:
+    TWILIO_SID = os.environ.get("TWILIO_SID")
+    TWILIO_AUTHTOKEN = os.environ.get("TWILIO_AUTHTOKEN")
+    TWILIO_FROMSMS = os.environ.get("TWILIO_FROMSMS")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
