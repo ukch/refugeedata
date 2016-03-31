@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 23:56+0200\n"
+"POT-Creation-Date: 2016-04-01 01:39+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
-#: refugeedata/app/settings.py:196
+#: refugeedata/app/settings.py:201
 msgid "Admin Interface"
 msgstr ""
 
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Registration"
 msgstr "Kaydetme"
 
-#: refugeedata/dashboard.py:42 refugeedata/models.py:322
+#: refugeedata/dashboard.py:42 refugeedata/models.py:327
 #: templates/admin/base_site.html:29 templates/distribution/base.html:4
 #: templates/distribution/base.html.py:6 templates/inc/right_menu.html:12
 msgid "Distribution"
@@ -78,15 +78,11 @@ msgstr ""
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
-#: refugeedata/mailings/forms.py:8
+#: refugeedata/mailings/forms.py:9
 #, fuzzy
 #| msgid "To:"
 msgid "To"
 msgstr "Kime:"
-
-#: refugeedata/mailings/forms.py:9
-msgid "Subject"
-msgstr ""
 
 #: refugeedata/mailings/forms.py:11
 #, fuzzy
@@ -94,9 +90,31 @@ msgstr ""
 msgid "Message Body"
 msgstr "Mesaj:"
 
-#: refugeedata/mailings/forms.py:23
+#: refugeedata/mailings/forms.py:29
+msgid "Subject"
+msgstr ""
+
+#: refugeedata/mailings/forms.py:42
 #, python-brace-format
 msgid "'{item}' does not look like an email address."
+msgstr ""
+
+#: refugeedata/mailings/forms.py:50
+#, python-brace-format
+msgid ""
+"You are not allowed to send messages internationally, and {item} looks like "
+"an international number. If this is a local number, please re-format it so "
+"that it begins with a zero."
+msgstr ""
+
+#: refugeedata/mailings/forms.py:62
+#, python-brace-format
+msgid "{item} is not a number."
+msgstr ""
+
+#: refugeedata/mailings/forms.py:65
+#, python-brace-format
+msgid "{item} does not start with a zero."
 msgstr ""
 
 #: refugeedata/models.py:29 templates/inc/person_details.html:40
@@ -250,21 +268,21 @@ msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 msgid "Distribution Times"
 msgstr "Dağıtmalar"
 
-#: refugeedata/models.py:323
+#: refugeedata/models.py:328
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
-#: refugeedata/utils.py:172
+#: refugeedata/utils.py:174
 #, python-brace-format
 msgid "Filter '{name}' is not defined. Please choose from one of {filters}."
 msgstr ""
 
-#: refugeedata/utils.py:176
+#: refugeedata/utils.py:178
 msgid ""
 "Expression must be made up of upper or lowercase letters and underscores."
 msgstr ""
 
-#: refugeedata/utils.py:213
+#: refugeedata/utils.py:215
 #, python-brace-format
 msgid "'{name}' filter requires locale"
 msgstr ""
@@ -415,14 +433,6 @@ msgstr ""
 msgid "Please set the following template variables:"
 msgstr ""
 
-#: templates/distribution/template_mock_send.html:7
-msgid "To:"
-msgstr "Kime:"
-
-#: templates/distribution/template_mock_send.html:8
-msgid "Message:"
-msgstr "Mesaj:"
-
 #: templates/distribution/template_syntax_error.html:6
 msgid "An error occurred while evaluating the templates"
 msgstr ""
@@ -530,11 +540,33 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: templates/mailings/home.html:6
+#: templates/mailings/message.html:7
+#, fuzzy
+#| msgid "Email"
+msgid "Send Email"
+msgstr "E-posta Adresi"
+
+#: templates/mailings/message.html:8
+#, fuzzy
+#| msgid "Send:"
+msgid "Send SMS"
+msgstr "Gönder:"
+
+#: templates/mailings/message.html:10
 msgid "New Mailing"
 msgstr ""
 
-#: templates/mailings/home.html:18
+#: templates/mailings/message.html:16
+msgid ""
+"Your system is not set up to send SMS messages. Please contact someone if "
+"you would like this set up."
+msgstr ""
+
+#: templates/mailings/message.html:24
+msgid "UNKNOWN ADDRESS"
+msgstr ""
+
+#: templates/mailings/message.html:31
 #, fuzzy
 #| msgid "Send:"
 msgid "Send"
@@ -588,6 +620,12 @@ msgstr "Başka kişi kaydetme"
 #: templates/registration/stage2_complete.html:12
 msgid "Edit details"
 msgstr ""
+
+#~ msgid "To:"
+#~ msgstr "Kime:"
+
+#~ msgid "Message:"
+#~ msgstr "Mesaj:"
 
 #~ msgid "Attendees:"
 #~ msgstr "Katılanlar:"
