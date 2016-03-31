@@ -140,7 +140,8 @@ def template_to_mailer(request, distribution, template_id):
         "body": body.encode("utf-8"),
         "next": request.path,
     }
-    url_name = ("mailings:home" if template.type == models.ONE_DIGIT_CODE_EMAIL
+    url_name = ("mailings:send_email"
+                if template.type == models.ONE_DIGIT_CODE_EMAIL
                 else "mailings:send_sms")
     url = reverse(url_name) + "?" + urlencode(params)
     return HttpResponseRedirect(url)

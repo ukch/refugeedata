@@ -3,6 +3,10 @@
 {% load foundation %}
 
 {% block content %}
+<ul class="tabs" data-tab>
+    <li class="tab-title{{ is_sms|yesno:", active" }}"><a href="{% url 'mailings:send_email' %}">{% trans "Send Email" %}</a></li>
+    <li class="tab-title{{ is_sms|yesno:" active," }}"><a href="{% url 'mailings:send_sms' %}">{% trans "Send SMS" %}</a></li>
+</ul>
 <h1>{% trans "New Mailing" %}</h1>
 <form method="POST">
     {% csrf_token %}

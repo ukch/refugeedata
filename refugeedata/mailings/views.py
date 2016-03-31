@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import RedirectView
 
 from django.contrib.auth.decorators import user_passes_test
 
@@ -13,6 +14,10 @@ from ..decorators import cache_control
 from . import forms
 
 require_staff = user_passes_test(lambda u: u.is_staff)
+
+
+home = require_staff(cache_control(24 * 60 * 60)(
+    RedirectView.as_view(pattern_name="mailings:send_email", permanent=False)))
 
 
 def _send_email(data):
@@ -28,8 +33,7 @@ def _send_sms(data):
 
 @require_staff
 @cache_control(24 * 60 * 60)
-def home(request, type_=models.ONE_DIGIT_CODE_EMAIL,
-         template_name="mailings/home.html"):
+def send_message(request, type_, template_name="mailings/message.html"):
     ctx = {}
     if type_ == models.ONE_DIGIT_CODE_EMAIL:
         is_sms = False
@@ -60,7 +64,8 @@ def home(request, type_=models.ONE_DIGIT_CODE_EMAIL,
     })
     return render(request, template_name, ctx)
 
-send_sms = functools.partial(home, type_=models.ONE_DIGIT_CODE_SMS)
+send_email = functools.partial(send_message, type_=models.ONE_DIGIT_CODE_EMAIL)
+send_sms = functools.partial(send_message, type_=models.ONE_DIGIT_CODE_SMS)
 
 
 @require_staff
