@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load foundation %}
+
+{% block content %}
+<h1>{% trans "New Mailing" %}</h1>
+<form method="POST">
+    {% csrf_token %}
+    {% if is_sms and not has_twilio %}
+    <div class="row error">
+        <div class="columns error">
+            <small class="error">{% trans "Your system is not set up to send SMS messages. Please contact someone if you would like this set up." %}</small>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="large-12 columns">
+            <label>
+                From
+                {% trans "UNKNOWN ADDRESS" as unknown_address %}
+                <input type="text" value="{{ from_address|default:unknown_address }}" disabled />
+            </label>
+        </div>
+    </div>
+    {{ form|foundation }}
+    {% if has_twilio or not is_sms %}
+    <input type="submit" class="button small" value="{% trans 'Send' %}" />
+    {% endif %}
+</form>
+{% endblock %}
