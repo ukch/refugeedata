@@ -9,9 +9,9 @@ from django.views.generic import RedirectView
 
 from django.contrib.auth.decorators import user_passes_test
 
-from .. import models, utils
+from .. import models
 from ..decorators import cache_control
-from . import forms
+from . import forms, tasks
 
 require_staff = user_passes_test(lambda u: u.is_staff)
 
@@ -27,8 +27,7 @@ def _send_email(data):
 
 
 def _send_sms(data):
-    # FIXME this is slow. Farm it out to a worker.
-    utils.send_sms(to=data["to"], body=data["body"])
+    tasks.send_sms.delay(to=data["to"], body=data["body"])
 
 
 @require_staff
