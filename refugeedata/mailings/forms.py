@@ -4,6 +4,8 @@ import django.forms as forms
 
 from django.utils.translation import ugettext_lazy as _
 
+from .. import utils
+
 
 class MailerFormBase(forms.Form):
     to = forms.CharField(required=True, label=_("To"))
@@ -46,21 +48,9 @@ class SendEmailForm(MailerFormBase):
 
 class SendSMSForm(MailerFormBase):
 
-    international_error = _(
-        "You are not allowed to send messages internationally, and {item} "
-        "looks like an international number. If this is a local number, "
-        "please re-format it so that it begins with a zero."
-    )
-
     def clean_to_item(self, item):
-        # Really basic SMS validation
-        if item.startswith("+"):
+        try:
+            return utils.to_international_format(item)
+        except utils.InvalidNumber:
             raise forms.ValidationError(
-                self.international_error.format(item=item))
-        if not item.isnumeric():
-            raise forms.ValidationError(
-                _("{item} is not a number.").format(item=item))
-        if not item[0] == "0":
-            raise forms.ValidationError(
-                _("{item} does not start with a zero.").format(item=item))
-        return item
+                _("{item} is not a valid number.".format(item=item)))

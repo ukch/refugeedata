@@ -9,10 +9,16 @@ from django.utils.safestring import SafeData
 from django.utils.translation import ugettext as _
 
 from babel.dates import format_date, format_time
-from twilio.rest import TwilioRestClient
-
+from memoize import memoize
+import phonenumbers
+import pytz
 import pyratemp
 import six
+from twilio.rest import TwilioRestClient
+
+
+class InvalidNumber(Exception):
+    pass
 
 
 def get_keys_from_session(session):
@@ -386,3 +392,20 @@ def send_sms(to, body):
     fromsms = settings.TWILIO_FROMSMS
     client = TwilioRestClient(account_sid, auth_token)
     client.messages.create(to=to, from_=fromsms, body=body)
+
+
+@memoize(timeout=300)
+def timezone_to_country_code(tz_name):
+    mapping = {tz: country
+               for country, tz_list in pytz.country_timezones.iteritems()
+               for tz in tz_list}
+    return mapping[tz_name]
+
+
+def to_international_format(local_number):
+    country_code = timezone_to_country_code(settings.TIME_ZONE)
+    number = phonenumbers.parse(local_number, region=country_code)
+    if not phonenumbers.is_valid_number(number):
+        raise InvalidNumber(number)
+    return phonenumbers.format_number(
+        number, phonenumbers.PhoneNumberFormat.E164)
