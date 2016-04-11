@@ -28,6 +28,7 @@ urlpatterns += i18n_patterns(
     url(r'^mailings/', include('refugeedata.mailings.urls',
         app_name="mailings", namespace="mailings")),
     url(r'^admin/show_faces', 'refugeedata.views.show_faces', name="show_faces"),
+    url(r'^admin/queue/', include('django_rq.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 if settings.DEBUG:

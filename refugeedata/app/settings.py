@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_rq',
     'compressor',
     'raven.contrib.django.raven_compat',
     'foundationform',
@@ -201,6 +202,12 @@ LOGIN_REDIRECT_URL = reverse_lazy("public")
 GRAPPELLI_ADMIN_TITLE = _("Admin Interface")
 GRAPPELLI_INDEX_DASHBOARD = 'refugeedata.dashboard.CustomIndexDashboard'
 
+RQ_QUEUES = {
+    'default': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+    },
+}
 
 # File storage
 if not DEBUG:
