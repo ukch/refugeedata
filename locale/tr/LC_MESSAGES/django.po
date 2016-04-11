@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 23:47+0300\n"
+"POT-Creation-Date: 2016-04-12 00:36+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
-#: refugeedata/app/settings.py:202
+#: refugeedata/app/settings.py:203
 msgid "Admin Interface"
 msgstr ""
 
@@ -78,43 +78,30 @@ msgstr ""
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
-#: refugeedata/mailings/forms.py:9
+#: refugeedata/mailings/forms.py:11
 #, fuzzy
 #| msgid "To:"
 msgid "To"
 msgstr "Kime:"
 
-#: refugeedata/mailings/forms.py:11
+#: refugeedata/mailings/forms.py:13
 #, fuzzy
 #| msgid "Message:"
 msgid "Message Body"
 msgstr "Mesaj:"
 
-#: refugeedata/mailings/forms.py:29
+#: refugeedata/mailings/forms.py:31
 msgid "Subject"
 msgstr ""
 
-#: refugeedata/mailings/forms.py:42
+#: refugeedata/mailings/forms.py:44
 #, python-brace-format
 msgid "'{item}' does not look like an email address."
 msgstr ""
 
-#: refugeedata/mailings/forms.py:50
+#: refugeedata/mailings/forms.py:56
 #, python-brace-format
-msgid ""
-"You are not allowed to send messages internationally, and {item} looks like "
-"an international number. If this is a local number, please re-format it so "
-"that it begins with a zero."
-msgstr ""
-
-#: refugeedata/mailings/forms.py:62
-#, python-brace-format
-msgid "{item} is not a number."
-msgstr ""
-
-#: refugeedata/mailings/forms.py:65
-#, python-brace-format
-msgid "{item} does not start with a zero."
+msgid "{item} is not a valid number."
 msgstr ""
 
 #: refugeedata/models.py:29 templates/inc/person_details.html:40
@@ -272,17 +259,17 @@ msgstr "Dağıtmalar"
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
-#: refugeedata/utils.py:174
+#: refugeedata/utils.py:180
 #, python-brace-format
 msgid "Filter '{name}' is not defined. Please choose from one of {filters}."
 msgstr ""
 
-#: refugeedata/utils.py:178
+#: refugeedata/utils.py:184
 msgid ""
 "Expression must be made up of upper or lowercase letters and underscores."
 msgstr ""
 
-#: refugeedata/utils.py:215
+#: refugeedata/utils.py:221
 #, python-brace-format
 msgid "'{name}' filter requires locale"
 msgstr ""
