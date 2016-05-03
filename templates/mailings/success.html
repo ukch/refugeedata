@@ -5,6 +5,7 @@
 {% block content %}
 <h4 class="text-center">{% trans "The message has been queued." %}</h4>
 <div class="text-center">
-    <a class="button" href="{{ next_url }}">{% trans "Continue" %}</a>
+    <p><a href="/admin/queue/">{% trans "Check the SMS sending queue" %}</a></p>
+    <a class="button" href="{{ next_url }}">{% trans "Return to previous page" %}</a>
 </div>
 {% endblock %}
