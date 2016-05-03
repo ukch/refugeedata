@@ -136,10 +136,13 @@ def template_to_mailer(request, distribution, template_id):
             "template": template,
         })
     params = {
-        "to": "; ".join(recipients),
         "body": body.encode("utf-8"),
         "next": request.path,
     }
+    if len(recipients) >= 50:
+        params["to_template"] = template.id
+    else:
+        params["to"] = "; ".join(recipients)
     url_name = ("mailings:send_email"
                 if template.type == models.ONE_DIGIT_CODE_EMAIL
                 else "mailings:send_sms")
