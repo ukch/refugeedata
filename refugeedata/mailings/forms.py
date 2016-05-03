@@ -2,15 +2,41 @@ from collections import OrderedDict
 
 import django.forms as forms
 
+# FIXME forms shouldn't know about HTTP
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+
 from django.utils.translation import ugettext_lazy as _
 
-from .. import utils
+from .. import models, utils
 
 
 class MailerFormBase(forms.Form):
     to = forms.CharField(required=True, label=_("To"))
     body = forms.CharField(
         required=True, widget=forms.Textarea, label=_("Message Body"))
+        
+    def __init__(self, data=None, *args, **kwargs):
+        if data and "to_template" in data:
+            data = data.copy()
+            template_data = data.pop("to_template")
+            try:
+                template_id, distribution_id = template_data.split(":", 1)
+                template_id = int(template_id)
+                if distribution_id == "":
+                    distribution_id = None
+                else:
+                    distribution_id = int(distribution_id)
+            except ValueError:
+                raise Http404("Bad to_template value")
+            template = get_object_or_404(models.Template, id=template_id)
+            if distribution_id:
+                distribution = get_object_or_404(models.Distribution, id=distribution_id)
+                recipients = template.get_invitees(distribution)
+            else:
+                recipients = template.get_invitees()
+            data["to"] = "; ".join(recipients)
+        super(MailerFormBase, self).__init__(data, *args, **kwargs)
 
     def clean_to(self):
         to = self.cleaned_data["to"]
