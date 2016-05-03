@@ -19,7 +19,7 @@ class MailerFormBase(forms.Form):
     def __init__(self, data=None, *args, **kwargs):
         if data and "to_template" in data:
             data = data.copy()
-            template_data = data.pop("to_template")
+            template_data = data["to_template"]
             try:
                 template_id, distribution_id = template_data.split(":", 1)
                 template_id = int(template_id)
