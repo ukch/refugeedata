@@ -140,7 +140,7 @@ def template_to_mailer(request, distribution, template_id):
         "next": request.path,
     }
     if len(recipients) >= 50:
-        params["to_template"] = template.id
+        params["to_template"] = "{}:{}".format(template.id, "" if "to_everyone" in request.GET else distribution.id)
     else:
         params["to"] = "; ".join(recipients)
     url_name = ("mailings:send_email"
