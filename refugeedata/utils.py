@@ -391,7 +391,8 @@ def send_sms(to, body):
     auth_token = settings.TWILIO_AUTHTOKEN
     fromsms = settings.TWILIO_FROMSMS
     client = TwilioRestClient(account_sid, auth_token)
-    client.messages.create(to=to, from_=fromsms, body=body)
+    for number in to:
+        client.messages.create(to=number, from_=fromsms, body=body)
 
 
 @memoize(timeout=300)
