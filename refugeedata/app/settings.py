@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import warnings
 
 """
@@ -107,6 +108,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'refugeedata.app.context_processors.languages',
             ],
         },
     },
@@ -135,7 +137,7 @@ LANGUAGE_CODE = 'en-us'
 
 # TODO allow this to be specified elsewhere
 LANGUAGES = (
-    ("tr", "Turkish"),
+    ("tr", "Turkçe"),
     ("en", "English"),
 )
 

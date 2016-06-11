@@ -21,6 +21,16 @@
     </ul>
 </li>
 {% endif %}
+{% if multilanguage %}
+<li class="has-dropdown">
+    <a>{{ current_lang_name }}</a>
+    <ul class="dropdown">
+        {% for lang_name, url in language_urls %}
+        <li><a href="{{ url }}">{{ lang_name }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
+{% endif %}
 {% if user.is_authenticated %}
 <li class="has-dropdown">
     <a>{% if request.user.get_short_name %}{{ request.user.get_short_name }}{% else %}{{ request.user.get_username }}{% endif %}</a>
@@ -28,9 +38,9 @@
         {% if user.is_superuser %}
         <li><a href="{% url "admin:index" %}">{% trans "Admin interface" %}</a></li>
         {% endif %}
-        <li><a href="{% url "auth:logout" %}">Log out</a></li>
+        <li><a href="{% url "auth:logout" %}">{% trans "Log out" %}</a></li>
     </ul>
 </li>
 {% else %}
-<li><a href="{% url "auth:login" %}">{% trans "Log In" %}</a></li>
+<li><a href="{% url "auth:login" %}">{% trans "Log in" %}</a></li>
 {% endif %}
