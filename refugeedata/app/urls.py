@@ -9,7 +9,6 @@ handler500 = "refugeedata.views.server_error"
 handler403 = "refugeedata.views.permission_denied"
 
 urlpatterns = [
-    url(r'^$', 'refugeedata.views.home', name='public'),
     url(r'^c/(?P<card_number>\d+)/(?P<card_code>[a-fA-F0-9]{4})/$',
         'refugeedata.views.scan_card', name="scan_card"),
     url(r'^c/(?P<card_number>\d+)/$',
@@ -20,6 +19,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
+    url(r'^$', 'refugeedata.views.home', name='public'),
     url(r'^$', RedirectView.as_view(pattern_name="public", permanent=True)),
     url(r'^distribution/', include('refugeedata.distribution.urls',
         app_name="distribution", namespace="dist")),

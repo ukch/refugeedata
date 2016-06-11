@@ -13,17 +13,21 @@ from django.views.generic import RedirectView
 
 import django.contrib.auth.views as auth_views
 
+from .decorators import cache_control
 from .models import Distribution, Person
 
 SOURCE_URL = "https://github.com/ukch/refugeedata"
 
 
+# TODO is this safe? Will it respect logins?
+@cache_control(1 * 60 * 60)
 def home(request):
     if request.user.has_perm("refugeedata.add_person"):
         return redirect("reg:home")
     return render(request, "public.html", {
         "site_name": request.site.name,
         "source_url": SOURCE_URL,
+        "next_distribution": Distribution.objects.upcoming().first(),
     })
 
 

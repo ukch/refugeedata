@@ -3,5 +3,16 @@
 
 {% block content %}
 <h1>{% blocktrans %}Welcome to {{ site_name }}{% endblocktrans %}</h1>
-<p>{% blocktrans with '<a href="'|add:source_url|add:'" target="_blank">'|safe as link_begin and '</a>' as link_end %}This site is built using the {{ link_begin }}Refugeedata{{ link_end }}</a> system.{% endblocktrans %}</p>
+{% if next_distribution %}
+{% with distribution=next_distribution %}
+<p>{% blocktrans with date=distribution.date|date numbers=distribution.show_numbers %}The next distribution will be on <strong>{{ date }}</strong> for numbers <strong>{{ numbers }}</strong>, at the following times:{% endblocktrans %}</p>
+<ul>
+    {% for times in distribution.times.all %}
+    <li>{{ times.start_time|time }} &mdash; {{ times.end_time|time }}</li>
+    {% endfor %}
+</ul>
+{% endwith %}
+{% else %}
+<p>{% trans "No data is available about future distributions. Please check back another time." %}</p>
+{% endif %}
 {% endblock %}
