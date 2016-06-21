@@ -6,6 +6,7 @@ import pyratemp
 import six
 from z3c.rml import rml2pdf
 
+from django.conf import settings
 from django.core.files import File
 from django.core.management.base import BaseCommand, CommandError
 
@@ -26,7 +27,11 @@ class Command(BaseCommand):
 
     def parse_template(self, template, cards):
         try:
-            return str(template(cards=cards))
+            return str(template(
+                cards=cards,
+                phone=getattr(settings, "CONTACT_PHONE_NUMBER", ""),
+                email=getattr(settings, "CONTACT_EMAIL_ADDRESS", ""),
+            ))
         except SitesNotInstalledError:
             raise CommandError("Unknown domain. Please set the DEFAULT_DOMAIN "
                                "environment variable, then run ./manage.py "

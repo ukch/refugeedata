@@ -61,9 +61,8 @@
         <!-- Here are the backs of the cards -->
         <setNextTemplate name="back" />
         {% for card in cards %}
-        <!-- TODO this text should be custom strings -->
-        <para keepWithNext="true" style="back">Phone: +90 534 052 39 97</para>
-        <para style="back">info@ank-aid.com</para>
+        <para keepWithNext="true" style="back">{% if phone %}Phone: {{ phone }}{% endif %}</para>
+        <para style="back">{{ email }}</para>
         <nextFrame />
         {% endfor %}
     </story>
