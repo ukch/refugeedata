@@ -5,4 +5,10 @@ from .. import utils
 
 @job
 def send_sms(to, body):
+    for number in to:
+        send_single_sms.delay([to], body)
+
+
+@job
+def send_single_sms(to, body):
     utils.send_sms(to=to, body=body)
