@@ -6,7 +6,7 @@ from .. import utils
 @job
 def send_sms(to, body):
     for number in to:
-        send_single_sms.delay([to], body)
+        send_single_sms.delay([number], body)
 
 
 @job
