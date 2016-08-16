@@ -1,0 +1,82 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style type="text/css">
+    .face {
+        float: left;
+        width: 200px;
+        margin: 5px;
+        text-align: center;
+    }
+    .face img {
+        max-width: 100%;
+        max-height: 200px;
+    }
+    .c-1.label {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="grp-module">
+    {% for person in people %}
+    {% url 'admin:refugeedata_person_change' person.obj.id as person_url %}
+    <div class="grp-module">
+        <a href="{{ person_url }}"><h4>{{ person.obj }}</h4></a>
+        <div class="face">
+            <a href="{{ person_url }}">
+                <img src="{{ person.obj.photo.url }}" alt="{{ person.obj }}" title="{{ person.obj }}" />
+            </a>
+        </div>
+        <div class="l-2c-fluid l-d-4 grp-cell">
+            <div class="c-1 label">
+                {% trans "Distributions invited to" %}:
+            </div>
+            <div class="c-2">
+                {{ person.invited }}
+            </div>
+        </div>
+        <div class="l-2c-fluid l-d-4 grp-cell">
+            <div class="c-1 label">
+                {% trans "Distributions attended" %}:
+            </div>
+            <div class="c-2">
+                {{ person.attended }}
+            </div>
+        </div>
+        <div class="l-2c-fluid l-d-4 grp-cell">
+            <div class="c-1 label">
+                {% trans "Attendance to date" %}:
+            </div>
+            <div class="c-2">
+                {{ person.attendance|stringformat:".0f" }}%
+            </div>
+        </div>
+        <div class="l-2c-fluid l-d-4 grp-cell">
+            <div class="c-1 label">
+                {% trans "Last distribution invited to" %}:
+            </div>
+            <div class="c-2">
+                {{ person.obj.registration_card.distributions_invited_to.last|default:'N/A' }}
+            </div>
+        </div>
+        <div class="l-2c-fluid l-d-4 grp-cell">
+            <div class="c-1 label">
+                {% trans "Last distribution attended" %}:
+            </div>
+            <div class="c-2">
+                {{ person.obj.registration_card.distributions_attended.last|default:'N/A' }}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="grp-row">
+        {% trans "No people have been invited to any distributions" %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

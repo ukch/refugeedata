@@ -1,5 +1,8 @@
+from __future__ import division
+
 import datetime
 from functools import partial
+import operator
 import os
 
 from django.core.urlresolvers import resolve, Resolver404
@@ -109,6 +112,33 @@ def show_faces(request, template_name="admin/show_faces.html"):
         "title": _("Faces"),
         "site_url": "/",
         "people": people,
+    })
+
+
+@user_passes_test(lambda u: u.is_superuser, login_url="admin:login")
+def attendance(request, template_name="admin/attendance.html"):
+    people = Person.objects.filter(active=True)\
+        .select_related("registration_card")
+    people_list = []
+    for person in people:
+        person_list = {
+            "obj": person,
+            "invited":
+                person.registration_card.distributions_invited_to.count(),
+            "attended":
+                person.registration_card.distributions_attended.count(),
+        }
+        if person_list["invited"]:
+            person_list["attendance"] = (
+                person_list["attended"] / person_list["invited"] * 100)
+        else:
+            # Person has never been invited to a distribution
+            continue
+        people_list.append(person_list)
+    return render(request, template_name, {
+        "title": _("Distribution attendance"),
+        "site_url": "/",
+        "people": sorted(people_list, key=operator.itemgetter("attendance"))
     })
 
 
