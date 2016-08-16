@@ -28,9 +28,11 @@
     <div class="grp-module">
         <a href="{{ person_url }}"><h4>{{ person.obj }}</h4></a>
         <div class="face">
+            {% if person.obj.photo %}
             <a href="{{ person_url }}">
                 <img src="{{ person.obj.photo.url }}" alt="{{ person.obj }}" title="{{ person.obj }}" />
             </a>
+            {% endif %}
         </div>
         <div class="l-2c-fluid l-d-4 grp-cell">
             <div class="c-1 label">
