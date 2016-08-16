@@ -138,7 +138,8 @@ def attendance(request, template_name="admin/attendance.html"):
     return render(request, template_name, {
         "title": _("Distribution attendance"),
         "site_url": "/",
-        "people": sorted(people_list, key=operator.itemgetter("attendance"))
+        "people": sorted(people_list,
+                         key=operator.itemgetter("attendance"))[:100]
     })
 
 
