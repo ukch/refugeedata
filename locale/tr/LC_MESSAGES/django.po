@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-11 21:47+0300\n"
+"POT-Creation-Date: 2016-08-16 21:39+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,19 +37,25 @@ msgstr ""
 msgid "Show all faces"
 msgstr ""
 
-#: refugeedata/dashboard.py:60
+#: refugeedata/dashboard.py:54 refugeedata/views.py:139
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Distribution attendance"
+msgstr "Dağıtma Tarihi"
+
+#: refugeedata/dashboard.py:63
 msgid "Support"
 msgstr ""
 
-#: refugeedata/dashboard.py:64
+#: refugeedata/dashboard.py:67
 msgid "Refugeedata Website"
 msgstr ""
 
-#: refugeedata/dashboard.py:69
+#: refugeedata/dashboard.py:72
 msgid "Bug/Issue Tracker"
 msgstr ""
 
-#: refugeedata/dashboard.py:87
+#: refugeedata/dashboard.py:90
 #, fuzzy
 #| msgid "Description"
 msgid "Recent Actions"
@@ -78,28 +84,28 @@ msgstr ""
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
-#: refugeedata/mailings/forms.py:11
+#: refugeedata/mailings/forms.py:15
 #, fuzzy
 #| msgid "To:"
 msgid "To"
 msgstr "Kime:"
 
-#: refugeedata/mailings/forms.py:13
+#: refugeedata/mailings/forms.py:17
 #, fuzzy
 #| msgid "Message:"
 msgid "Message Body"
 msgstr "Mesaj:"
 
-#: refugeedata/mailings/forms.py:31
+#: refugeedata/mailings/forms.py:57
 msgid "Subject"
 msgstr ""
 
-#: refugeedata/mailings/forms.py:44
+#: refugeedata/mailings/forms.py:70
 #, python-brace-format
 msgid "'{item}' does not look like an email address."
 msgstr ""
 
-#: refugeedata/mailings/forms.py:56
+#: refugeedata/mailings/forms.py:82
 #, python-brace-format
 msgid "{item} is not a valid number."
 msgstr ""
@@ -274,7 +280,7 @@ msgstr ""
 msgid "'{name}' filter requires locale"
 msgstr ""
 
-#: refugeedata/views.py:109
+#: refugeedata/views.py:112
 msgid "Faces"
 msgstr ""
 
@@ -318,6 +324,38 @@ msgstr ""
 msgid ""
 "We are sorry. It seems we have some bugs in our code. Please refresh the "
 "page and try again."
+msgstr ""
+
+#: templates/admin/attendance.html:37
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Distributions invited to"
+msgstr "Dağıtma Tarihi"
+
+#: templates/admin/attendance.html:45
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Distributions attended"
+msgstr "Dağıtma Tarihi"
+
+#: templates/admin/attendance.html:53
+msgid "Attendance to date"
+msgstr ""
+
+#: templates/admin/attendance.html:61
+#, fuzzy
+#| msgid "Distributions"
+msgid "Last distribution invited to"
+msgstr "Dağıtmalar"
+
+#: templates/admin/attendance.html:69
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Last distribution attended"
+msgstr "Dağıtma Tarihi"
+
+#: templates/admin/attendance.html:78
+msgid "No people have been invited to any distributions"
 msgstr ""
 
 #: templates/admin/base_site.html:26 templates/inc/right_menu.html:5
@@ -560,7 +598,11 @@ msgid "The message has been queued."
 msgstr ""
 
 #: templates/mailings/success.html:8
-msgid "Continue"
+msgid "Check the SMS sending queue"
+msgstr ""
+
+#: templates/mailings/success.html:9
+msgid "Return to previous page"
 msgstr ""
 
 #: templates/public.html:5
