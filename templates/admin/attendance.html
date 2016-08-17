@@ -24,13 +24,13 @@
 {% block content %}
 <div class="grp-module">
     {% for person in people %}
-    {% url 'admin:refugeedata_person_change' person.obj.id as person_url %}
+    {% url 'admin:refugeedata_person_change' person.id as person_url %}
     <div class="grp-module">
-        <a href="{{ person_url }}"><h4>{{ person.obj }}</h4></a>
+        <a href="{{ person_url }}"><h4>{{ person }}</h4></a>
         <div class="face">
-            {% if person.obj.photo %}
+            {% if person.photo %}
             <a href="{{ person_url }}">
-                <img src="{{ person.obj.photo.url }}" alt="{{ person.obj }}" title="{{ person.obj }}" />
+                <img src="{{ person.photo.url }}" alt="{{ person }}" title="{{ person }}" />
             </a>
             {% endif %}
         </div>
@@ -39,7 +39,7 @@
                 {% trans "Distributions invited to" %}:
             </div>
             <div class="c-2">
-                {{ person.invited }}
+                {{ person.registration_card.distributions_invited_to.count }}
             </div>
         </div>
         <div class="l-2c-fluid l-d-4 grp-cell">
@@ -47,7 +47,7 @@
                 {% trans "Distributions attended" %}:
             </div>
             <div class="c-2">
-                {{ person.attended }}
+                {{ person.registration_card.distributions_attended.count }}
             </div>
         </div>
         <div class="l-2c-fluid l-d-4 grp-cell">
@@ -55,7 +55,7 @@
                 {% trans "Attendance to date" %}:
             </div>
             <div class="c-2">
-                {{ person.attendance|stringformat:".0f" }}%
+                {{ person.attendance_percent|stringformat:".0f" }}%
             </div>
         </div>
         <div class="l-2c-fluid l-d-4 grp-cell">
@@ -63,7 +63,7 @@
                 {% trans "Last distribution invited to" %}:
             </div>
             <div class="c-2">
-                {{ person.obj.registration_card.distributions_invited_to.last|default:'N/A' }}
+                {{ person.registration_card.distributions_invited_to.last|default:'N/A' }}
             </div>
         </div>
         <div class="l-2c-fluid l-d-4 grp-cell">
@@ -71,7 +71,7 @@
                 {% trans "Last distribution attended" %}:
             </div>
             <div class="c-2">
-                {{ person.obj.registration_card.distributions_attended.last|default:'N/A' }}
+                {{ person.registration_card.distributions_attended.last|default:'N/A' }}
             </div>
         </div>
     </div>

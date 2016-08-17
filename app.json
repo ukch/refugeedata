@@ -5,7 +5,8 @@
   "website": "http://joelcross.co.uk/refugeedata",
   "addons": [
     "heroku-postgresql:hobby-dev",
-    "mailgun:starter"
+    "mailgun:starter",
+    "scheduler:standard"
   ],
   "success_url": "/admin",
   "env": {
