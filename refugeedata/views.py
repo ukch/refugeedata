@@ -5,6 +5,7 @@ from functools import partial
 import os
 
 from django.core.urlresolvers import resolve, Resolver404
+from django.db.models import Count
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
@@ -118,11 +119,14 @@ def show_faces(request, template_name="admin/show_faces.html"):
 def attendance(request, template_name="admin/attendance.html"):
     people = Person.objects.filter(active=True)\
         .exclude(attendance_percent=None)\
-        .select_related("registration_card")
+        .select_related("registration_card")\
+        .annotate(
+            invited_count=Count("registration_card__distributions_invited_to"))
     return render(request, template_name, {
         "title": _("Distribution attendance"),
         "site_url": "/",
-        "people": people.order_by("attendance_percent")[:100],
+        "people": people.order_by("attendance_percent",
+                                  "-invited_count")[:100],
     })
 
 
