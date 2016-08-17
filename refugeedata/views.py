@@ -122,7 +122,7 @@ def attendance(request, template_name="admin/attendance.html"):
     return render(request, template_name, {
         "title": _("Distribution attendance"),
         "site_url": "/",
-        "people": people.order_by("attendance_percent"),
+        "people": people.order_by("attendance_percent")[:100],
     })
 
 
