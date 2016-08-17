@@ -27,13 +27,13 @@
     {% url 'admin:refugeedata_person_change' person.id as person_url %}
     <div class="grp-module">
         <a href="{{ person_url }}"><h4>{{ person }}</h4></a>
+        {% if person.photo %}
         <div class="face">
-            {% if person.photo %}
             <a href="{{ person_url }}">
                 <img src="{{ person.photo.url }}" alt="{{ person }}" title="{{ person }}" />
             </a>
-            {% endif %}
         </div>
+        {% endif %}
         <div class="l-2c-fluid l-d-4 grp-cell">
             <div class="c-1 label">
                 {% trans "Distributions invited to" %}:
