@@ -7,7 +7,7 @@ Django==1.8.*
 django-appconf==1.0.2
 django-compressor==2.1
 django-extras==0.3
-django-grappelli==2.7.1
+django-grappelli==2.8.2
 django-gulp==2.0.0
 django-imagekit==3.3
 django-languages==0.1
