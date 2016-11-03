@@ -29,7 +29,7 @@ Pillow==3.4.2
 psutil==4.4.2
 psycopg2==2.6
 pyratemp==0.3.2
-raven==5.0.0
+raven==5.31.0
 reportlab==3.2.0
 six==1.10.0
 static3==0.5.1
