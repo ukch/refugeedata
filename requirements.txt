@@ -15,7 +15,7 @@ django-mailgun==0.9.1
 django-memoize==2.0.0
 django-rq==0.9.3
 django-sslify==0.2.7
-django-storages==1.1.8
+django-storages==1.5.1
 django-toolbelt==0.0.1
 django-uuidfield==0.5.0
 env-tools==2.0.0
