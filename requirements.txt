@@ -35,6 +35,6 @@ six==1.10.0
 static3==0.7.0
 tini==3.0.1
 twilio>=3.3.6
-waitress==0.8.10
+waitress==1.0.1
 whitenoise==2.0.6
 z3c.rml==3.0.0
