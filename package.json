@@ -6,7 +6,7 @@
     "node": "latest"
   },
   "dependencies": {
-    "browserify": "^13.2.0",
+    "browserify": "^13.3.0",
     "canvas-to-blob": "0.0.0",
     "cookie": "^0.2.3",
     "dropzone": "^4.2.0",
