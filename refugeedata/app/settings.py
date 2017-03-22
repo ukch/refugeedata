@@ -207,7 +207,7 @@ GRAPPELLI_INDEX_DASHBOARD = 'refugeedata.dashboard.CustomIndexDashboard'
 
 RQ_QUEUES = {
     'default': {
-        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
+        'URL': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
     },
 }
