@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Refugee Data\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 23:56+0200\n"
+"POT-Creation-Date: 2016-08-16 21:39+0300\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
-#: refugeedata/app/settings.py:196
+#: refugeedata/app/settings.py:205
 msgid "Admin Interface"
 msgstr ""
 
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Registration"
 msgstr "Kaydetme"
 
-#: refugeedata/dashboard.py:42 refugeedata/models.py:322
+#: refugeedata/dashboard.py:42 refugeedata/models.py:327
 #: templates/admin/base_site.html:29 templates/distribution/base.html:4
 #: templates/distribution/base.html.py:6 templates/inc/right_menu.html:12
 msgid "Distribution"
@@ -37,19 +37,25 @@ msgstr ""
 msgid "Show all faces"
 msgstr ""
 
-#: refugeedata/dashboard.py:60
+#: refugeedata/dashboard.py:54 refugeedata/views.py:139
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Distribution attendance"
+msgstr "Dağıtma Tarihi"
+
+#: refugeedata/dashboard.py:63
 msgid "Support"
 msgstr ""
 
-#: refugeedata/dashboard.py:64
+#: refugeedata/dashboard.py:67
 msgid "Refugeedata Website"
 msgstr ""
 
-#: refugeedata/dashboard.py:69
+#: refugeedata/dashboard.py:72
 msgid "Bug/Issue Tracker"
 msgstr ""
 
-#: refugeedata/dashboard.py:87
+#: refugeedata/dashboard.py:90
 #, fuzzy
 #| msgid "Description"
 msgid "Recent Actions"
@@ -78,25 +84,30 @@ msgstr ""
 msgid "Number of cards to add"
 msgstr "Kaç kart eklemek istiyorsunuz?"
 
-#: refugeedata/mailings/forms.py:8
+#: refugeedata/mailings/forms.py:15
 #, fuzzy
 #| msgid "To:"
 msgid "To"
 msgstr "Kime:"
 
-#: refugeedata/mailings/forms.py:9
-msgid "Subject"
-msgstr ""
-
-#: refugeedata/mailings/forms.py:11
+#: refugeedata/mailings/forms.py:17
 #, fuzzy
 #| msgid "Message:"
 msgid "Message Body"
 msgstr "Mesaj:"
 
-#: refugeedata/mailings/forms.py:23
+#: refugeedata/mailings/forms.py:57
+msgid "Subject"
+msgstr ""
+
+#: refugeedata/mailings/forms.py:70
 #, python-brace-format
 msgid "'{item}' does not look like an email address."
+msgstr ""
+
+#: refugeedata/mailings/forms.py:82
+#, python-brace-format
+msgid "{item} is not a valid number."
 msgstr ""
 
 #: refugeedata/models.py:29 templates/inc/person_details.html:40
@@ -250,26 +261,26 @@ msgstr "Paketlerin Açıklaması (ve Özel Bilgi)"
 msgid "Distribution Times"
 msgstr "Dağıtmalar"
 
-#: refugeedata/models.py:323
+#: refugeedata/models.py:328
 msgid "Distributions"
 msgstr "Dağıtmalar"
 
-#: refugeedata/utils.py:172
+#: refugeedata/utils.py:180
 #, python-brace-format
 msgid "Filter '{name}' is not defined. Please choose from one of {filters}."
 msgstr ""
 
-#: refugeedata/utils.py:176
+#: refugeedata/utils.py:184
 msgid ""
 "Expression must be made up of upper or lowercase letters and underscores."
 msgstr ""
 
-#: refugeedata/utils.py:213
+#: refugeedata/utils.py:221
 #, python-brace-format
 msgid "'{name}' filter requires locale"
 msgstr ""
 
-#: refugeedata/views.py:105
+#: refugeedata/views.py:112
 msgid "Faces"
 msgstr ""
 
@@ -315,6 +326,38 @@ msgid ""
 "page and try again."
 msgstr ""
 
+#: templates/admin/attendance.html:37
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Distributions invited to"
+msgstr "Dağıtma Tarihi"
+
+#: templates/admin/attendance.html:45
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Distributions attended"
+msgstr "Dağıtma Tarihi"
+
+#: templates/admin/attendance.html:53
+msgid "Attendance to date"
+msgstr ""
+
+#: templates/admin/attendance.html:61
+#, fuzzy
+#| msgid "Distributions"
+msgid "Last distribution invited to"
+msgstr "Dağıtmalar"
+
+#: templates/admin/attendance.html:69
+#, fuzzy
+#| msgid "Distribution Date"
+msgid "Last distribution attended"
+msgstr "Dağıtma Tarihi"
+
+#: templates/admin/attendance.html:78
+msgid "No people have been invited to any distributions"
+msgstr ""
+
 #: templates/admin/base_site.html:26 templates/inc/right_menu.html:5
 #, fuzzy
 #| msgid "Description"
@@ -331,7 +374,7 @@ msgstr ""
 msgid "Change password"
 msgstr "Yanlış şifresi"
 
-#: templates/admin/base_site.html:43
+#: templates/admin/base_site.html:43 templates/inc/right_menu.html:41
 msgid "Log out"
 msgstr ""
 
@@ -414,14 +457,6 @@ msgstr ""
 #: templates/distribution/template_missing_context.html:7
 msgid "Please set the following template variables:"
 msgstr ""
-
-#: templates/distribution/template_mock_send.html:7
-msgid "To:"
-msgstr "Kime:"
-
-#: templates/distribution/template_mock_send.html:8
-msgid "Message:"
-msgstr "Mesaj:"
 
 #: templates/distribution/template_syntax_error.html:6
 msgid "An error occurred while evaluating the templates"
@@ -514,38 +549,60 @@ msgstr "Telefon"
 msgid "Admin"
 msgstr ""
 
-#: templates/inc/right_menu.html:29
+#: templates/inc/right_menu.html:39
 msgid "Admin interface"
 msgstr ""
 
-#: templates/inc/right_menu.html:35
-msgid "Log In"
+#: templates/inc/right_menu.html:45 templates/login.html:10
+msgid "Log in"
 msgstr ""
 
 #: templates/inc/template_variable_update.html:13
 msgid "Update"
 msgstr ""
 
-#: templates/login.html:10
-msgid "Log in"
-msgstr ""
+#: templates/mailings/message.html:7
+#, fuzzy
+#| msgid "Email"
+msgid "Send Email"
+msgstr "E-posta Adresi"
 
-#: templates/mailings/home.html:6
+#: templates/mailings/message.html:8
+#, fuzzy
+#| msgid "Send:"
+msgid "Send SMS"
+msgstr "Gönder:"
+
+#: templates/mailings/message.html:10
 msgid "New Mailing"
 msgstr ""
 
-#: templates/mailings/home.html:18
+#: templates/mailings/message.html:16
+msgid ""
+"Your system is not set up to send SMS messages. Please contact someone if "
+"you would like this set up."
+msgstr ""
+
+#: templates/mailings/message.html:24
+msgid "UNKNOWN ADDRESS"
+msgstr ""
+
+#: templates/mailings/message.html:31
 #, fuzzy
 #| msgid "Send:"
 msgid "Send"
 msgstr "Gönder:"
 
 #: templates/mailings/success.html:6
-msgid "The email sent successfully."
+msgid "The message has been queued."
 msgstr ""
 
 #: templates/mailings/success.html:8
-msgid "Continue"
+msgid "Check the SMS sending queue"
+msgstr ""
+
+#: templates/mailings/success.html:9
+msgid "Return to previous page"
 msgstr ""
 
 #: templates/public.html:5
@@ -553,11 +610,17 @@ msgstr ""
 msgid "Welcome to %(site_name)s"
 msgstr ""
 
-#: templates/public.html:6
+#: templates/public.html:8
 #, python-format
 msgid ""
-"This site is built using the %(link_begin)sRefugeedata%(link_end)s</a> "
-"system."
+"The next distribution will be on <strong>%(date)s</strong> for numbers "
+"<strong>%(numbers)s</strong>, at the following times:"
+msgstr ""
+
+#: templates/public.html:16
+msgid ""
+"No data is available about future distributions. Please check back another "
+"time."
 msgstr ""
 
 #: templates/registration/base.html:11
@@ -588,6 +651,12 @@ msgstr "Başka kişi kaydetme"
 #: templates/registration/stage2_complete.html:12
 msgid "Edit details"
 msgstr ""
+
+#~ msgid "To:"
+#~ msgstr "Kime:"
+
+#~ msgid "Message:"
+#~ msgstr "Mesaj:"
 
 #~ msgid "Attendees:"
 #~ msgstr "Katılanlar:"

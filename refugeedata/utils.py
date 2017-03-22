@@ -3,14 +3,22 @@ from itertools import chain
 import re
 import urllib
 
+from django.conf import settings
 from django.template import defaultfilters
 from django.utils.safestring import SafeData
 from django.utils.translation import ugettext as _
 
 from babel.dates import format_date, format_time
-
+from memoize import memoize
+import phonenumbers
+import pytz
 import pyratemp
 import six
+from twilio.rest import TwilioRestClient
+
+
+class InvalidNumber(Exception):
+    pass
 
 
 def get_keys_from_session(session):
@@ -371,3 +379,34 @@ def qr_code_from_url(relative_url, request=None, size=500):
     else:
         url = relative_url
     return QR_CODE_URL_TEMPLATE.format(size=size, data=urllib.quote_plus(url))
+
+
+def send_sms(to, body):
+    """Sends an SMS using the Twilio API library
+    arguments:
+    to: a list of phone numbers (may or may not be valid)
+    body: a string containing the body of the message to be sent
+    """
+    account_sid = settings.TWILIO_SID
+    auth_token = settings.TWILIO_AUTHTOKEN
+    fromsms = settings.TWILIO_FROMSMS
+    client = TwilioRestClient(account_sid, auth_token)
+    for number in to:
+        client.messages.create(to=number, from_=fromsms, body=body)
+
+
+@memoize(timeout=300)
+def timezone_to_country_code(tz_name):
+    mapping = {tz: country
+               for country, tz_list in pytz.country_timezones.iteritems()
+               for tz in tz_list}
+    return mapping[tz_name]
+
+
+def to_international_format(local_number):
+    country_code = timezone_to_country_code(settings.TIME_ZONE)
+    number = phonenumbers.parse(local_number, region=country_code)
+    if not phonenumbers.is_valid_number(number):
+        raise InvalidNumber(number)
+    return phonenumbers.format_number(
+        number, phonenumbers.PhoneNumberFormat.E164)

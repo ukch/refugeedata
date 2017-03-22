@@ -14,6 +14,7 @@ from django.dispatch import receiver
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 
+from django_extras.db.models import PercentField
 from django_languages import LanguageField
 from six.moves import map
 from imagekit.models import ProcessedImageField
@@ -138,6 +139,8 @@ class Person(models.Model):
     number_of_dependents = models.PositiveSmallIntegerField(
         default=0, verbose_name=_("Number of Dependents"))
     active = models.BooleanField(default=True, verbose_name=_("Active"))
+    attendance_percent = PercentField(
+        blank=True, null=True, verbose_name=_("Distribution attendance"))
 
     # Populated by mobile (although fallback is available)
     registration_card = models.OneToOneField(

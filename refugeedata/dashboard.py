@@ -50,6 +50,9 @@ class CustomIndexDashboard(Dashboard):
                     children=[{
                         "title": _("Show all faces"),
                         "url": reverse("show_faces"),
+                    }, {
+                        "title": _("Distribution attendance"),
+                        "url": reverse("attendance"),
                     }]
                 ),
             ]

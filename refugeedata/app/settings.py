@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import warnings
 
 """
@@ -27,6 +28,11 @@ if "MAILGUN_API_KEY" in os.environ:
 if "EMAIL_FROM_ADDRESS" in os.environ:
     DEFAULT_FROM_EMAIL = os.environ["EMAIL_FROM_ADDRESS"]
 
+if "TWILIO_SID" in os.environ:
+    TWILIO_SID = os.environ.get("TWILIO_SID")
+    TWILIO_AUTHTOKEN = os.environ.get("TWILIO_AUTHTOKEN")
+    TWILIO_FROMSMS = os.environ.get("TWILIO_FROMSMS")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -54,6 +60,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'memoize',
+    'django_rq',
     'compressor',
     'raven.contrib.django.raven_compat',
     'foundationform',
@@ -100,6 +108,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'refugeedata.app.context_processors.languages',
             ],
         },
     },
@@ -128,7 +137,7 @@ LANGUAGE_CODE = 'en-us'
 
 # TODO allow this to be specified elsewhere
 LANGUAGES = (
-    ("tr", "Turkish"),
+    ("tr", "Turkçe"),
     ("en", "English"),
 )
 
@@ -196,6 +205,12 @@ LOGIN_REDIRECT_URL = reverse_lazy("public")
 GRAPPELLI_ADMIN_TITLE = _("Admin Interface")
 GRAPPELLI_INDEX_DASHBOARD = 'refugeedata.dashboard.CustomIndexDashboard'
 
+RQ_QUEUES = {
+    'default': {
+        'URL': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+    },
+}
 
 # File storage
 if not DEBUG:

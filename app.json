@@ -5,7 +5,8 @@
   "website": "http://joelcross.co.uk/refugeedata",
   "addons": [
     "heroku-postgresql:hobby-dev",
-    "mailgun:starter"
+    "mailgun:starter",
+    "scheduler:standard"
   ],
   "success_url": "/admin",
   "env": {
@@ -23,6 +24,18 @@
     },
     "RAVEN_DSN": {
         "description": "If you are using Sentry for error logging, you must set the Raven DSN here. If not, you may safely leave this blank.",
+        "required": false
+    },
+    "TWILIO_SID": {
+        "description": "If you are using Twilio for sending SMS messages, you must set the SID here.",
+        "required": false
+    },
+    "TWILIO_AUTHTOKEN": {
+        "description": "If you are using Twilio for sending SMS messages, you must set the authentication token here.",
+        "required": false
+    },
+    "TWILIO_FROMSMS": {
+        "description": "If you are using Twilio for sending SMS messages, you must set the from address here.",
         "required": false
     },
     "SECRET_KEY": {
