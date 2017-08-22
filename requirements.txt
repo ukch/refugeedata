@@ -5,7 +5,7 @@ configparser==3.5.0b2
 dj-database-url==0.3.0
 Django==1.8.*
 django-appconf==1.0.1
-django-compressor==1.5
+django-compressor==2.2
 django-extras==0.3
 django-grappelli==2.7.1
 django-gulp==2.0.0
