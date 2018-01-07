@@ -17,7 +17,7 @@
     "gulp-minify-css": "^1.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.1",
-    "gulp-watch": "^4.2.4",
+    "gulp-watch": "^5.0.0",
     "gulp-watchify": "^0.5.0",
     "jquery": "^2.1.4",
     "modernizr": "^3.0.0-alpha.4",
