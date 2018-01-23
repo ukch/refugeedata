@@ -9,7 +9,7 @@
     "browserify": "^9.0.8",
     "canvas-to-blob": "0.0.0",
     "cookie": "^0.2.3",
-    "dropzone": "^5.2.0",
+    "dropzone": "^5.3.0",
     "fix-orientation": "0.0.2",
     "gulp": "^3.8.11",
     "gulp-gzip": "^1.1.0",
