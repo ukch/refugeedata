@@ -12,7 +12,7 @@ django-gulp==2.0.0
 django-imagekit==3.3
 django-languages==0.1
 django-mailgun==0.8.0
-django-memoize==2.1.0
+django-memoize==2.1.1
 django-rq==0.9.0
 django-sslify==0.2.7
 django-storages==1.1.8
