@@ -4,7 +4,7 @@ boto==2.38.0
 configparser==3.5.0b2
 dj-database-url==0.3.0
 Django==1.8.*
-django-appconf==1.0.1
+django-appconf==1.0.3
 django-compressor==1.5
 django-extras==0.3
 django-grappelli==2.7.1
