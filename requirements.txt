@@ -30,7 +30,7 @@ psutil==2.2.1
 psycopg2==2.6
 pyratemp==0.3.2
 raven==5.0.0
-reportlab==3.5.20
+reportlab==3.5.21
 six==1.10.0
 static3==0.5.1
 tini==3.0.1
