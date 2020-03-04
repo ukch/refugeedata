@@ -8,7 +8,7 @@ steps:
     environment:
       VIRTUAL_ENV: "/opt/venv"
     commands:
-      - apt-get update && apt-get -y install gcc libjpeg-dev
+      - apt-get update && apt-get -y install gcc
       - export PATH="$VIRTUAL_ENV/bin:$PATH"
       - pip install virtualenv
       - virtualenv $VIRTUAL_ENV
