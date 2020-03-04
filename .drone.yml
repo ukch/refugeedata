@@ -8,8 +8,9 @@ steps:
     environment:
       VIRTUAL_ENV: "/opt/venv"
     commands:
-      - export PATH="${VIRTUAL_ENV}/bin:$PATH"
-      - python -m venv ${VIRTUAL_ENV}
+      - export PATH="$VIRTUAL_ENV/bin:$PATH"
+      - pip install virtualenv
+      - virtualenv $VIRTUAL_ENV
       - pip install -r requirements.txt
 
   - name: test
@@ -17,6 +18,6 @@ steps:
     environment:
       VIRTUAL_ENV: "/opt/venv"
     commands:
-      - export PATH="${VIRTUAL_ENV}/bin:$PATH"
+      - export PATH="$VIRTUAL_ENV/bin:$PATH"
       - ./manage.py check
       - ./manage.py test
