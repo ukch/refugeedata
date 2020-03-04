@@ -6,18 +6,18 @@ steps:
   - name: build
     image: python:2.7-slim
     environment:
-      VIRTUAL_ENV: "/opt/venv"
+      VIRTUAL_ENV: ".venv"
     commands:
       - apt-get update && apt-get -y install gcc libjpeg-dev zlib1g-dev
       - export PATH="$VIRTUAL_ENV/bin:$PATH"
       - pip install virtualenv
       - virtualenv $VIRTUAL_ENV
-      - pip install -r requirements.txt
+      - python -m pip install -r requirements.txt
 
   - name: test
     image: python:2.7-slim
     environment:
-      VIRTUAL_ENV: "/opt/venv"
+      VIRTUAL_ENV: ".venv"
     commands:
       - export PATH="$VIRTUAL_ENV/bin:$PATH"
       - ./manage.py check
