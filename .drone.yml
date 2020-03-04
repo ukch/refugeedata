@@ -1,0 +1,24 @@
+---
+kind: pipeline
+name: test
+
+steps:
+  - name: build
+    image: python:2.7-slim
+    environment:
+      VIRTUAL_ENV: "/opt/venv"
+    commands:
+      - apt-get update && apt-get -y install gcc libjpeg-dev
+      - export PATH="$VIRTUAL_ENV/bin:$PATH"
+      - pip install virtualenv
+      - virtualenv $VIRTUAL_ENV
+      - pip install -r requirements.txt
+
+  - name: test
+    image: python:2.7-slim
+    environment:
+      VIRTUAL_ENV: "/opt/venv"
+    commands:
+      - export PATH="$VIRTUAL_ENV/bin:$PATH"
+      - ./manage.py check
+      - ./manage.py test
