@@ -4,7 +4,7 @@ name: test
 
 steps:
   - name: build
-    image: python:2.7-alpine
+    image: python:2.7-slim
     environment:
       VIRTUAL_ENV: "/opt/venv"
     commands:
@@ -14,7 +14,7 @@ steps:
       - pip install -r requirements.txt
 
   - name: test
-    image: python:2.7-alpine
+    image: python:2.7-slim
     environment:
       VIRTUAL_ENV: "/opt/venv"
     commands:
