@@ -18,8 +18,20 @@ steps:
     image: python:2.7-slim
     environment:
       VIRTUAL_ENV: ".venv"
+      SECRET_KEY: "not really secret"
+      DATABASE_URL: "postgres://drone:drone@database:5432/refugee"
     commands:
       - apt-get update && apt-get -y install libjpeg62-turbo zlib1g
       - export PATH="$VIRTUAL_ENV/bin:$PATH"
       - ./manage.py check
       - ./manage.py test
+
+
+services:
+  - name: database
+    image: postgres:alpine
+    ports:
+      - 5432
+    environment:
+      POSTGRES_USER: drone
+      POSTGRES_PASSWORD: drone
