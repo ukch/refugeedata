@@ -10,6 +10,9 @@
   ],
   "success_url": "/admin",
   "env": {
+    "BUILDPACK_URL": {
+        "value": "https://github.com/heroku/heroku-buildpack-multi.git"
+    },
     "EMAIL_FROM_ADDRESS": {
         "description": "Default address to send emails from"
     },
