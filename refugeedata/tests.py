@@ -1,10 +1,7 @@
-from django.core.management import call_command
-from django.test import RequestFactory, TestCase
-from django.test.utils import override_settings
+from django.test import TestCase
 
 from model_mommy import mommy
 
-from .middleware import EnforceCurrentSiteMiddleware
 from .models import RegistrationNumber, Distribution
 
 
@@ -35,34 +32,3 @@ class DistributionTests(TestCase):
         dist_values = dist.invitees.values_list("number", flat=True)
         self.assertEqual(list(dist_values), [1, 2, 4, 5, 6])
         self.assertEqual(dist.finish_number, 6)
-
-
-@override_settings(INSTALLED_APPS=("django.contrib.sites", ))
-class MiddlewareTest(TestCase):
-
-    def setUp(self):
-        call_command("migrate", "sites", verbosity=0)
-        self.middleware = EnforceCurrentSiteMiddleware()
-        self.rf = RequestFactory()
-
-    def test_simple(self):
-        request = self.rf.get("/foo")
-        response = self.middleware.process_request(request)
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, "//example.com/foo")
-
-    def test_with_site_id(self):
-        request = self.rf.get("/foo")
-        with self.settings(SITE_ID=1):
-            response = self.middleware.process_request(request)
-        self.assertIsNotNone(response)
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, "//example.com/foo")
-
-    def test_without_sites(self):
-        request = self.rf.get("/foo")
-        with self.settings(INSTALLED_APPS=()):
-            response = self.middleware.process_request(request)
-        self.assertIsNone(response)
-        self.assertEqual(type(request.site).__name__, "RequestSite")
