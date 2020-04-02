@@ -31,7 +31,7 @@ pyratemp==0.3.2
 raven==5.0.0
 reportlab==3.2.0
 rq==0.13
-six==1.10.0
+six==1.14.0
 static3==0.5.1
 tini==3.0.1
 twilio==5.4.*
