@@ -1,9 +1,9 @@
 ---
 kind: pipeline
-name: npm-install
+name: npm_install
 
 steps:
-  - name: npm-install
+  - name: npm_install
     image: node:latest
     commands:
       npm install
