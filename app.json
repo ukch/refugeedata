@@ -10,9 +10,6 @@
   ],
   "success_url": "/admin",
   "env": {
-    "BUILDPACK_URL": {
-        "value": "https://github.com/heroku/heroku-buildpack-multi.git"
-    },
     "EMAIL_FROM_ADDRESS": {
         "description": "Default address to send emails from"
     },
@@ -51,6 +48,8 @@
     }
   },
   "buildpacks": [{
-      "url": "https://github.com/heroku/heroku-buildpack-multi.git"
+      "url": "heroku/python"
+  }, {
+      "url": "heroku/nodejs"
   }]
 }
