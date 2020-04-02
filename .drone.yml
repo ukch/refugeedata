@@ -1,5 +1,16 @@
 ---
 kind: pipeline
+name: npm-install
+
+steps:
+  - name: npm-install
+    image: node:latest
+    commands:
+      npm install
+      npm audit --production
+
+---
+kind: pipeline
 name: test
 
 steps:
