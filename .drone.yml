@@ -6,8 +6,8 @@ steps:
   - name: npm_install
     image: node:latest
     commands:
-      npm install
-      npm audit --production
+      - npm install
+      - npm audit --production
 
 ---
 kind: pipeline
