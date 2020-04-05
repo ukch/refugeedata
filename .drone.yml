@@ -7,6 +7,9 @@ steps:
     image: node:latest
     commands:
       - npm install
+  - name: npm_audit
+    image: node:latest
+    commands:
       - npm audit --production
 
 ---
