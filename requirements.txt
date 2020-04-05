@@ -24,7 +24,7 @@ ipdb==0.8
 ipython==3.1.0
 model-mommy==1.2.4
 phonenumbers==7.3.0
-Pillow==3.1.0
+Pillow==6.2.0
 psutil==2.2.1
 psycopg2-binary==2.8
 pyratemp==0.3.2

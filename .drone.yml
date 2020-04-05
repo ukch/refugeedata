@@ -19,7 +19,7 @@ steps:
     environment:
       VIRTUAL_ENV: ".venv"
     commands:
-      - apt-get update && apt-get -y install gcc libjpeg62-turbo-dev zlib1g-dev
+      - apt-get update && apt-get -y install gcc
       - export PATH="$VIRTUAL_ENV/bin:$PATH"
       - pip install virtualenv
       - virtualenv $VIRTUAL_ENV
