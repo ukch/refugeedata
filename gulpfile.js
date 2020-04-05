@@ -72,7 +72,7 @@
             .pipe(sourcemaps.write('./')) // writes .map file
             .pipe(gulp.dest('refugeedata/static/js/'));
     }
-    gulp.task('browserify', bundle);
+    gulp.task('browserify', gulp.series(bundle, function finish(done) { b.close(); done() }));
 
     gulp.task('watchify', gulp.series('enable-watch-mode', 'browserify'));
 
