@@ -48,6 +48,8 @@
     }
   },
   "buildpacks": [{
-      "url": "https://github.com/heroku/heroku-buildpack-multi.git"
+      "url": "heroku/nodejs"
+  }, {
+      "url": "heroku/python"
   }]
 }
