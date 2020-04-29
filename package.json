@@ -19,7 +19,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-watch": "^5.0.1",
-    "jquery": "^3.0.0",
+    "jquery": "^3.5.0",
     "modernizr": "^3.0.0-alpha.4",
     "process": "^0.11.2",
     "vinyl-buffer": "^1.0.1",
