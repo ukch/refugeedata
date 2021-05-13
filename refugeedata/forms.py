@@ -30,7 +30,7 @@ class BatchAdminForm(forms.ModelForm):
         except IndexError:
             starting_number = 0
         regs = [models.RegistrationNumber(number=obj_number+starting_number)
-                for obj_number in xrange(1, number_to_create + 1)]
+                for obj_number in range(1, number_to_create + 1)]
         return regs
 
 

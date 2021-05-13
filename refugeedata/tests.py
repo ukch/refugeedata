@@ -9,7 +9,7 @@ class DistributionTests(TestCase):
 
     def setUp(self):
         cards = []
-        for number in xrange(1, 16):
+        for number in range(1, 16):
             cards.append(mommy.prepare(RegistrationNumber, number=number,
                                        active=True))
         RegistrationNumber.objects.bulk_create(cards)

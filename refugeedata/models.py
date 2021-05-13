@@ -76,7 +76,7 @@ class RegistrationNumber(models.Model):
         return utils.qr_code_from_url(absolute_url, size=130)
 
     def __unicode__(self):
-        return unicode(self.number)
+        return str(self.number)
 
 
 class RegistrationCardBatch(models.Model):
@@ -91,7 +91,7 @@ class RegistrationCardBatch(models.Model):
                                  verbose_name=_("Data File"))
 
     def __unicode__(self):
-        return unicode(self.registration_number_format())
+        return str(self.registration_number_format())
 
     def registration_number_format(self):
         numbers = self.registration_numbers.order_by("number")
@@ -112,7 +112,7 @@ class Language(models.Model):
                                     verbose_name=_("Example Text"))
 
     def __unicode__(self):
-        return u"{}: {}".format(self.iso_code, self.description)
+        return "{}: {}".format(self.iso_code, self.description)
 
     class Meta:
         ordering = ("iso_code", )
@@ -158,7 +158,7 @@ class Person(models.Model):
         return reverse("reg:stage_2_complete", args=[self.id])
 
     def __unicode__(self):
-        return u"{}: {}".format(self.registration_card.number, self.name)
+        return "{}: {}".format(self.registration_card.number, self.name)
 
     class Meta:
         verbose_name = _("Person")
@@ -176,7 +176,7 @@ class DistributionTime(models.Model):
         ordering = ("start_time", )
 
     def __unicode__(self):
-        return u"{} - {}".format(self.start_time, self.end_time)
+        return "{} - {}".format(self.start_time, self.end_time)
 
 
 class MissingContext(Exception):
@@ -193,7 +193,7 @@ class Template(models.Model):
     text = models.TextField(verbose_name=_("Template Text"))
 
     def __unicode__(self):
-        return u"{}: {}".format(self.get_type_display(), self.text)
+        return "{}: {}".format(self.get_type_display(), self.text)
 
     class Meta:
         verbose_name = _("Template")
@@ -274,7 +274,7 @@ class Distribution(models.Model):
         return password == self.hash
 
     def __unicode__(self):
-        return unicode(formats.date_format(self.date))
+        return str(formats.date_format(self.date))
 
     @property
     def numbers(self):
@@ -284,12 +284,12 @@ class Distribution(models.Model):
             max_padding = 5
             groups = []
             for key, group in groupby(enumerate(numbers),
-                                      lambda (index, item): index - item):
+                                      lambda index_item: index_item[0] - index_item[1]):
                 group = list(map(itemgetter(1), group))
                 if len(groups) and groups[-1][1] + max_padding >= group[0]:
                     # There is a small gap between the groups. If the cards in
                     # this gap are all deactivated, pretend it's not there.
-                    extras = range(groups[-1][1] + 1, group[0])
+                    extras = list(range(groups[-1][1] + 1, group[0]))
                     extras = RegistrationNumber.objects.filter(
                         number__in=extras)
                     inactive_extras = extras.filter(active=False)
@@ -311,8 +311,8 @@ class Distribution(models.Model):
         return self._numbers
 
     def show_numbers(self):
-        return "; ".join((u"#{}".format(begin) if begin == end else
-                          u"#{} \u2013 #{}".format(begin, end)
+        return "; ".join(("#{}".format(begin) if begin == end else
+                          "#{} \u2013 #{}".format(begin, end)
                           for begin, end in self.numbers))
 
     def get_absolute_url(self):

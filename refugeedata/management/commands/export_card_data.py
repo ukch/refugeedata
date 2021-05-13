@@ -32,7 +32,7 @@ class Command(BaseCommand):
     def handle(self, batch_id, save=False, **options):
         try:
             batch = RegistrationCardBatch.objects.get(id=batch_id)
-        except RegistrationCardBatch.DoesNotExist, e:
+        except RegistrationCardBatch.DoesNotExist as e:
             raise CommandError(e)
         cards = batch.registration_numbers.all()
         if save:
