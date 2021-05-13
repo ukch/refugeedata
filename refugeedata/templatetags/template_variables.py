@@ -12,7 +12,7 @@ register = django.template.Library()
 
 class HighlightedTemplate(TemplateWithDefaultFallback):
 
-    replace_variable_with = mark_safe(u'<span class="variable">{}</span>')
+    replace_variable_with = mark_safe('<span class="variable">{}</span>')
 
     def __init__(self, *args, **kwargs):
         super(HighlightedTemplate, self).__init__(*args, **kwargs)

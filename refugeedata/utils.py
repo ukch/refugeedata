@@ -1,7 +1,7 @@
 import functools
 from itertools import chain
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 from django.template import defaultfilters
@@ -23,7 +23,7 @@ class InvalidNumber(Exception):
 
 def get_keys_from_session(session):
     dic = {}
-    for key, value in session.iteritems():
+    for key, value in session.items():
         if key.startswith("template_variable_"):
             dic[key[18:][:-6]] = value
     return dic
@@ -153,9 +153,9 @@ class DjangoFormatParserWithCustomTagHandler(DjangoFormatParser):
         for elem in superclass.parse(template):
             if elem[0] == "for":
                 names, iterable = elem[1:3]
-                parsetree.append(("str", u"%s for %s in %s %s\n" % (
+                parsetree.append(("str", "%s for %s in %s %s\n" % (
                     "{%",
-                    u", ".join(replace_variable_with.format(name)
+                    ", ".join(replace_variable_with.format(name)
                                for name in names),
                     replace_variable_with.format(iterable),
                     "%}",
@@ -179,7 +179,7 @@ def test_expression(expr):
         if fltr not in FILTER_REGISTRY:
             raise SyntaxError(_("Filter '{name}' is not defined. Please "
                                 "choose from one of {filters}.").format(
-                    name=fltr, filters=FILTER_REGISTRY.keys()))
+                    name=fltr, filters=list(FILTER_REGISTRY.keys())))
     if not re.match(r"^[a-zA-Z_.]+$", expr):
         raise SyntaxError(_("Expression must be made up of upper or lowercase "
                           "letters and underscores."))
@@ -251,7 +251,7 @@ class PyratempTemplate(pyratemp.Renderer):
 class TemplateWithDefaultFallback(PyratempTemplate):
     """Don't leave unresolved context variables empty; leave them as-is."""
 
-    replace_variable_with = u"{}"
+    replace_variable_with = "{}"
 
     PARSER_CLASS = DjangoFormatParserWithCustomTagHandler
 
@@ -301,7 +301,7 @@ class NameHarvesterTemplate(TemplateWithDefaultFallback):
         }
         self.forloop_defined_variables = {
             name
-            for names in self.parser.forloop_defined_variables.itervalues()
+            for names in self.parser.forloop_defined_variables.values()
             for name in names
         }
         return super(NameHarvesterTemplate, self).render(context, *extra)
@@ -339,11 +339,11 @@ def format_range(values):
 
     def _iter(values):
         # We use _iter here to mutate values
-        prev = values.next()
+        prev = next(values)
         while True:
             try:
-                current = values.next()
-            except StopIteration, e:
+                current = next(values)
+            except StopIteration as e:
                 yield prev, None
                 raise e
             yield prev, current
@@ -378,7 +378,7 @@ def qr_code_from_url(relative_url, request=None, size=500):
         url = request.build_absolute_uri(relative_url)
     else:
         url = relative_url
-    return QR_CODE_URL_TEMPLATE.format(size=size, data=urllib.quote_plus(url))
+    return QR_CODE_URL_TEMPLATE.format(size=size, data=urllib.parse.quote_plus(url))
 
 
 def send_sms(to, body):
@@ -398,7 +398,7 @@ def send_sms(to, body):
 @memoize(timeout=300)
 def timezone_to_country_code(tz_name):
     mapping = {tz: country
-               for country, tz_list in pytz.country_timezones.iteritems()
+               for country, tz_list in pytz.country_timezones.items()
                for tz in tz_list}
     return mapping[tz_name]
 

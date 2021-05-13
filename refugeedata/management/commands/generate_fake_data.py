@@ -48,7 +48,7 @@ class Command(BaseCommand):
         now = datetime.now()
 
         # Past dates
-        for i in xrange(10):
+        for i in range(10):
             date = (now - timedelta(weeks=i)).date()
             mommy.make("refugeedata.Distribution", date=date,
                        supplies_quantity=25)

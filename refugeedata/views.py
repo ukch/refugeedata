@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 import datetime
 from functools import partial
