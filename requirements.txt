@@ -28,7 +28,7 @@ Pillow==6.2.0
 psycopg2-binary==2.8
 pyratemp==0.3.2
 raven==5.0.0
-reportlab==3.2.0
+reportlab==3.5.55
 rq==0.13
 six==1.10.0
 static3==0.5.1
